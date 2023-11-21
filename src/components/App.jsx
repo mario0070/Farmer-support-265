@@ -1,9 +1,9 @@
 import { useState } from 'react'
 import { Route, BrowserRouter, Routes } from 'react-router-dom'
-import Dashboard from "./pages/dashboard"
-import Homepage from "./pages/homepage"
-import Login from "./pages/login"
-import Register from "./pages/register"
+import Dashboard from "../pages/dashboard"
+import Homepage from "../pages/homepage"
+import Login from "../pages/login"
+import Register from "../pages/register"
 
 function App() {
 

@@ -1,0 +1,124 @@
+.signup{
+    /* position: fixed; */
+    width: 100%;
+    max-width: 1440px;
+    margin: auto auto;
+    font-size: 16px;
+}
+
+.signup .img-bg{
+    position: relative;
+}
+
+.signup img{
+    width: 100%;
+    object-fit:cover;
+    height: 100vh;
+    position: relative;
+}
+
+.signup .content{
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.288);
+    width: 100%;
+    z-index: 1;
+    height: 100vh;
+    max-width: 1440px;
+    overflow: scroll;
+}
+
+.signup .content::-webkit-scrollbar{
+    display: none;
+}
+
+.signup .content .section{
+    justify-content: space-evenly;
+    margin-top: 2em;
+    transition: .2s;
+}
+
+.signup .logo{
+    width: 150px;
+    height: 190px;
+    position: fixed;
+    transform: translateX(-100px);
+}
+
+.signup .logo-container{
+    margin-top: 10em;
+}
+
+.signup .content .form{
+    background-color: white;
+    padding: 2em;
+    border-radius: 6px;
+    width: 400px;
+}
+
+.signup .content .form i {
+    color: grey;
+    font-size: .8em;
+}
+
+.signup .content .form input{
+    border: 1px solid rgb(237, 235, 235);
+    width: 85%;
+    border-radius: 6px;
+    outline: none;
+    padding: .8em !important;
+}
+
+.signup .content .form input::placeholder{
+    color: rgb(178, 174, 174);
+    transition: .2s;
+}
+
+.signup .content .form input:focus{
+    border: 1px solid rgba(85, 175, 110, 1);
+    transition: .2s;
+    caret-color: rgba(85, 175, 110, 1);
+}
+
+.signup .content .form button{
+    background-color: rgba(85, 175, 110, 1);
+    color: white;
+    width: 10em;
+    border-radius: 20px;
+    margin-top: 1em;
+}
+
+.signup .content .form .btns{
+    border-bottom: 1px solid rgb(227, 224, 224);
+    padding-bottom: 1em;
+}
+
+.signup .platform{
+    justify-content: space-evenly;
+}
+
+.signup .platform img{
+    width: 17px;
+    height: 17px;
+}
+
+.signup .content .form .text-sm{
+    font-size: 1em;
+    color: rgb(189, 184, 184);
+}
+
+.signup .content .form a {
+    color: rgba(85, 175, 110, 1);
+    text-decoration: none;
+}
+
+
+@media screen and (max-width: 800px){
+    .signup .logo-container{
+        display: none;
+    }
+
+    .signup .form{
+        margin: 1em;
+        margin-top: 1em;
+    }
+}

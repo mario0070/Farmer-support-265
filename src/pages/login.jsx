@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import logo from "/img/logo.png"
 import logox1 from "/img/logox1.png"
 import bg from "/img/img-bg.png"
@@ -6,8 +6,15 @@ import apple from "/img/apple.png"
 import google from "/img/google.png"
 import twt from "/img/x.png"
 import "/public/css/login.css"
+import { Link } from 'react-router-dom'
 
 export default function Login() {
+  const [input, setinput] = useState("")
+
+  const submit = () => {
+    
+  }
+
   return (
     <div className='signup'>
        <div className="content">
@@ -24,12 +31,12 @@ export default function Login() {
 
                   <div className="input-group mb-4">
                     <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
-                    <input type="email" className="form-control p-2" placeholder="Email"/>
+                    <input type="email" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Email"/>
                   </div>
 
                   <div className="input-group mb-3">
                     <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
-                    <input type="password" className="form-control p-2" placeholder="Password"/>
+                    <input type="password" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Password"/>
                   </div>
 
                   <div className="text-center btns">
@@ -44,7 +51,7 @@ export default function Login() {
                       <a href=""><img src={twt} alt="" /></a>
                     </div>
                     <p className="text-sm mt-4">
-                      Don’t have an account?, sign up <a href='/signup' className='instead'>here</a>
+                      Don’t have an account?, sign up <Link to="/signup">here</Link>
                     </p>
                   </div>
 

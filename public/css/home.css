@@ -3,6 +3,11 @@
     padding: .4em;
 }
 
+.dashboard{
+    max-width: 1440px;
+    margin: auto auto;
+}
+
 .dashboard .content{
     margin-left: 200px;
     padding: 1em;

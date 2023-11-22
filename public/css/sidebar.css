@@ -53,3 +53,7 @@
 .sidebar .bottom-link {
     border-top: 1px solid rgba(217, 215, 215, 0.642);
 }
+ 
+.sidebar i{
+    margin-right: .3em;
+}

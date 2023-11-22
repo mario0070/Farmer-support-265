@@ -23,10 +23,6 @@ export default function Register() {
                 <p className="mb-5 text-muted text-center">Create an account to get started</p>
 
                 <form action="">
-                  <div className="input-group mb-4">
-                    <span className="input-group-text"><i className="fa-solid fa-user"></i></span>
-                    <input onChange={e => setinput(e.target.value)} type="text" className="p-2" placeholder="Fullname"/>
-                  </div>
 
                   <div className="input-group mb-4">
                     <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>

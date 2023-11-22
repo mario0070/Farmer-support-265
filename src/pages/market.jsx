@@ -12,7 +12,7 @@ export default function Market() {
 
         <div className="home w-100">
             <div className="header d-flex">
-            <i class="fa-solid fa-paper-plane mb-3 mx-2 mt-2"></i>
+            <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
             <img src={farmer} alt="" />
             </div>
         </div>

@@ -6,7 +6,12 @@
     min-width: 150px;
     transition: .2s;
     position: fixed;
-    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.089);
+    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.057);
+    overflow: scroll;
+}
+
+.sidebar::-webkit-scrollbar{
+    display: none;
 }
 
 .sidebar .navbar-expand-sm .navbar-nav{
@@ -30,4 +35,21 @@
 
 .sidebar .active{
     color: rgba(85, 175, 110, 1) !important;
+}
+
+.sidebar .img img{
+    width: 70px;
+}
+
+.sidebar .img {
+    border-bottom: 1px solid rgba(217, 215, 215, 0.642);
+}
+
+.sidebar .img a{
+    text-decoration: none;
+    color: rgba(85, 175, 110, 1) !important;
+}
+
+.sidebar .bottom-link {
+    border-top: 1px solid rgba(217, 215, 215, 0.642);
 }

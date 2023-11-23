@@ -1,6 +1,6 @@
 .produce_listing{
     overflow: scroll;
-    height: 80vh;
+    height: 85vh;
     /* background-color: red; */
 }
 
@@ -10,15 +10,18 @@
 
 .produce_listing .produce{
     box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.1);
-    width: 350px;
+    width: 300px;
     border-radius: 8px;
     margin-bottom: 2em;
     margin-right: 2em;
+    overflow: hidden;
+    height: fit-content;
 }
 
 .produce_listing .produce img{
     width: 100%;
     height: 150px;
+    transition: .2s;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
 }
@@ -36,4 +39,84 @@
 .produce_listing .prod_container{
     justify-content:baseline;
     flex-wrap: wrap;
+}
+
+.produce_listing .add_produce i{
+    font-size: 100px;
+    margin-top: .8em;
+    color: rgba(113, 113, 113, 0.735);
+}
+
+.produce_listing .add_produce:hover{
+    cursor: pointer;
+    transform: scale(0.9);
+    transition: .2s;
+}
+
+.produce_listing .add_produce{
+    transition: .2s;
+}
+
+.produce_listing .produce:hover{
+    cursor: pointer;
+}
+
+.produce_listing .produce:hover img{
+   transform: scale(1.1);
+   transition: .2s;
+}
+
+.produce_listing .produce_form{
+    padding: 1em;
+    /* display: none; */
+}
+
+.produce_listing .add_produce {
+    height: 300px;
+}
+
+.produce_listing .produce_form p{
+    color: rgb(178, 176, 176);
+    font-size: .8em;
+}
+
+.produce_listing .produce_form input{
+    padding: 1em;
+    border: none;
+    margin-bottom: .5em;
+    border-bottom: 1px solid rgb(173, 172, 172);
+    width: 100%;
+    margin-bottom: 1em;
+    outline: none;
+    transition: .2s;
+}
+
+.produce_listing .produce_form input::placeholder{
+    color: rgb(173, 172, 172);
+}
+
+.produce_listing .produce_form label{
+    color: rgba(85, 175, 110, 1);
+}
+
+.produce_listing .produce_form label:hover{
+   cursor: pointer;
+}
+
+.produce_listing .produce_form button{
+    background-color: rgba(85, 175, 110, 1);
+    border-radius: 10px;
+    margin-bottom: 1em;
+    border: none;
+}
+
+.produce_listing .produce_form button:hover{
+    background-color: green;
+    transition: .2s;
+}
+
+.produce_listing .produce_form input:focus{
+    border-bottom: 2px solid rgba(85, 175, 110, 1);
+    caret-color: rgba(85, 175, 110, 1);
+    transition: .2s;
 }

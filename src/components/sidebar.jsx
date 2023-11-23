@@ -18,22 +18,22 @@ export default function Sidebar() {
             <div className="w-100">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link" to="/dashboard"><i class="fa-solid fa-bars"></i> Dashboard</Link>
+                        <Link className="nav-link" to="/dashboard"><i className="fa-solid fa-bars"></i> Dashboard</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/weather"><i class="fa-solid fa-cloud"></i> Weather Forecast</Link>
+                        <Link className="nav-link" to="/weather"><i className="fa-solid fa-cloud"></i> Weather Forecast</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/produce-listing"><i class="fa-solid fa-list"></i> Produce Listing</Link>
+                        <Link className="nav-link" to="/produce-listing"><i className="fa-solid fa-list"></i> Produce Listing</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/chat-bot"><i class="fa-brands fa-bots"></i> Chat Bot</Link>
+                        <Link className="nav-link" to="/chat-bot"><i className="fa-brands fa-bots"></i> Chat Bot</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/market-insight"><i class="fa-solid fa-chart-simple"></i> Market Insight</Link>
+                        <Link className="nav-link" to="/market-insight"><i className="fa-solid fa-chart-simple"></i> Market Insight</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/articles"><i class="fa-solid fa-newspaper"></i> Articles</Link>
+                        <Link className="nav-link" to="/articles"><i className="fa-solid fa-newspaper"></i> Articles</Link>
                     </li>
                 </ul>
             </div>
@@ -43,10 +43,10 @@ export default function Sidebar() {
             <div className="w-100">
                 <ul className="navbar-nav">
                     <li className="nav-item">
-                        <Link className="nav-link"><i class="fa-solid fa-gear"></i> Settings</Link>
+                        <Link className="nav-link"><i className="fa-solid fa-gear"></i> Settings</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" ><i class="fa-solid fa-power-off"></i> Log Out</Link>
+                        <Link className="nav-link" ><i className="fa-solid fa-power-off"></i> Log Out</Link>
                     </li>
                 </ul>
             </div>

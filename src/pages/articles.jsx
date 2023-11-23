@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
+import "/public/css/article.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
+import book from "/img/book.png"
 
 export default function Articles() {
   return (
@@ -21,9 +23,23 @@ export default function Articles() {
 
         
 
-        <div className="content text-center mt-5">
-            <img src={logo} alt="" />   
-            <h1>Articles</h1>
+        <div className="content article mt-2">
+          <div className="article_container d-flex">
+
+            <div className="sing_article">
+              <img src={book} alt="" />  
+              <p className="name text-center">cocoa seed</p> 
+              <p className="text-end mb-1 mt-2">read <i class="fa-solid fa-arrows-turn-right"></i></p>             
+            </div>
+
+            <div className="sing_article">
+              <img src={book} alt="" />  
+              <p className="name text-center">cocoa seed</p> 
+              <p className="text-end mb-1 mt-2">read <i class="fa-solid fa-arrows-turn-right"></i></p>             
+            </div>
+
+
+          </div> 
         </div>
     </div>
   )

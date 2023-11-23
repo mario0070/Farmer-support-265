@@ -1,0 +1,24 @@
+.article{
+
+}
+
+.article .sing_article{
+    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.068);
+    padding: 1em;
+    width: 150px;
+    margin-bottom: 1em;
+    margin-right: 2em;
+}
+
+.article .sing_article .text-end{
+    color: rgba(85, 175, 110, 1);
+    font-size: .9em;
+}
+
+.article .article_container{
+    flex-wrap: wrap;
+}
+
+.article .sing_article .name{
+    color: rgb(179, 175, 175);
+}

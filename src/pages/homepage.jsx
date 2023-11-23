@@ -8,8 +8,10 @@ import legumes from "/img/legumes.png"
 import soil from "/img/soil.png"
 import "/public/css/landingpage.css"
 import { Link } from 'react-router-dom'
+import { CookiesProvider, useCookies } from "react-cookie";
 
 export default function Homepage() {
+  const [cookie, setCookie] = useCookies("")
   return (
     <div className='homepage'>
     <div className="content">
@@ -23,18 +25,19 @@ export default function Homepage() {
 
         <ul className='d-flex'>
           <li className="list-unstyled"><a href="/">Home</a></li>
-          <li className="list-unstyled"><a href="/dashboard">Dashboard</a></li>
+          {cookie.user_token && <li className="list-unstyled"><a href="/dashboard">Dashboard</a></li>}
           <li className="list-unstyled"><a href="/about">About</a></li>
           <li className="list-unstyled"><a href="/contact">Contact</a></li>
           <li className="list-unstyled"><a href="/help">Help</a></li>
-          <li className="list-unstyled"><a href="/login" className='btn fw-bold'>Login</a></li>
+          {cookie.user_token ? <li className="list-unstyled"><a href="/" className='btn fw-bold'>Logout</a></li> : <li className="list-unstyled"><a href="/login" className='btn fw-bold'>Login</a></li>}
+          
         </ul>
      </div>
 
      <div className="head-up">
         <h2 className="text-white fw-bold">Guiding you to a fruitful harvest</h2>
         <p className="text-white">Bountiful fruits, tasty produce is what we offer, just hit the button below</p>
-        <li className="list-unstyled mt-4"><a href="/signup" className='btn fw-bold'>Get started</a></li>
+        { !cookie.user_token && <li className="list-unstyled mt-4"><a href="/signup" className='btn fw-bold'>Get started</a></li>}
      </div>
    </div>
 
@@ -105,6 +108,6 @@ export default function Homepage() {
    </div>
    
   
- </div>
+    </div>
   )
 }

@@ -1,7 +1,6 @@
 import React from 'react'
 
-export default function sweetalert({icon,text}) {
-    const Toast = Swal.mixin({
+export default  Toast = Swal.mixin({
         toast: true,
         position: "top-end",
         showConfirmButton: false,
@@ -11,10 +10,9 @@ export default function sweetalert({icon,text}) {
           toast.onmouseenter = Swal.stopTimer;
           toast.onmouseleave = Swal.resumeTimer;
         }
-    });
+});
 
-  Toast.fire({
-    icon: icon,
-    title: text
-    });
-}
+Toast.fire({
+  icon: icon,
+  title: text
+});

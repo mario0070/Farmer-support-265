@@ -30,12 +30,12 @@
 }
 
 .weather .weather_content .section .name {
-    font-size: 1.2em;
+    font-size: 1em;
     color: rgb(165, 165, 165);
 }
 
 .weather .weather_content .section .temp{
-    font-size: 1.2em;
+    font-size: 1em;
     color: rgb(165, 165, 165);
 }
 
@@ -92,4 +92,8 @@
 .weather .weather_content .section .pest .search i {
     color:  rgb(181, 180, 180);
     font-size: 1.4em;
+}
+
+.weather .weather_content .section canvas{
+    height: 300px !important;
 }

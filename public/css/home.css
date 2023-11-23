@@ -8,9 +8,19 @@
     margin: auto auto;
 }
 
+@keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 100;
+    }
+}
+
 .dashboard .content{
     margin-left: 200px;
     padding: 1em;
+    animation: fade-in .5s;
 }
 
 .home .header{

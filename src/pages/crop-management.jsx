@@ -6,6 +6,7 @@ import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
 import yam from "/img/yam.png"
 import cocoa from "/img/cocoa.png"
+import { Link } from 'react-router-dom'
 
 export default function Crop() {
   return (
@@ -15,7 +16,7 @@ export default function Crop() {
 
         <div className="home w-100">
             <div className="header d-flex">
-            <a href="/my-produce" className="btn btn-success my_listing text-white">View my listings</a>
+            <Link to="/my-produce" className="btn btn-success my_listing text-white">View my listings</Link>
             <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
             <img src={farmer} alt="" />
             </div>

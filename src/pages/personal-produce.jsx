@@ -7,6 +7,7 @@ import logo from "/img/greenlogo.png"
 import yam from "/img/yam.png"
 import cocoa from "/img/cocoa.png"
 import $ from 'jquery';
+import { Link } from 'react-router-dom'
 
 export default function Person_produce() {
     const [show, setShow] = useState(false)
@@ -24,7 +25,7 @@ export default function Person_produce() {
     
             <div className="home w-100">
                 <div className="header d-flex">
-                <a href="/produce-listing" className="btn btn-success my_listing text-white">View market listings</a>
+                <Link to="/produce-listing" className="btn btn-success my_listing text-white">View market listings</Link>
                 <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
                 <img src={farmer} alt="" />
                 </div>

@@ -5,6 +5,7 @@ import "/public/css/crop.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
 import yam from "/img/yam.png"
+import cocoa from "/img/cocoa.png"
 
 export default function Crop() {
   return (
@@ -14,6 +15,7 @@ export default function Crop() {
 
         <div className="home w-100">
             <div className="header d-flex">
+            <a href="/my-produce" className="btn btn-success my_listing text-white">View my listings</a>
             <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
             <img src={farmer} alt="" />
             </div>
@@ -23,11 +25,11 @@ export default function Crop() {
 
         
 
-        <div className="content produce_listing mt-5">
+        <div className="content produce_listing mt-2">
             <div className="prod_container d-flex">
 
               <div className="produce">
-                <img src={yam} alt="" /> 
+                <img src={cocoa} alt="" /> 
                 <div className="prod_info p-3">
                   <p className="prod_name mb-1">Name</p>
                   <p className="prod_price fw-bold">₦500</p>
@@ -36,7 +38,7 @@ export default function Crop() {
               </div>
 
               <div className="produce">
-                <img src={yam} alt="" /> 
+                <img src={cocoa} alt="" /> 
                 <div className="prod_info p-3">
                   <p className="prod_name mb-1">Name</p>
                   <p className="prod_price fw-bold">₦500</p>
@@ -46,7 +48,7 @@ export default function Crop() {
 
               
               <div className="produce">
-                <img src={yam} alt="" /> 
+                <img src={cocoa} alt="" /> 
                 <div className="prod_info p-3">
                   <p className="prod_name mb-1">Name</p>
                   <p className="prod_price fw-bold">₦500</p>
@@ -55,7 +57,7 @@ export default function Crop() {
               </div>
               
               <div className="produce">
-                <img src={yam} alt="" /> 
+                <img src={cocoa} alt="" /> 
                 <div className="prod_info p-3">
                   <p className="prod_name mb-1">Name</p>
                   <p className="prod_price fw-bold">₦500</p>

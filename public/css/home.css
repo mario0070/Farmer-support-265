@@ -27,11 +27,16 @@
     justify-content: flex-end;
     border-bottom: 1px solid rgb(237, 234, 234);
     margin-right: 1em;
+    padding-bottom: .3em;
+}
+
+.home .header i{
+    font-size: 1.2em;
 }
 
 .home .header img{
-    width: 30px;
-    height: 30px;
+    width: 40px;
+    height: 40px;
     background-color: rgba(85, 175, 110, 1);
     border-radius: 50%;
     padding: .2em;
@@ -40,4 +45,17 @@
 
 .home .header img:hover{
     cursor: pointer;
+}
+
+.home .header .my_listing{
+    background-color: rgba(85, 175, 110, 1);
+    margin-right: 1em;
+    border-radius: 10px;
+    transition: .2s;
+    border: none;
+}
+
+.home .header .my_listing:hover{
+    background-color: green;
+    transition: .2s;
 }

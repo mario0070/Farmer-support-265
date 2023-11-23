@@ -9,6 +9,7 @@ import Articles from "../pages/articles"
 import Market from "../pages/market"
 import Crop from "../pages/crop-management"
 import Weather from "../pages/weather"
+import Mylisting from "../pages/personal-produce"
 
 function App() {
 
@@ -24,6 +25,7 @@ function App() {
           <Route element={<Market/>} path='/market-insight'/>
           <Route element={<Crop/>} path='/produce-listing'/>
           <Route element={<Weather/>} path='/weather'/>
+          <Route element={<Mylisting/>} path='/my-produce'/>
         </Routes>
     </>
   )

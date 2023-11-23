@@ -47,7 +47,7 @@ export default function Register() {
           password: password.current.value,
         })
         .then(res => {
-          console.log(res.data)
+          console.log(res)
           setCookie("user_token",res.data)
           alert("success","Account created succesfully")
           window.location.href = "/dashboard"

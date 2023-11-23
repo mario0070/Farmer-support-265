@@ -123,5 +123,94 @@
 
 .body .section2{
     padding: 2em;
-    transform: translateY(400px);
+    width: 70%;
+    margin: auto auto;
+    transform: translateY(430px);
+}
+
+.body .section2 h4 img{
+    width: 40px;
+    height: 40px;
+    margin-left: .5em;
+}
+
+.body .section2 h4{
+    color: rgba(85, 175, 110, 1);
+}
+
+.body .section2{
+    margin-bottom: 3em;
+    position: relative !important;
+}
+
+.body  .section2 .text-lay{
+    position: absolute;
+    top: 0;
+    background-color: rgba(0, 0, 0, 0.484);
+    width: 100%;
+    height: 100%;
+    padding: 2em;
+    color: white;
+}
+
+.section2 .img-bg{
+    height: 350px;
+    overflow: hidden;
+}
+
+.section2 .img-bg img{
+    width: 100%;
+    height: 100%;
+}
+
+
+@media screen and (max-width: 750px){
+    .body .section2{
+        width: 90%;
+        transform: translateY(530px);
+    }
+    
+    .homepage .header ul{
+        display: none !important;
+    }
+
+    .body .section1{
+        right: 0;
+        transform: translateY(-70px);
+    }
+
+    .body .img-container{
+        width: 90%;
+        margin: auto auto;
+        height: 400px;
+    }
+    
+}
+
+@media screen and (max-width: 1030px){    
+    .homepage .header li {
+        margin-left: 2em;
+    }
+
+    .body .section1{
+        margin-right: 8em;
+        transform: translateY(-70px);
+    }
+
+    .body .section2{
+        transform: translateY(480px);
+    }
+   
+}
+
+@media screen and (max-width: 850px){    
+    .homepage .header li {
+        margin-left:1em;
+    }
+
+    .body .section1{
+        margin-right: 5em;
+        transform: translateY(-70px);
+    }
+
 }

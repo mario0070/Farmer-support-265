@@ -22,7 +22,7 @@ function App() {
           <Route element={<Chat/>} path='/chat-bot'/>
           <Route element={<Articles/>} path='/articles'/>
           <Route element={<Market/>} path='/market-insight'/>
-          <Route element={<Crop/>} path='/crop-management'/>
+          <Route element={<Crop/>} path='/produce-listing'/>
           <Route element={<Weather/>} path='/weather'/>
         </Routes>
     </>

@@ -1,0 +1,39 @@
+.produce_listing{
+    overflow: scroll;
+    height: 80vh;
+    /* background-color: red; */
+}
+
+.produce_listing::-webkit-scrollbar{
+    display: none;
+}
+
+.produce_listing .produce{
+    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.1);
+    width: 350px;
+    border-radius: 8px;
+    margin-bottom: 2em;
+    margin-right: 2em;
+}
+
+.produce_listing .produce img{
+    width: 100%;
+    height: 150px;
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
+}
+
+.produce_listing .produce .prod_name, .produce_listing .produce .prod_biz_name{
+    color: rgba(154, 153, 153, 0.854);
+    font-size: .9em;
+}
+
+.produce_listing .produce .prod_price{
+    color: rgba(85, 175, 110, 1);
+    font-size: 1.4em;
+}
+
+.produce_listing .prod_container{
+    justify-content:baseline;
+    flex-wrap: wrap;
+}

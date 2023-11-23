@@ -24,7 +24,7 @@ export default function Sidebar() {
                         <Link className="nav-link" to="/weather"><i class="fa-solid fa-cloud"></i> Weather Forecast</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/crop-management"><i class="fa-solid fa-list"></i> Produce Listing</Link>
+                        <Link className="nav-link" to="/produce-listing"><i class="fa-solid fa-list"></i> Produce Listing</Link>
                     </li>
                     <li className="nav-item">
                         <Link className="nav-link" to="/chat-bot"><i class="fa-brands fa-bots"></i> Chat Bot</Link>

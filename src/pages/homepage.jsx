@@ -1,10 +1,10 @@
 import React from 'react'
 import logo from "/img/logo.png"
-import logox1 from "/img/logox1.png"
+import logox1 from "/img/greenlogo.png"
 import bg from "/img/img-bg.png"
-import apple from "/img/apple.png"
-import google from "/img/google.png"
-import twt from "/img/x.png"
+import cloud from "/img/Cloud.png"
+import analysis from "/img/analysis.png"
+import legumes from "/img/legumes.png"
 import soil from "/img/soil.png"
 import "/public/css/landingpage.css"
 import { Link } from 'react-router-dom'
@@ -50,9 +50,58 @@ export default function Homepage() {
         </div>
       </div>
 
-      <div className="section2">
-        <h2 className='fw-bold'>Our Services</h2>
+      <div className="section2 p-0">
+        <div className="img-bg">
+          <img src={legumes} alt="" />
+        </div>
+        <div className="text-lay text-white">
+          <p className="text-start mt-5">Providing you with the current market listings from other farmers</p>
+          <p className="text-start">Recommendation system and image analyzing</p>
+          <p className="text-start">We provide our users with ability to implement their own listings in the market</p>
+        </div>
       </div>
+      
+      <div className="section2 p-0">
+        <div className="img-bg">
+          <img src={cloud} alt="" />
+        </div>
+        <div className="text-lay">
+          <p className="fw-bold mt-1">Favourable weather conditions for plant growth</p>
+          <ul className='mt-2'>
+            <li className="mb-2">Sunlight Content</li>
+            <li className="mb-2">Rain Quantity</li>
+            <li className="mb-2">Humid Condition</li>
+            <li className='mb-2'>Irrigation</li>
+            <li className='mb-2'>Wind</li>
+            <li className='mb-2'>Rainmaking</li>
+          </ul>
+        </div>
+      </div>
+      
+      <div className="section2 p-0">
+        <div className="img-bg">
+          <img src={analysis} alt="" />
+        </div>
+        <div className="text-lay">
+          <div className="mx-auto">
+            <p className="fw-bold">Market Insights</p>
+            <ul className="mt-2">
+              <li className="mb-2">Pricing</li>
+              <li className="mb-2">Availability</li>
+              <li className="mb-2">Volume</li>
+              <li className="mb-2">weather impacts</li>
+              <li className="mb-2">Supply</li>
+              <li className="mb-2">Demand</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div className="section2">
+        <h1>Footer</h1>
+      </div>
+      
+
    </div>
    
   

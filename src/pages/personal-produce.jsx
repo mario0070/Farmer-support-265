@@ -37,7 +37,7 @@ export default function Person_produce() {
     
                   { !show &&
                     <div onClick={showForm} className="produce text-center add_produce">
-                        <i class="fa-solid fa-plus"></i>
+                        <i className="fa-solid fa-plus"></i>
                     </div>
                   }
 

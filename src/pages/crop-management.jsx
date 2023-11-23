@@ -1,8 +1,10 @@
 import React from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
+import "/public/css/crop.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
+import yam from "/img/yam.png"
 
 export default function Crop() {
   return (
@@ -21,9 +23,46 @@ export default function Crop() {
 
         
 
-        <div className="content text-center mt-5">
-            <img src={logo} alt="" />    
-            <h1>Crop Management</h1>
+        <div className="content produce_listing mt-5">
+            <div className="prod_container d-flex">
+
+              <div className="produce">
+                <img src={yam} alt="" /> 
+                <div className="prod_info p-3">
+                  <p className="prod_name mb-1">Name</p>
+                  <p className="prod_price fw-bold">₦500</p>
+                  <p className="prod_biz_name text-end">Business Name</p>
+                </div>
+              </div>
+
+              <div className="produce">
+                <img src={yam} alt="" /> 
+                <div className="prod_info p-3">
+                  <p className="prod_name mb-1">Name</p>
+                  <p className="prod_price fw-bold">₦500</p>
+                  <p className="prod_biz_name text-end">Business Name</p>
+                </div>
+              </div>
+
+              
+              <div className="produce">
+                <img src={yam} alt="" /> 
+                <div className="prod_info p-3">
+                  <p className="prod_name mb-1">Name</p>
+                  <p className="prod_price fw-bold">₦500</p>
+                  <p className="prod_biz_name text-end">Business Name</p>
+                </div>
+              </div>
+              
+              <div className="produce">
+                <img src={yam} alt="" /> 
+                <div className="prod_info p-3">
+                  <p className="prod_name mb-1">Name</p>
+                  <p className="prod_price fw-bold">₦500</p>
+                  <p className="prod_biz_name text-end">Business Name</p>
+                </div>
+              </div>
+            </div>   
         </div>
   </div>
   )

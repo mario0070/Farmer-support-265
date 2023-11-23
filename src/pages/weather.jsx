@@ -48,7 +48,7 @@ export default function Weather() {
                 </div>
 
                 <div className="humidity mt-5 text-center">
-                  <p className="name mb-1">Humidity</p>
+                  <p className="name mb-1">Humidity <i class="fa-solid fa-droplet"></i></p>
                   <p className="num">90%</p>
                 </div>
 
@@ -56,7 +56,7 @@ export default function Weather() {
 
               <div className="section">
                 <div className="temp mt-2 text-center">
-                  <p className="">Chart</p>
+                  <p className="">Rain Quantity <i class="fa-solid fa-cloud-showers-water"></i></p>
                 </div>
               </div>
 

@@ -61,57 +61,62 @@ export default function Login() {
   
   }
 
-  return (
-    <div className='signup'>
-       <div className="content">
-         <div className="section d-flex">
-            <div className="logo-container">
-              <a href="/">
-              <img src={logox1} alt="" className='logo' />
-              </a>
-            </div>
+  if(cookie.user_token){
+    window.location.href = "/dashboard"
+  }
+  else{
+    return (
+      <div className='signup'>
+          <div className="content">
+            <div className="section d-flex">
+              <div className="logo-container">
+                <a href="/">
+                <img src={logox1} alt="" className='logo' />
+                </a>
+              </div>
 
-            <div className="form">
-                <h2 className='mb-2 mt-2 text-center fw-bold'>Welcome back!</h2>
-                <p className="mb-5 text-muted text-center">Guiding you to the best produce</p>
+              <div className="form">
+                  <h2 className='mb-2 mt-2 text-center fw-bold'>Welcome back!</h2>
+                  <p className="mb-5 text-muted text-center">Guiding you to the best produce</p>
 
-                <form action="" onSubmit={loginUser}>
+                  <form action="" onSubmit={loginUser}>
 
-                  <div className="input-group mb-4">
-                    <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
-                    <input ref={email} type="email" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Email"/>
-                  </div>
-
-                  <div className="input-group mb-3">
-                    <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
-                    <input ref={password} type="password" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Password"/>
-                  </div>
-
-                  <div className="text-center btns">
-                      <button id='login' className="btn">Log In</button>
-                  </div>
-
-                  <div className="text-center">
-                    <p className="text-sm mb-1 mt-3">Log in with</p>
-                    <div className="d-flex platform mt-3">
-                      <a href=""><img src={apple} alt="" /></a>
-                      <a href=""><img src={google} alt="" /></a>
-                      <a href=""><img src={twt} alt="" /></a>
+                    <div className="input-group mb-4">
+                      <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
+                      <input ref={email} type="email" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Email"/>
                     </div>
-                    <p className="text-sm mt-4">
-                      Don’t have an account?, sign up <Link to="/signup">here</Link>
-                    </p>
-                  </div>
 
-                </form>
+                    <div className="input-group mb-3">
+                      <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                      <input ref={password} type="password" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Password"/>
+                    </div>
+
+                    <div className="text-center btns">
+                        <button id='login' className="btn">Log In</button>
+                    </div>
+
+                    <div className="text-center">
+                      <p className="text-sm mb-1 mt-3">Log in with</p>
+                      <div className="d-flex platform mt-3">
+                        <a href=""><img src={apple} alt="" /></a>
+                        <a href=""><img src={google} alt="" /></a>
+                        <a href=""><img src={twt} alt="" /></a>
+                      </div>
+                      <p className="text-sm mt-4">
+                        Don’t have an account?, sign up <Link to="/signup">here</Link>
+                      </p>
+                    </div>
+
+                  </form>
+              </div>
             </div>
-         </div>
-      </div>
+        </div>
 
-      <div className="img-bg">
-        <img src={bg} alt="" className=''/>
+        <div className="img-bg">
+          <img src={bg} alt="" className=''/>
+        </div>
+        
       </div>
-     
-    </div>
-  )
+    )
+  }
 }

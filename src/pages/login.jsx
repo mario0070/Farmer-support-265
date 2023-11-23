@@ -20,7 +20,9 @@ export default function Login() {
        <div className="content">
          <div className="section d-flex">
             <div className="logo-container">
+              <a href="/">
               <img src={logox1} alt="" className='logo' />
+              </a>
             </div>
 
             <div className="form">

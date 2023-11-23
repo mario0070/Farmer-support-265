@@ -6,23 +6,47 @@ import apple from "/img/apple.png"
 import google from "/img/google.png"
 import twt from "/img/x.png"
 import { Link } from 'react-router-dom'
+import axios from 'axios'
 
 export default function Register() {
   const [input, setinput] = useState("")
+
+  const instance = axios.create({
+    baseURL: 'http://localhost:3000',
+    timeout: 1000,
+    headers: {
+      'Access-Control-Allow-Origin' : '*',
+      'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    },
+  });
+
+  const registerUser = (e) => {
+    e.preventDefault()
+    instance.post("/user/signin",{
+
+    })
+    .then(res => {
+      
+      console.log(res)
+    })
+    .catch(err => console.log(err))
+  }
 
   return (
     <div className='signup'>
        <div className="content">
          <div className="section d-flex">
             <div className="logo-container">
-              <img src={logox1} alt="" className='logo' />
+              <a href="/">
+                <img src={logox1} alt="" className='logo' />
+              </a>
             </div>
 
             <div className="form mb-5">
                 <h2 className='mb-2 mt-2 text-center fw-bold'>Welcome!</h2>
                 <p className="mb-5 text-muted text-center">Create an account to get started</p>
 
-                <form action="">
+                <form action="" onSubmit={registerUser}>
 
                   <div className="input-group mb-4">
                     <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>

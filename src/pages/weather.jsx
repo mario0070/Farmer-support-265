@@ -1,15 +1,54 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/weather.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
 import sun from "/img/sun.png"
+import $ from 'jquery';
+import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
+import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
+
+Chartjs.register(
+  BarElement,
+  CategoryScale,
+  LinearScale,
+  Tooltip,
+)
 
 export default function Weather() {
   let newDate = new Date()
   let hrs = newDate.getHours();
   let mins = newDate.getMinutes();
+
+  const data = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
+    datasets: [{
+      label: 'Rain Quantity',
+      data: [0.1, 0.9, 0.3, 0.5, 0.2, 0.3, 0.3, 0.3, 0.2, 0.8, 0.6, 0.4],
+      borderWidth: 1,
+      backgroundColor: ["green"],
+    }]
+  }
+
+  const options = {
+    Plugins : {
+      legend : false
+    },
+    scales : {
+      x : {
+        border: {
+          color: ["green"]
+        },
+        grid :{
+          display : false,
+          padding: 10,
+          drawOnChartArea: false,
+        } 
+      },
+    }
+  }
+
 
   return (
     <div className='dashboard'>
@@ -58,6 +97,7 @@ export default function Weather() {
                 <div className="temp mt-2 text-center">
                   <p className="">Rain Quantity <i class="fa-solid fa-cloud-showers-water"></i></p>
                 </div>
+                <Bar data={data} options={options}></Bar>
               </div>
 
               <div className="section">

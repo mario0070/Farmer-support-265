@@ -94,6 +94,10 @@
     font-size: 1.4em;
 }
 
+.weather .weather_content .section .bar{
+    object-fit:cover ;
+}
+
 .weather .weather_content .section canvas{
     height: 300px !important;
 }

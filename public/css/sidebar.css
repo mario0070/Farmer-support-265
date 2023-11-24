@@ -93,6 +93,7 @@
     .home .fa-bars{
         z-index: 1 !important;
     }
+    
 }
 
 @media screen and (max-width: 750px){    
@@ -159,5 +160,9 @@
     .produce_listing .produce{
         width: 100% !important;
         margin-right: 0 !important;
+    }
+
+    .market .chart{
+        width: 100% !important;
     }
 }

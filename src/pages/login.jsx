@@ -46,13 +46,14 @@ export default function Login() {
       })
       .then(res => {
         console.log(res)
+        setCookie("user",res.data.user)
         setCookie("user_token",res.data)
         alert("success","Sign in was succesful")
         redirect("/dashboard")
       })
       .catch(err => {
         console.log(err)
-        btn.innerHTML = "Sign Up"
+        btn.innerHTML = "Log in"
         alert("error",err.response.data.Error)
       })
     }else{

@@ -14,6 +14,10 @@
     transform: translateY(40px);
 }
 
+.settings .img .name{
+    text-transform: capitalize;
+}
+
 .settings .img label{
     background-color: white;
     color: rgba(85, 175, 110, 1);

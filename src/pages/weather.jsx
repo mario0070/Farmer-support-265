@@ -29,22 +29,31 @@ export default function Weather() {
     datasets: [{
       label: 'Rain Quantity',
       data: [0.1, 0.9, 0.3, 0.5, 0.2, 0.3, 0.3, 0.3, 0.2, 0.8, 0.6, 0.4],
-      borderWidth: 1,
-      backgroundColor: ["green"],
+      borderWidth: 0,
+      backgroundColor: ["#00FF80"],
     }]
   }
 
   const options = {
     Plugins : {
-      legend : false
+      legend: {
+        labels: {
+            fontSize: 22
+        }
+      }
     },
     scales : {
       x : {
         grid :{
           display : false,
-          padding: 10,
           drawOnChartArea: false,
         } 
+      },
+      y : {
+        grid :{
+          display : false,
+          drawOnChartArea: false,
+        } ,
       },
     }
   }

@@ -26,10 +26,20 @@ export default function Market() {
     datasets: [{
       label: 'Range',
       data: [20, 49, 60, 35, 55, 15, 70, 35, 50, 24, 70, 45],
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: ["green"],
-      pointBorderColor: ["transparent"],
-      tension: 0.4
+      pointBorderColor: ["green"],
+    }]
+  }
+
+  const barData = {
+    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
+    datasets: [{
+      label: 'Range',
+      data: [20, 49, 60, 35, 55, 15, 70, 35, 50, 24, 70, 45],
+      borderColor: ["green"],
+      pointBorderColor: ["#00FF80"],
+      backgroundColor: ["#00FF80"]
     }]
   }
 
@@ -101,7 +111,7 @@ export default function Market() {
                       <p className="mb-0">Quantity</p>
                       <p className="mb-0">2023</p>
                     </div>
-                    <Line data={data} options={options}></Line>
+                    <Bar data={barData} options={options}></Bar>
                   </div>
                   <p className='text-muted text-center'>Note: these are approximated values</p>
               </div>

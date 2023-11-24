@@ -7,6 +7,7 @@ import { CookiesProvider, useCookies, } from "react-cookie";
 
 export default function Sidebar() {
     const [cookie, setCookie, removeCookie] = useCookies(["user_token"])
+    const [logOut, setlogout, removeLogout] = useCookies(["user"])
 
     const logout = () => {
         Swal.fire({
@@ -21,6 +22,7 @@ export default function Sidebar() {
           }).then((result) => {
             if (result.isConfirmed) {
                 removeCookie(["user_token"])
+                removeLogout(["user"])
                 Swal.fire({
                     title: "Logged out!",
                     text: "You are logged out.",

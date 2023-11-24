@@ -1,0 +1,28 @@
+.market{
+    height: 85vh;
+    overflow: scroll;
+}
+
+.market::-webkit-scrollbar{
+    display: none;
+}
+
+.market .chart{
+    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.096);
+    width: 80%;
+    padding: 1em;
+    margin: auto auto;
+    margin-bottom: 4em;
+}
+
+.market .chart .d-flex{
+    justify-content: space-between;
+}
+
+.market .chart p{
+    color: rgb(172, 171, 171);
+}
+
+.market .chart .name{
+    color: rgba(85, 175, 110, 1);
+}

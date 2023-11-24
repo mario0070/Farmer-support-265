@@ -57,7 +57,7 @@ export default function Login() {
         console.log(res,data.token)
         setCookie("user",res.data.user)
         alert("success","Sign in was succesful")
-        // window.location.href = "/dashboard"
+        window.location.href = "/dashboard"
       })
       .catch(err => {
         console.log(err)

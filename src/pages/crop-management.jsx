@@ -10,6 +10,7 @@ import { CookiesProvider, useCookies, } from "react-cookie";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import { NumericFormat } from 'react-number-format';
+import fruits from "/img/allfruits.jpg"
 
 export default function Crop() {
   const [cookie, setCookie, removeCookie] = useCookies("")
@@ -69,7 +70,7 @@ export default function Crop() {
                 {produce.map((val, index) => {
                   return (
                     <div className="produce">
-                      <img src={cocoa} alt="" /> 
+                      <img src={fruits} alt="" /> 
                       <div className="prod_info p-3">
                         <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
                         <p className="prod_name mb-1">{val.description}</p>

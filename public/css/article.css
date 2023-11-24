@@ -5,20 +5,39 @@
 .article .sing_article{
     box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.068);
     padding: 1em;
-    width: 150px;
-    margin-bottom: 1em;
+    width: 200px;
+    margin-bottom: 3em;
     margin-right: 2em;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
 }
 
 .article .sing_article .text-end{
     color: rgba(85, 175, 110, 1);
     font-size: .9em;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
+    transform: translateY(-10px);
 }
 
 .article .article_container{
     flex-wrap: wrap;
+    height: 82vh;
+    overflow: scroll;
+    justify-content: space-evenly;
+}
+
+.article .article_container a{
+    text-decoration: none;
+}
+
+.article .article_container::-webkit-scrollbar{
+    display: none;
 }
 
 .article .sing_article .name{
-    color: rgb(179, 175, 175);
+    color: rgb(156, 155, 155);
 }

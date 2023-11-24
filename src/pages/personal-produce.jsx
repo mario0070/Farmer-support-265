@@ -11,10 +11,12 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
+import fruits from "/img/allfruits.jpg"
 
 export default function Person_produce() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [show, setShow] = useState(false)
+  const [input, setInput] = useState("")
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
   const cropType = useRef("")
@@ -111,9 +113,9 @@ export default function Person_produce() {
       .then(res => {
         alert("success", "Product has been added")
         btn.innerHTML = `List product`
-        cropType.current.value == ""
-        description.current.value == ""
-        price.current.value == ""
+        cropType.current.value = ""
+        description.current.value = ""
+        price.current.value = ""
       })
       .catch(err => {
         btn.innerHTML = `List product`
@@ -156,6 +158,7 @@ export default function Person_produce() {
                   { !show &&
                     <div onClick={showForm} className="produce text-center add_produce">
                         <i className="fa-solid fa-plus"></i>
+                        <p className="text-muted">Add produce</p>
                     </div>
                   }
 
@@ -163,9 +166,9 @@ export default function Person_produce() {
                     <div className="produce produce_form">
                     {/* <p className="text-center">Fill products in quantity such as, “A bag of rice”</p> */}
                     <form action="" onSubmit={addProduce}>
-                        <input ref={cropType} type="text" placeholder='Enter product name'/>
-                        <input ref={price} type="text" placeholder='Product price' />
-                        <input ref={description} type="text" placeholder='Description' />
+                        <input onChange={e => setInput(e.target.value)} ref={cropType} type="text" placeholder='Enter product name'/>
+                        <input onChange={e => setInput(e.target.value)} ref={price} type="text" placeholder='Product price' />
+                        <input onChange={e => setInput(e.target.value)} ref={description} type="text" placeholder='Description' />
                         <label htmlFor="file" className='d-block mb-4'>Choose images</label>
                         <input type="file" className='d-none ' name="file" id="file" />
                         <button id='add' className='btn btn-success text-white mt-2'>List product</button>
@@ -177,7 +180,7 @@ export default function Person_produce() {
                   {produce.map((val, index) => {
                     return (
                       <div className="produce">
-                        <img src={yam} alt="" /> 
+                        <img src={fruits} alt="" /> 
                         <div className="prod_info p-3">
                           <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
                           <p className="prod_name mb-1">{val.description}</p>

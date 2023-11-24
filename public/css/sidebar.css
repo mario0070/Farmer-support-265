@@ -165,4 +165,14 @@
     .market .chart{
         width: 100% !important;
     }
+
+    .article .sing_article {
+        width: 300px !important;
+        height: fit-content;
+    }
+
+    .article .sing_article img{
+        /* width: 60% !important;
+        height: 100px; */
+    }
 }

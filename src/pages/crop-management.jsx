@@ -1,16 +1,43 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/crop.css"
 import farmer from "/img/farmer.png"
-import logo from "/img/greenlogo.png"
-import yam from "/img/yam.png"
+import loader from "/img/loader.gif"
 import cocoa from "/img/cocoa.png"
 import { Link } from 'react-router-dom'
 import { CookiesProvider, useCookies, } from "react-cookie";
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import { NumericFormat } from 'react-number-format';
 
 export default function Crop() {
   const [cookie, setCookie, removeCookie] = useCookies("")
+  const [produce, setProduce] = useState([])
+  const [isLoaded, setisLoaded] = useState(false)
+
+  var data = JSON.parse(Cookies.get('user_token'))
+  let send = axios.create({
+    baseURL: 'https://farmer-support-api.onrender.com/',
+    headers: {
+        "Authorization" : `Bearer ${data.token}`,
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    },
+  });
+
+  useEffect(() => {
+    send.get("/produce",{
+    })
+    .then(res => {
+      setisLoaded(true)
+      setProduce(res.data.data)
+      console.log(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[])
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -36,47 +63,42 @@ export default function Crop() {
           
 
           <div className="content produce_listing mt-2">
-              <div className="prod_container d-flex">
+            { isLoaded 
+              ? <div className="prod_container d-flex">
 
-                <div className="produce">
+                {produce.map((val, index) => {
+                  return (
+                    <div className="produce">
+                      <img src={cocoa} alt="" /> 
+                      <div className="prod_info p-3">
+                        <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
+                        <p className="prod_name mb-1">{val.description}</p>
+                        <p className="prod_price fw-bold">₦{new Intl.NumberFormat('en-IN', {}).format(val.price)}</p>
+                        <p className="prod_biz_name text-end">{val.farmName}</p>
+                      </div>
+                    </div>
+                  )
+                })}
+
+                {/* <div className="produce">
                   <img src={cocoa} alt="" /> 
                   <div className="prod_info p-3">
                     <p className="prod_name mb-1">Name</p>
                     <p className="prod_price fw-bold">₦500</p>
                     <p className="prod_biz_name text-end">Business Name</p>
                   </div>
-                </div>
+                </div> */}
+                </div> 
+                  
 
-                <div className="produce">
-                  <img src={cocoa} alt="" /> 
-                  <div className="prod_info p-3">
-                    <p className="prod_name mb-1">Name</p>
-                    <p className="prod_price fw-bold">₦500</p>
-                    <p className="prod_biz_name text-end">Business Name</p>
-                  </div>
+              : <div className="text-center mt-5">
+                  <img src={loader} alt="" width={400} />
                 </div>
-
                 
-                <div className="produce">
-                  <img src={cocoa} alt="" /> 
-                  <div className="prod_info p-3">
-                    <p className="prod_name mb-1">Name</p>
-                    <p className="prod_price fw-bold">₦500</p>
-                    <p className="prod_biz_name text-end">Business Name</p>
-                  </div>
-                </div>
-                
-                <div className="produce">
-                  <img src={cocoa} alt="" /> 
-                  <div className="prod_info p-3">
-                    <p className="prod_name mb-1">Name</p>
-                    <p className="prod_price fw-bold">₦500</p>
-                    <p className="prod_biz_name text-end">Business Name</p>
-                  </div>
-                </div>
-              </div>   
+            }
           </div>
     </div>
     )
+    
   }
 }

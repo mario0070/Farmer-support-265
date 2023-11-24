@@ -7,6 +7,7 @@ import logo from "/img/greenlogo.png"
 import farmer1 from "/img/farmer1.png"
 import book from "/img/book.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
+import $ from "jquery"
 
 export default function Settings() {
     const [cookie, setCookie, removeCookie] = useCookies("")
@@ -33,6 +34,10 @@ export default function Settings() {
     const updateP = () => {
         alert("warning", "In development")
     }
+
+    $("#file").change(function(){
+      alert("warning", "Coming soon!!")
+    });
 
     if(!cookie.user_token){
       window.location.href = "/login"

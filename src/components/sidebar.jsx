@@ -9,9 +9,27 @@ export default function Sidebar() {
     const [cookie, setCookie, removeCookie] = useCookies(["user_token"])
 
     const logout = () => {
-        removeCookie()
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You are logging out your account",
+            icon: "warning",
+            color : "grey",
+            showCancelButton: true,
+            confirmButtonColor: "green",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, Log out!"
+          }).then((result) => {
+            removeCookie(["user_token"])
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Logged out!",
+                    text: "You are logged out.",
+                    icon: "success"
+                });
+            }
+        });
     }
-    
+
   return (
     <div className="sidebar">
         <div className="img text-center mt-3">
@@ -51,10 +69,10 @@ export default function Sidebar() {
             <div className="w-100">
                 <ul className="navbar-nav">
                     <li  className="nav-item">
-                        <Link onClick={logout} className="nav-link"><i className="fa-solid fa-gear"></i> Settings</Link>
+                        <Link to="/account-settings" className="nav-link"><i className="fa-solid fa-gear"></i> Settings</Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" ><i className="fa-solid fa-power-off"></i> Log Out</Link>
+                        <Link onClick={logout} className="nav-link" ><i className="fa-solid fa-power-off"></i> Log Out</Link>
                     </li>
                 </ul>
             </div>

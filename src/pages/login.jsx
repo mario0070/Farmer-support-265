@@ -6,7 +6,7 @@ import apple from "/img/apple.png"
 import google from "/img/google.png"
 import twt from "/img/x.png"
 import "/public/css/login.css"
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 import Axios from '../utils/axios'
 import { CookiesProvider, useCookies } from "react-cookie";
 
@@ -48,7 +48,7 @@ export default function Login() {
         console.log(res)
         setCookie("user_token",res.data)
         alert("success","Sign in was succesful")
-        window.location.href = "/dashboard"
+        redirect("/dashboard")
       })
       .catch(err => {
         console.log(err)

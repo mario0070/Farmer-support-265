@@ -1,0 +1,92 @@
+.settings{
+    margin: auto auto;
+    height: 82vh;
+    overflow: scroll;
+}
+
+.settings::-webkit-scrollbar{
+    display: none;
+}
+
+.settings .img{
+    width: 230px;
+    height: 230px;
+    transform: translateY(40px);
+}
+
+.settings .img label{
+    background-color: white;
+    color: rgba(85, 175, 110, 1);
+    border-radius: 100%;
+    padding: 1em;
+    box-shadow: .1em .1em 1em rgb(216, 216, 216);
+    position: absolute;
+    top: 0;
+    right: 0;
+    transition: .2s;
+}
+
+.settings .img label:hover{
+    cursor: pointer;
+    transform: scale(1.1);
+    transition: .2s;
+}
+
+.settings .img i{
+    font-size: 1.5em;
+    text-align: center;
+}
+
+.settings img{
+    width: 100%;
+    height: 100%;
+    background-color: rgba(85, 175, 110, 1);
+    border-radius: 50%;
+    padding: .2em;
+    margin-right: 1em ;
+}
+
+.settings .img button{
+    background-color: rgba(85, 175, 110, 1);
+    border: none;
+}
+
+.settings .img p{
+    font-size: 1.3em;
+    color: rgba(85, 175, 110, 1);
+}
+
+.settings .setting_container .d-flex{
+    justify-content: space-evenly;
+}
+
+.settings form label{
+    display: block;
+    margin-bottom: .3em;
+    color: rgb(184, 179, 179);
+}
+
+.settings .form{
+    width: 50%;
+}
+
+.settings form input{
+    padding: 1.3em;
+    margin-bottom: 2em;
+    border-radius: 20px;
+    box-shadow:  .1em .1em 1em rgba(0, 0, 0, 0.089);
+    width: 90%;
+    border: none;
+    outline: none;
+    transition: .2s;
+}
+
+.settings form input:focus{
+    border:1px solid  rgba(85, 175, 110, 1);
+    transition: .2s;
+    caret-color: rgba(85, 175, 110, 1);
+}
+
+.settings form input::placeholder{
+    color: rgb(190, 186, 186);
+}

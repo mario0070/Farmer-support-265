@@ -19,8 +19,8 @@ export default function Sidebar() {
             cancelButtonColor: "#d33",
             confirmButtonText: "Yes, Log out!"
           }).then((result) => {
-            removeCookie(["user_token"])
             if (result.isConfirmed) {
+                removeCookie(["user_token"])
                 Swal.fire({
                     title: "Logged out!",
                     text: "You are logged out.",

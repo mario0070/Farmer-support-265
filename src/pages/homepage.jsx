@@ -12,6 +12,30 @@ import { CookiesProvider, useCookies } from "react-cookie";
 
 export default function Homepage() {
   const [cookie, setCookie] = useCookies("")
+  const [cookies, setsCookie, removeCookie] = useCookies(["user_token"])
+
+  const logout = () => {
+    Swal.fire({
+        title: "Are you sure?",
+        text: "You are logging out your account",
+        icon: "warning",
+        color : "grey",
+        showCancelButton: true,
+        confirmButtonColor: "green",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, Log out!"
+      }).then((result) => {
+        if (result.isConfirmed) {
+          removeCookie(["user_token"])
+            Swal.fire({
+                title: "Logged out!",
+                text: "You are logged out.",
+                icon: "success"
+            });
+        }
+    });
+  }
+
   return (
     <div className='homepage'>
     <div className="content">
@@ -29,7 +53,7 @@ export default function Homepage() {
           <li className="list-unstyled"><a href="/about">About</a></li>
           <li className="list-unstyled"><a href="/contact">Contact</a></li>
           <li className="list-unstyled"><a href="/help">Help</a></li>
-          {cookie.user_token ? <li className="list-unstyled"><a href="/" className='btn fw-bold'>Logout</a></li> : <li className="list-unstyled"><a href="/login" className='btn fw-bold'>Login</a></li>}
+          {cookie.user_token ? <li className="list-unstyled"><a onClick={logout}  className='btn fw-bold'>Logout</a></li> : <li className="list-unstyled"><a href="/login" className='btn fw-bold'>Login</a></li>}
           
         </ul>
      </div>

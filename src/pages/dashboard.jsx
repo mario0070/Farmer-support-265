@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
+import empty from "/img/emptyimg.png"
 import { redirect } from 'react-router-dom'
 
 export default function Dashboard() {    
@@ -22,7 +23,7 @@ export default function Dashboard() {
   const [isLoaded, setisLoaded] = useState(false)
   const [period, setPeriod] = useState("")
   const [username, setUsername] = useState("")
-  
+
   if(cookie.user_token){
     const data = [
       {
@@ -243,7 +244,8 @@ export default function Dashboard() {
                     </div>
                     <div className="produce_listing mt-2">
                       <div className="prod_container d-flex">
-                        {myproduce.map((val, index) => {
+                        {myproduce.length > 0 
+                        ? myproduce.map((val, index) => {
                           return (
                             <div className="produce">
                               <img src={fruits} alt="" /> 
@@ -255,7 +257,14 @@ export default function Dashboard() {
                               </div>
                             </div>
                           )
-                        })}
+                        })
+                        :
+                        <div className="mt-5 w-100 empty text-center mb-5">
+                          <img src={empty} alt="" className='mt-3' />
+                          <p className="mt-2 mb-1">Empty</p>
+                          <p className="mb-3">You don't have any produce!!</p>
+                        </div>
+                        }
                       </div> 
                     </div>
                   </div>

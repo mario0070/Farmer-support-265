@@ -16,32 +16,31 @@ export default function Crop() {
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
 
-  var data = JSON.parse(Cookies.get('user_token'))
-  let send = axios.create({
-    baseURL: 'https://farmer-support-api.onrender.com/',
-    headers: {
-        "Authorization" : `Bearer ${data.token}`,
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    },
-  });
-
-  useEffect(() => {
-    send.get("/produce",{
-    })
-    .then(res => {
-      setisLoaded(true)
-      setProduce(res.data.data)
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[])
-
   if(!cookie.user_token){
     window.location.href = "/login"
   }else{
+    var data = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${data.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
+  
+    useEffect(() => {
+      send.get("/produce",{
+      })
+      .then(res => {
+        setisLoaded(true)
+        setProduce(res.data.data)
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },[])
     return (
       <div className='dashboard'>
           <div className="d-flex">

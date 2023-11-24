@@ -45,7 +45,7 @@ export default function ChatBot() {
       $(".msg-container").scrollTop($(".msg-container").height());
       msgInputs.current.value = ""
     }else{
-      alert("error","Please type a message")
+      alert("warning","Please type a message")
     }
   }
 

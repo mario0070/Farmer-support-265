@@ -78,6 +78,45 @@
     }
 }
 
-@media screen and (max-width: 850px){    
+@media screen and (max-width: 750px){    
+    .weather .weather_content .section{
+        width: 100% !important;
+    }
+    
+    .chat_history{
+        display: none !important;
+    }
+
+    .chat_bot .msg-container {
+        width: 100% !important;
+    }
+
+    .msg-container .wrap1{
+        margin-right: 0 !important;
+    }
+
+    .msg-container .wrap2{
+        margin-left: 0 !important;
+    }
+
+    .chat_bot .inputs{
+        width: 100% !important;
+        transform: translateY(0px) !important;
+        position: relative !important;
+        padding: 0 0 !important;
+    }
+
+    .chat_bot .inputs textarea {
+        width: 100% !important;
+        margin-right: .5em !important;
+    }
+
+    .chat_bot button{
+        border-radius: 10px !important;
+        width: fit-content !important;
+        text-overflow:ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+    }
 
 }

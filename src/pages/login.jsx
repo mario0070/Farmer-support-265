@@ -46,6 +46,7 @@ export default function Login() {
       })
       .then(res => {
         console.log(res)
+        setCookie("user",res.data.user)
         setCookie("user_token",res.data)
         alert("success","Sign in was succesful")
         redirect("/dashboard")

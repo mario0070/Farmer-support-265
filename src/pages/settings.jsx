@@ -8,9 +8,16 @@ import farmer1 from "/img/farmer1.png"
 import book from "/img/book.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
 import $ from "jquery"
+import Cookies from 'js-cookie';
+
 
 export default function Settings() {
     const [cookie, setCookie, removeCookie] = useCookies("")
+    const fullname = useRef("")
+    const email = useRef("")
+    const location = useRef("")
+    const password = useRef("")
+    const biz_name = useRef("")
 
     const alert = (icon, text) => {
         const Toast = Swal.mixin({
@@ -30,6 +37,16 @@ export default function Settings() {
           title: text
         });
     }
+
+    useEffect(()=>{
+      var user_data = JSON.parse(Cookies.get('user'))
+      location.current.value = user_data.location
+      biz_name.current.value = user_data.farmName
+      email.current.value = user_data.email
+      // password.current.value = user_data.password
+      // fullname.current.value = user_data.password
+      // console.log(user_data)
+    })
 
     const updateP = () => {
         alert("warning", "In development")
@@ -80,24 +97,29 @@ export default function Settings() {
                             <form action=''>
                                <div>
                                     <label htmlFor="">Edit Fullname</label>
-                                    <input type="text" placeholder='Enter your fullname' />
+                                    <input ref={fullname} type="text" placeholder='Enter your fullname' />
                                </div>
                                <div>
                                     <label htmlFor="">Email Address</label>
-                                    <input type="email" placeholder='Enter your fullname' />
+                                    <input ref={email} type="email" placeholder='Enter your fullname' />
+                               </div>
+                               <div>
+                                    <label htmlFor="">Change business name</label>
+                                    <input ref={biz_name} type="text" placeholder='Enter your business name' />
+                               </div>
+                               <div>
+                                    <label htmlFor="">Location</label>
+                                    <input ref={location} type="text" placeholder='Enter your location' />
                                </div>
                                <div>
                                     <label htmlFor="">Change password</label>
-                                    <input type="password" placeholder='********' />
+                                    <input ref={password} type="password" placeholder='********' />
                                </div>
                                <div>
                                     <label htmlFor="">Confirm Change password</label>
                                     <input type="password" placeholder='********' />
                                </div>
-                               <div>
-                                    <label htmlFor="">Change business name</label>
-                                    <input type="text" placeholder='Enter your business name' />
-                               </div>
+                               
                             </form>
                         </div>
 

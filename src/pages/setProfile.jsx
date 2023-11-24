@@ -7,7 +7,7 @@ import google from "/img/google.png"
 import twt from "/img/x.png"
 import "/public/css/login.css"
 import { Link, redirect } from 'react-router-dom'
-import Axios from '../utils/axios'
+// import Axios from '../utils/axios-token'
 import { CookiesProvider, useCookies } from "react-cookie";
 
 export default function Login() {
@@ -48,8 +48,9 @@ export default function Login() {
       })
       .then(res => {
         console.log(res)
+        setCookie("user",res.data.user)
         alert("success","Sign in was succesful")
-        // redirect("/dashboard")
+        window.location.href = "/dashboard"
       })
       .catch(err => {
         console.log(err)
@@ -78,18 +79,18 @@ export default function Login() {
                   <form action="" onSubmit={setprofile}>
 
                     <div className="input-group mb-4">
-                      <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
+                      <span className="input-group-text"><i class="fa-solid fa-user"></i></span>
                       <input ref={fullname} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Fullname"/>
                     </div>
 
                     <div className="input-group mb-3">
-                      <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                      <span className="input-group-text"><i class="fa-brands fa-pagelines"></i></span>
                       <input ref={biz_name} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Business name"/>
                     </div>
 
                     <div className="input-group mb-3">
-                      <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
-                      <input ref={location} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Business name"/>
+                      <span className="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
+                      <input ref={location} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Location"/>
                     </div>
 
                     <div className="text-center mb-4">

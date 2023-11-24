@@ -7,6 +7,7 @@ import logo from "/img/greenlogo.png"
 import farmer1 from "/img/farmer1.png"
 import book from "/img/book.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
+import $ from "jquery"
 
 export default function Settings() {
     const [cookie, setCookie, removeCookie] = useCookies("")
@@ -34,6 +35,11 @@ export default function Settings() {
         alert("warning", "In development")
     }
 
+    const profilePic = () => {
+      console.log("yea")
+      alert("warning", "Coming soon!!")
+    }
+
     if(!cookie.user_token){
       window.location.href = "/login"
     }else{
@@ -44,7 +50,7 @@ export default function Settings() {
   
             <div className="home w-100">
                 <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
-                  <i class="fa-solid fa-bars"></i>
+                  <i className="fa-solid fa-bars"></i>
                 </div>
                 <div className="header d-flex">
                     <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
@@ -61,10 +67,10 @@ export default function Settings() {
                         <div className="img sticky-top text-center">
                             <img src={farmer1} alt="" />
                             <div className="upload_img">
-                                <label htmlFor="file">
-                                <i class="fa-solid fa-plus"></i>
+                                <label htmlFor="prf">
+                                <i className="fa-solid fa-plus"></i>
                                 </label>
-                                <input type="file" name="file" id="file" className='d-none' />
+                                <input onChange={profilePic} type="file" name="file" id="prf" className='d-none' />
                             </div>
                             <p className="name fw-bold  mt-3">Username</p>
                             <button onClick={updateP} className="btn btn-success">Save changes</button>

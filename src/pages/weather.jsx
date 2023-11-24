@@ -60,7 +60,7 @@ export default function Weather() {
 
           <div className="home w-100">
             <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
-              <i class="fa-solid fa-bars"></i>
+              <i className="fa-solid fa-bars"></i>
             </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
@@ -78,22 +78,22 @@ export default function Weather() {
                 <div className="section">
 
                   <div className="temp mt-2 text-center">
-                    <p className="">Temperature <i class="fa-solid fa-temperature-low"></i></p>
+                    <p className="">Temperature <i className="fa-solid fa-temperature-low"></i></p>
                   </div>
 
                   <div className="d-flex degree">
                     <div className='outdoor'>
                       <p className="name mb-1">Indoor</p>
-                      <p className="num">80<span><i class="fa-regular fa-circle"></i></span></p>
+                      <p className="num">80<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                     <div className='indoor'>
                       <p className="name mb-1">Indoor</p>
-                      <p className="num">90<span><i class="fa-regular fa-circle"></i></span></p>
+                      <p className="num">90<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                   </div>
 
                   <div className="humidity mt-5 text-center">
-                    <p className="name mb-1">Humidity <i class="fa-solid fa-droplet"></i></p>
+                    <p className="name mb-1">Humidity <i className="fa-solid fa-droplet"></i></p>
                     <p className="num">90%</p>
                   </div>
 
@@ -101,7 +101,7 @@ export default function Weather() {
 
                 <div className="section">
                   <div className="temp mt-2 text-center">
-                    <p className="">Rain Quantity <i class="fa-solid fa-cloud-showers-water"></i></p>
+                    <p className="">Rain Quantity <i className="fa-solid fa-cloud-showers-water"></i></p>
                   </div>
                   <div className="bar">
                     <Bar data={data} options={options}></Bar>
@@ -119,19 +119,19 @@ export default function Weather() {
                     
                     <div className="icons d-flex">
                       <div>
-                        <i class="fa-solid fa-cloud-rain"></i>
+                        <i className="fa-solid fa-cloud-rain"></i>
                         <p className="">10:00</p>
                       </div>
                       <div>
-                        <i class="fa-solid fa-cloud-moon-rain"></i>
+                        <i className="fa-solid fa-cloud-moon-rain"></i>
                         <p className="">11:00</p>
                       </div>
                       <div>
-                        <i class="fa-solid fa-cloud-showers-water"></i>
+                        <i className="fa-solid fa-cloud-showers-water"></i>
                         <p className="">12:00</p>
                       </div>
                       <div>
-                        <i class="fa-solid fa-cloud-showers-heavy"></i>
+                        <i className="fa-solid fa-cloud-showers-heavy"></i>
                         <p className="">13:00</p>
                       </div>
                       <div>
@@ -145,10 +145,10 @@ export default function Weather() {
 
                 <div className="section">
                   <div className="pest temp mt-2 text-center">
-                    <p className="mb-4">Pest control <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
+                    <p className="mb-4">Pest control <i className="fa-solid fa-spaghetti-monster-flying"></i></p>
                     <div className="search">
                       <input type="text"  placeholder='Crop name'/>
-                      <button className='btn'><i class="fa-solid fa-magnifying-glass"></i></button>
+                      <button className='btn'><i className="fa-solid fa-magnifying-glass"></i></button>
                     </div>
                     <p className="text-center mt-4">Pest</p>
                     <div className="d-flex mt-2">

@@ -1,14 +1,12 @@
 import React, { useRef, useState } from 'react'
-import logo from "/img/logo.png"
 import logox1 from "/img/logox1.png"
 import bg from "/img/img-bg.png"
-import apple from "/img/apple.png"
-import google from "/img/google.png"
-import twt from "/img/x.png"
 import "/public/css/login.css"
 import { Link, redirect } from 'react-router-dom'
-// import Axios from '../utils/axios-token'
+// import axios from '../utils/axios-token'
 import { CookiesProvider, useCookies } from "react-cookie";
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 export default function Login() {
   const [input, setinput] = useState("")
@@ -17,6 +15,15 @@ export default function Login() {
   const biz_name = useRef("")
   const location = useRef("")
 
+  var data = JSON.parse(Cookies.get('user_token'))
+  let send = axios.create({
+    baseURL: 'https://farmer-support-api.onrender.com/',
+    headers: {
+        "Authorization" : `Bearer ${data.token}`,
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    },
+  });
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
       toast: true,
@@ -41,16 +48,16 @@ export default function Login() {
     if(fullname.current.value != "" && biz_name.current.value != "", location.current.value != ""){
       var btn = document.getElementById("login")
       btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
-      Axios.post("/user/profile",{
+      send.post("/user/profile",{
         fullName: fullname.current.value,
         location: location.current.value,
         farmName: biz_name.current.value,
       })
       .then(res => {
-        console.log(res)
+        console.log(res,data.token)
         setCookie("user",res.data.user)
         alert("success","Sign in was succesful")
-        window.location.href = "/dashboard"
+        // window.location.href = "/dashboard"
       })
       .catch(err => {
         console.log(err)

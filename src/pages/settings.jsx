@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/settings.css"
@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 
 export default function Settings() {
     const [cookie, setCookie, removeCookie] = useCookies("")
+    const [farmerName, setFarmer] = useState("")
     const fullname = useRef("")
     const email = useRef("")
     const location = useRef("")
@@ -44,7 +45,8 @@ export default function Settings() {
       biz_name.current.value = user_data.farmName
       email.current.value = user_data.email
       // password.current.value = user_data.password
-      // fullname.current.value = user_data.password
+      fullname.current.value = user_data.farmerName
+      setFarmer(user_data.farmerName)
       // console.log(user_data)
     })
 
@@ -89,7 +91,7 @@ export default function Settings() {
                                 </label>
                                 <input onChange={profilePic} type="file" name="file" id="prf" className='d-none' />
                             </div>
-                            <p className="name fw-bold  mt-3">Username</p>
+                            <p className="name fw-bold  mt-3" >{farmerName}</p>
                             <button onClick={updateP} className="btn btn-success">Save changes</button>
                         </div>
 

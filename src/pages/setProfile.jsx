@@ -13,8 +13,9 @@ import { CookiesProvider, useCookies } from "react-cookie";
 export default function Login() {
   const [input, setinput] = useState("")
   const [cookie, setCookie] = useCookies("")
-  const email = useRef("")
-  const password = useRef("")
+  const fullname = useRef("")
+  const biz_name = useRef("")
+  const location = useRef("")
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -35,25 +36,25 @@ export default function Login() {
     });
   }
 
-  const loginUser = (e) => {
+  const setprofile = (e) => {
     e.preventDefault()
-    if(email.current.value != "" && password.current.value != ""){
+    if(fullname.current.value != "" && biz_name.current.value != "", location.current.value != ""){
       var btn = document.getElementById("login")
       btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
-      Axios.post("/user/signin",{
-        email: email.current.value,
-        password: password.current.value,
+      Axios.post("/user/profile",{
+        fullName: fullname.current.value,
+        location: location.current.value,
+        farmName: biz_name.current.value,
       })
       .then(res => {
         console.log(res)
-        setCookie("user_token",res.data)
         alert("success","Sign in was succesful")
-        redirect("/dashboard")
+        // redirect("/dashboard")
       })
       .catch(err => {
         console.log(err)
-        btn.innerHTML = "Log in"
-        alert("error",err.response.data.Error)
+        btn.innerHTML = "Continue"
+        alert("error","Please try again")
       })
     }else{
       alert("warning","Please fill all the fields")
@@ -61,10 +62,6 @@ export default function Login() {
   
   }
 
-  if(cookie.user_token){
-    window.location.href = "/dashboard"
-  }
-  else{
     return (
       <div className='signup'>
           <div className="content">
@@ -75,36 +72,28 @@ export default function Login() {
                 </a>
               </div>
 
-              <div className="form">
-                  <h2 className='mb-2 mt-2 text-center fw-bold'>Welcome back!</h2>
-                  <p className="mb-5 text-muted text-center">Guiding you to the best produce</p>
+              <div className="form mt-5">
+                  <h2 className='mb-5 mt-2 text-center fw-bold'>Set up your profile</h2>
 
-                  <form action="" onSubmit={loginUser}>
+                  <form action="" onSubmit={setprofile}>
 
                     <div className="input-group mb-4">
                       <span className="input-group-text"><i className="fa-solid fa-envelope"></i></span>
-                      <input ref={email} type="email" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Email"/>
+                      <input ref={fullname} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Fullname"/>
                     </div>
 
                     <div className="input-group mb-3">
                       <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
-                      <input ref={password} type="password" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Password"/>
+                      <input ref={biz_name} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Business name"/>
                     </div>
 
-                    <div className="text-center btns">
-                        <button id='login' className="btn">Log In</button>
+                    <div className="input-group mb-3">
+                      <span className="input-group-text"><i className="fa-solid fa-lock"></i></span>
+                      <input ref={location} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Business name"/>
                     </div>
 
-                    <div className="text-center">
-                      <p className="text-sm mb-1 mt-3">Log in with</p>
-                      <div className="d-flex platform mt-3">
-                        <a href=""><img src={apple} alt="" /></a>
-                        <a href=""><img src={google} alt="" /></a>
-                        <a href=""><img src={twt} alt="" /></a>
-                      </div>
-                      <p className="text-sm mt-4">
-                        Don’t have an account?, sign up <Link to="/signup">here</Link>
-                      </p>
+                    <div className="text-center mb-4">
+                        <button id='login' className="btn">Continue</button>
                     </div>
 
                   </form>
@@ -118,5 +107,4 @@ export default function Login() {
         
       </div>
     )
-  }
 }

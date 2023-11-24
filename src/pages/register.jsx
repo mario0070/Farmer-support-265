@@ -50,7 +50,7 @@ export default function Register() {
           console.log(res)
           setCookie("user_token",res.data)
           alert("success","Account created succesfully")
-          redirect("/dashboard")
+          redirect("/profile-setup")
         })
         .catch(err => {
           console.log(err)

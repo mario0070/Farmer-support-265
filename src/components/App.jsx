@@ -11,6 +11,7 @@ import Crop from "../pages/crop-management"
 import Weather from "../pages/weather"
 import Mylisting from "../pages/personal-produce"
 import Settings from "../pages/settings"
+import Profile from "../pages/setProfile"
 
 function App() {
 
@@ -28,6 +29,7 @@ function App() {
           <Route element={<Weather/>} path='/weather'/>
           <Route element={<Mylisting/>} path='/my-produce'/>
           <Route element={<Settings/>} path='/account-settings'/>
+          <Route element={<Profile/>} path='/profile-setup'/>
         </Routes>
     </>
   )

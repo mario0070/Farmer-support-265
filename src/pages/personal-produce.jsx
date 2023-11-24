@@ -30,7 +30,7 @@ export default function Person_produce() {
 
             <div className="home w-100">
                 <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
-                  <i class="fa-solid fa-bars"></i>
+                  <i className="fa-solid fa-bars"></i>
                 </div>
                 <div className="header d-flex">
                 <Link to="/produce-listing" className="btn btn-success my_listing text-white">View market listings</Link>

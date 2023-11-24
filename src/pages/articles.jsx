@@ -20,7 +20,7 @@ export default function Articles() {
 
           <div className="home w-100">
               <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
-                <i class="fa-solid fa-bars"></i>
+                <i className="fa-solid fa-bars"></i>
               </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
@@ -38,13 +38,13 @@ export default function Articles() {
               <div className="sing_article">
                 <img src={book} alt="" />  
                 <p className="name text-center">cocoa seed</p> 
-                <p className="text-end mb-1 mt-2">read <i class="fa-solid fa-arrows-turn-right"></i></p>             
+                <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p>             
               </div>
 
               <div className="sing_article">
                 <img src={book} alt="" />  
                 <p className="name text-center">cocoa seed</p> 
-                <p className="text-end mb-1 mt-2">read <i class="fa-solid fa-arrows-turn-right"></i></p>             
+                <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p>             
               </div>
 
 

@@ -78,7 +78,7 @@ export default function Sidebar() {
             </div>
         </nav>
 
-        <div class="offcanvas offcanvas-start show_sidebar">
+        <div className="offcanvas offcanvas-start show_sidebar">
             <div className="img text-center mt-3">
            <a href="/">
             <h5 className=''>

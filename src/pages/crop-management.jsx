@@ -22,7 +22,7 @@ export default function Crop() {
 
           <div className="home w-100">
               <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
-                <i class="fa-solid fa-bars"></i>
+                <i className="fa-solid fa-bars"></i>
               </div>
               <div className="header d-flex">
               <Link to="/my-produce" className="btn btn-success my_listing text-white">View my listings</Link>

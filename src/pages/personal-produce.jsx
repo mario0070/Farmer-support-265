@@ -29,7 +29,9 @@ export default function Person_produce() {
             <Sidebar/>
 
             <div className="home w-100">
-          <     i class="fa-solid fa-bars"></i>
+                <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+                  <i class="fa-solid fa-bars"></i>
+                </div>
                 <div className="header d-flex">
                 <Link to="/produce-listing" className="btn btn-success my_listing text-white">View market listings</Link>
                 <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>

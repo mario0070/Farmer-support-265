@@ -57,3 +57,27 @@
 .sidebar i{
     margin-right: .3em;
 }
+
+
+@media screen and (max-width: 980px){    
+    .sidebar{
+        width: 0px;
+        min-width: 0px;
+    }
+
+    .home .fa-bars{
+        display: inline !important;
+    }
+    
+    .dashboard .content{
+        margin-left: 0px !important;
+    }
+
+    .home{
+        margin-left: 0px !important;
+    }
+}
+
+@media screen and (max-width: 850px){    
+
+}

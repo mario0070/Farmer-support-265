@@ -17,6 +17,7 @@ export default function Market() {
           <Sidebar/>
 
           <div className="home w-100">
+              <i class="fa-solid fa-bars"></i>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
               <img src={farmer} alt="" />

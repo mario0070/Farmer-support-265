@@ -3,6 +3,15 @@
     padding: .4em;
 }
 
+.home .fa-bars{
+    font-size: 2em;
+    transform: translateY(4px);
+    margin-left: .5em;
+    color: rgb(179, 176, 176);
+    position: absolute;
+    display: none;
+}
+
 .dashboard{
     max-width: 1440px;
     margin: auto auto;

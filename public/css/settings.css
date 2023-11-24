@@ -71,9 +71,9 @@
 }
 
 .settings form input{
-    padding: 1.3em;
-    margin-bottom: 2em;
-    border-radius: 20px;
+    padding: 1em;
+    margin-bottom: 1.5em;
+    border-radius: 10px;
     box-shadow:  .1em .1em 1em rgba(0, 0, 0, 0.089);
     width: 90%;
     border: none;

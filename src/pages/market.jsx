@@ -3,28 +3,36 @@ import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import logo from "/img/greenlogo.png"
 import farmer from "/img/farmer.png"
+import { CookiesProvider, useCookies, } from "react-cookie";
 
 export default function Market() {
-  return (
-    <div className='dashboard'>
-        <div className="d-flex">
-        <Sidebar/>
+  const [cookie, setCookie, removeCookie] = useCookies("")
 
-        <div className="home w-100">
-            <div className="header d-flex">
-            <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
-            <img src={farmer} alt="" />
-            </div>
-        </div>
+  if(!cookie.user_token){
+    window.location.href = "/login"
+  }else{
+    return (
+      <div className='dashboard'>
+          <div className="d-flex">
+          <Sidebar/>
 
-        </div>
+          <div className="home w-100">
+              <i class="fa-solid fa-bars"></i>
+              <div className="header d-flex">
+              <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
+              <img src={farmer} alt="" />
+              </div>
+          </div>
 
-        
+          </div>
 
-        <div className="content text-center mt-5">
-            <img src={logo} alt="" />            
-            <h1>Market insight</h1>
-        </div>
-    </div>
-  )
+          
+
+          <div className="content text-center mt-5">
+              <img src={logo} alt="" />            
+              <h1>Market insight</h1>
+          </div>
+      </div>
+    )
+  }
 }

@@ -4,7 +4,7 @@ import bg from "/img/img-bg.png"
 import apple from "/img/apple.png"
 import google from "/img/google.png"
 import twt from "/img/x.png"
-import { Link, Navigate } from 'react-router-dom'
+import { Link, Navigate, redirect } from 'react-router-dom'
 import Axios from '../utils/axios'
 import { CookiesProvider, useCookies } from "react-cookie";
 
@@ -47,10 +47,10 @@ export default function Register() {
           password: password.current.value,
         })
         .then(res => {
-          console.log(res.data)
+          console.log(res)
           setCookie("user_token",res.data)
           alert("success","Account created succesfully")
-          window.location.href = "/dashboard"
+          redirect("/dashboard")
         })
         .catch(err => {
           console.log(err)

@@ -54,7 +54,6 @@
 .homepage .header a:hover{
     color: green;
     transition: .2s;
-    font-weight: 900;
 }
 
 .homepage .header ul{

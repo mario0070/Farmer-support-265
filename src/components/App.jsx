@@ -10,6 +10,7 @@ import Market from "../pages/market"
 import Crop from "../pages/crop-management"
 import Weather from "../pages/weather"
 import Mylisting from "../pages/personal-produce"
+import Settings from "../pages/settings"
 
 function App() {
 
@@ -26,6 +27,7 @@ function App() {
           <Route element={<Crop/>} path='/produce-listing'/>
           <Route element={<Weather/>} path='/weather'/>
           <Route element={<Mylisting/>} path='/my-produce'/>
+          <Route element={<Settings/>} path='/account-settings'/>
         </Routes>
     </>
   )

@@ -8,34 +8,40 @@ import yam from "/img/yam.png"
 import cocoa from "/img/cocoa.png"
 import $ from 'jquery';
 import { Link } from 'react-router-dom'
+import { CookiesProvider, useCookies, } from "react-cookie";
 
 export default function Person_produce() {
-    const [show, setShow] = useState(false)
+  const [cookie, setCookie, removeCookie] = useCookies("")
+  const [show, setShow] = useState(false)
 
-    const showForm = () => {
-        setShow(true)
-        $(".produce_form").show();
-        console.log(show)
-    }
+  const showForm = () => {
+      setShow(true)
+      $(".produce_form").show();
+      console.log(show)
+  }
 
+  if(!cookie.user_token){
+    window.location.href = "/login"
+  }else{
     return (
         <div className='dashboard'>
             <div className="d-flex">
             <Sidebar/>
-    
+
             <div className="home w-100">
+          <     i class="fa-solid fa-bars"></i>
                 <div className="header d-flex">
                 <Link to="/produce-listing" className="btn btn-success my_listing text-white">View market listings</Link>
                 <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
                 <img src={farmer} alt="" />
                 </div>
             </div>
-    
+
             </div>
-    
+
             <div className="content produce_listing mt-2">
                 <div className="prod_container d-flex">
-    
+
                   { !show &&
                     <div onClick={showForm} className="produce text-center add_produce">
                         <i className="fa-solid fa-plus"></i>
@@ -55,7 +61,7 @@ export default function Person_produce() {
                     </form>
                   </div>
                   }
-    
+
                   <div className="produce">
                     <img src={yam} alt="" /> 
                     <div className="prod_info p-3">
@@ -64,9 +70,10 @@ export default function Person_produce() {
                       <p className="prod_biz_name text-end">Business Name</p>
                     </div>
                   </div>
-    
+
                 </div>   
             </div>
       </div>
     )
+  }
 }

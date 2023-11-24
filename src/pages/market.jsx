@@ -103,6 +103,7 @@ export default function Market() {
                     </div>
                     <Line data={data} options={options}></Line>
                   </div>
+                  <p className='text-muted text-center'>Note: these are approximated values</p>
               </div>
           </div>
       </div>

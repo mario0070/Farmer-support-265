@@ -103,7 +103,9 @@ export default function Weather() {
                   <div className="temp mt-2 text-center">
                     <p className="">Rain Quantity <i class="fa-solid fa-cloud-showers-water"></i></p>
                   </div>
-                  <Bar data={data} options={options}></Bar>
+                  <div className="bar">
+                    <Bar data={data} options={options}></Bar>
+                  </div>
                 </div>
 
                 <div className="section">

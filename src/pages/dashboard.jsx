@@ -15,15 +15,16 @@ export default function Dashboard() {
           <Sidebar/>
 
           <div className="home w-100">
-          <i class="fa-solid fa-bars"></i>
+            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+              <i class="fa-solid fa-bars"></i>
+            </div>
             <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
-              <img src={farmer} alt="" />
+              <img  src={farmer} alt="" />
             </div>
           </div>
 
         </div>
-
         
 
         <div className="content text-center mt-5">

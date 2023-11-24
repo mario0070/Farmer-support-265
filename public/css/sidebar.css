@@ -58,8 +58,13 @@
     margin-right: .3em;
 }
 
+.offcanvas{
+    z-index: 1000000000000000;
+}
 
-@media screen and (max-width: 980px){    
+
+@media screen and (max-width: 980px){ 
+       
     .sidebar{
         width: 0px;
         min-width: 0px;
@@ -75,6 +80,18 @@
 
     .home{
         margin-left: 0px !important;
+    }
+
+    .chat_bot .inputs,.msg-container .wrap1 .msgBodys, .msg-container .sentMsg .myMsg,.dashboard .con{
+        position: relative !important;
+    }
+
+    .chat_bot .inputs,.msg-container .wrap1 .msgBodys, .msg-container .sentMsg .myMsg{
+        z-index: -1 !important;
+    }
+
+    .home .fa-bars{
+        z-index: 1 !important;
     }
 }
 
@@ -104,6 +121,7 @@
         transform: translateY(0px) !important;
         position: relative !important;
         padding: 0 0 !important;
+        z-index: -1;
     }
 
     .chat_bot .inputs textarea {
@@ -119,4 +137,27 @@
         white-space: nowrap;
     }
 
+    .settings .setting_container .d-flex{
+        flex-wrap: wrap !important;
+    }
+
+    .settings .img{
+        z-index: -1;
+        position: relative !important;
+        transform: translateY(0px) !important;
+    }
+
+    .settings .form{
+        width: 100% !important;
+        margin-top: 8em;
+    }
+
+    .settings form input{
+        width: 100% !important;
+    }
+
+    .produce_listing .produce{
+        width: 100% !important;
+        margin-right: 0 !important;
+    }
 }

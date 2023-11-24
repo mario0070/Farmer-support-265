@@ -59,7 +59,9 @@ export default function Weather() {
           <Sidebar/>
 
           <div className="home w-100">
+            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
               <i class="fa-solid fa-bars"></i>
+            </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
               <img src={farmer} alt="" />

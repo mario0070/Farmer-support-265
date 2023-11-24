@@ -4,7 +4,6 @@ import "/public/css/home.css"
 import "/public/css/crop.css"
 import farmer from "/img/farmer.png"
 import loader from "/img/loader.gif"
-import cocoa from "/img/cocoa.png"
 import { Link } from 'react-router-dom'
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Cookies from 'js-cookie';
@@ -80,15 +79,6 @@ export default function Crop() {
                     </div>
                   )
                 })}
-
-                {/* <div className="produce">
-                  <img src={cocoa} alt="" /> 
-                  <div className="prod_info p-3">
-                    <p className="prod_name mb-1">Name</p>
-                    <p className="prod_price fw-bold">₦500</p>
-                    <p className="prod_biz_name text-end">Business Name</p>
-                  </div>
-                </div> */}
                 </div> 
                   
 

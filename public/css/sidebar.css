@@ -94,6 +94,13 @@
         z-index: 1 !important;
     }
     
+    .chat_bot .msg-container{
+        height: 70vh !important;
+    }
+
+    .overview .sec1{
+        width: 100% !important;
+    }
 }
 
 @media screen and (max-width: 750px){    

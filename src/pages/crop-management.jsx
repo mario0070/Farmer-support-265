@@ -4,7 +4,6 @@ import "/public/css/home.css"
 import "/public/css/crop.css"
 import farmer from "/img/farmer.png"
 import loader from "/img/loader.gif"
-import cocoa from "/img/cocoa.png"
 import { Link } from 'react-router-dom'
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Cookies from 'js-cookie';
@@ -17,32 +16,31 @@ export default function Crop() {
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
 
-  var data = JSON.parse(Cookies.get('user_token'))
-  let send = axios.create({
-    baseURL: 'https://farmer-support-api.onrender.com/',
-    headers: {
-        "Authorization" : `Bearer ${data.token}`,
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    },
-  });
-
-  useEffect(() => {
-    send.get("/produce",{
-    })
-    .then(res => {
-      setisLoaded(true)
-      setProduce(res.data.data)
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[])
-
   if(!cookie.user_token){
     window.location.href = "/login"
   }else{
+    var data = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${data.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
+  
+    useEffect(() => {
+      send.get("/produce",{
+      })
+      .then(res => {
+        setisLoaded(true)
+        setProduce(res.data.data)
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },[])
     return (
       <div className='dashboard'>
           <div className="d-flex">
@@ -80,15 +78,6 @@ export default function Crop() {
                     </div>
                   )
                 })}
-
-                {/* <div className="produce">
-                  <img src={cocoa} alt="" /> 
-                  <div className="prod_info p-3">
-                    <p className="prod_name mb-1">Name</p>
-                    <p className="prod_price fw-bold">₦500</p>
-                    <p className="prod_biz_name text-end">Business Name</p>
-                  </div>
-                </div> */}
                 </div> 
                   
 

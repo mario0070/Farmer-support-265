@@ -42,97 +42,97 @@ export default function Person_produce() {
     });
   }
 
-  var data = JSON.parse(Cookies.get('user_token'))
-  let send = axios.create({
-    baseURL: 'https://farmer-support-api.onrender.com/',
-    headers: {
-        "Authorization" : `Bearer ${data.token}`,
-        'Access-Control-Allow-Origin' : '*',
-        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-    },
-  });
-
-  const confirmDelete = (id) => {
-    send.delete(`/produce/me?id=${id}`,{
-    })
-    .then(res => {
-      console.log(res)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  }
-
-  const deleteProduce = (id) => {
-    Swal.fire({
-        title: "Are you sure?",
-        text: "Deleting this produce cannot be undo",
-        icon: "warning",
-        color : "grey",
-        showCancelButton: true,
-        confirmButtonColor: "green",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "Yes, Delete!"
-      }).then((result) => {
-        if (result.isConfirmed) {
-          confirmDelete(id)
-            Swal.fire({
-                title: "Deleted!",
-                text: "Produce is deleted successfully",
-                icon: "success"
-            });
-          }
-      });
-  }
-
-  useEffect(() => {
-    send.get("/produce/me",{
-    })
-    .then(res => {
-      setisLoaded(true)
-      setProduce(res.data.myProduces)
-    })
-    .catch(err => {
-      console.log(err)
-    })
-  },[produce]
-  )
-
-  const addProduce = (e) => {
-    e.preventDefault()
-    if(cropType.current.value == "" || description.current.value == ""  || price.current.value == ""){
-      alert("warning", "Fill all the fields")
-    }else{
-      var btn = document.getElementById("add")
-      btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
-      send.post("/produce/me",{
-        "cropType": cropType.current.value,
-        "description": description.current.value,
-        "price": price.current.value
-      })
-      .then(res => {
-        alert("success", "Product has been added")
-        btn.innerHTML = `List product`
-        cropType.current.value = ""
-        description.current.value = ""
-        price.current.value = ""
-      })
-      .catch(err => {
-        btn.innerHTML = `List product`
-        alert("error", "something went wrong")
-        console.log(err)
-      })
-    }
-  }
-
-  const showForm = () => {
-      setShow(true)
-      $(".produce_form").show();
-  }
-
   if(!cookie.user_token){
     window.location.href = "/login"
   }else{
+    var data = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${data.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
+
+    const confirmDelete = (id) => {
+      send.delete(`/produce/me?id=${id}`,{
+      })
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
+
+    const deleteProduce = (id) => {
+      Swal.fire({
+          title: "Are you sure?",
+          text: "Deleting this produce cannot be undo",
+          icon: "warning",
+          color : "grey",
+          showCancelButton: true,
+          confirmButtonColor: "green",
+          cancelButtonColor: "#d33",
+          confirmButtonText: "Yes, Delete!"
+        }).then((result) => {
+          if (result.isConfirmed) {
+            confirmDelete(id)
+              Swal.fire({
+                  title: "Deleted!",
+                  text: "Produce is deleted successfully",
+                  icon: "success"
+              });
+            }
+        });
+    }
+
+    useEffect(() => {
+      send.get("/produce/me",{
+      })
+      .then(res => {
+        setisLoaded(true)
+        setProduce(res.data.myProduces)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },[produce]
+    )
+
+    const addProduce = (e) => {
+      e.preventDefault()
+      if(cropType.current.value == "" || description.current.value == ""  || price.current.value == ""){
+        alert("warning", "Fill all the fields")
+      }else{
+        var btn = document.getElementById("add")
+        btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
+        send.post("/produce/me",{
+          "cropType": cropType.current.value,
+          "description": description.current.value,
+          "price": price.current.value
+        })
+        .then(res => {
+          alert("success", "Product has been added")
+          btn.innerHTML = `List product`
+          cropType.current.value = ""
+          description.current.value = ""
+          price.current.value = ""
+        })
+        .catch(err => {
+          btn.innerHTML = `List product`
+          alert("error", "something went wrong")
+          console.log(err)
+        })
+      }
+    }
+
+    const showForm = () => {
+        setShow(true)
+        $(".produce_form").show();
+    }
+
     return (
         <div className='dashboard'>
             <div className="d-flex">

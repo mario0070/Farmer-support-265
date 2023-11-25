@@ -39,29 +39,28 @@ export default function Settings() {
         });
     }
 
-    useEffect(()=>{
-      var user_data = JSON.parse(Cookies.get('user'))
-      location.current.value = user_data.location
-      biz_name.current.value = user_data.farmName
-      email.current.value = user_data.email
-      // password.current.value = user_data.password
-      fullname.current.value = user_data.farmerName
-      setFarmer(user_data.farmerName)
-      // console.log(user_data)
-    })
-
-    const updateP = () => {
-        alert("warning", "In development")
-    }
-
-    const profilePic = () => {
-      console.log("yea")
-      alert("warning", "Coming soon!!")
-    }
-
     if(!cookie.user_token){
       window.location.href = "/login"
     }else{
+      useEffect(()=>{
+        var user_data = JSON.parse(Cookies.get('user'))
+        location.current.value = user_data.location
+        biz_name.current.value = user_data.farmName
+        email.current.value = user_data.email
+        fullname.current.value = user_data.farmerName
+        setFarmer(user_data.farmerName)
+        // console.log(user_data)
+      })
+  
+      const updateP = () => {
+          alert("warning", "In development")
+      }
+  
+      const profilePic = () => {
+        console.log("yea")
+        alert("warning", "Coming soon!!")
+      }
+      
       return (
         <div className='dashboard'>
             <div className="d-flex">

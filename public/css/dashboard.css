@@ -1,0 +1,135 @@
+.overview{
+
+}
+
+.overview .pfp{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: rgba(85, 175, 110, 1);
+    margin-left: 0em;
+    margin-bottom: 1em;
+    overflow: hidden;
+}
+
+.overview .pfp img{
+    width: 100%;
+    height: 100%;
+}
+
+.overview .pfp h4{
+    white-space: nowrap;
+    color: rgba(85, 175, 110, 1);
+    margin-left: 1.3em;
+    transform: translateY(15px);
+}
+
+.overview .sec1{
+    width: 45%;
+    margin-right: 1em;
+}
+
+.overview .section{
+    height: fit-content !important;
+}
+
+.overview .sec1 .section{
+    width: 100% !important;
+}
+
+.overview .sec1 .section .icons p{
+    color: rgb(167, 163, 163);
+    font-size: .9em;
+}
+
+
+.overview .sec1 p, .overview .sec1 .name, .overview .sec1 .num{
+    font-size: .9em !important;
+}
+
+.overview .article .sing_article{
+    box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.068);
+    padding: 1em;
+    width: 200px;
+    margin-bottom: 3.4em;
+    margin-right: 2em;
+    height: 250px;
+    overflow: hidden;
+    position: relative;
+}
+
+.overview .article .sing_article .text-end{
+    color: rgba(85, 175, 110, 1);
+    font-size: .9em;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin: 1em;
+    transform: translateY(-10px);
+}
+
+.overview .article .article_container{
+    flex-wrap: nowrap !important;
+    overflow: scroll;
+    justify-content: space-evenly;
+    height: fit-content !important;
+    padding: 1em;
+}
+
+.overview .article .article_container a{
+    text-decoration: none;
+}
+
+.overview .article .article_container::-webkit-scrollbar{
+    display: none;
+}
+
+.overview .article .sing_article .name,.overview .section .see_all p{
+    color: rgb(156, 155, 155);
+}
+
+.overview .article .sing_article .name{
+    font-size: .8em !important;
+}
+
+.overview .section .see_all{
+    font-size: .9em;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+.overview .section .see_all a{
+    text-decoration: none;
+    color: rgba(85, 175, 110, 1);
+}
+
+.overview .produce_listing{
+    height: fit-content;
+    width: 100%;
+    overflow: scroll;
+}
+
+.overview .produce_listing .prod_container{
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.overview .produce_listing .produce{
+    min-width: 300px !important;
+    margin-right: 2em !important;
+}
+
+.overview .sec1 .img_cont .username{
+    color: rgba(85, 175, 110, 1);
+    transform: translateY(35px);
+    text-transform: capitalize;
+}
+
+.overview .weather_content .section .num i{
+    transform: translateY(-10px) !important;
+}
+
+.overview .empty p{
+    color: rgb(174, 172, 172);
+    font-size: .9em;
+}

@@ -130,3 +130,50 @@
 .produce_listing .produce .fa-trash{
     transition: .2s;
 }
+
+.dashboard .pagination{
+    margin-left: 200px;
+    margin-bottom: 1em;
+    background-color: white;
+    padding-top: 1em;
+    width: fit-content;
+    /* box-shadow: .1em .1em 1em rgba(19, 18, 18, 0.075); */
+    left: 0;
+}
+
+.dashboard .pagination li{
+    list-style: none;
+}
+
+.dashboard .pagination a {
+    color: rgba(85, 175, 110, 1);
+    border: 1px solid rgba(85, 175, 110, 1);
+    padding: .4em .8em;
+    margin-right: .5em;
+    text-decoration: none;
+    transform: .2s;
+    border-radius: 3px;
+}
+
+.dashboard .pagination a:hover {
+    background-color: rgba(85, 175, 110, 1);
+    color: white;
+    transform: .2s;
+    cursor: pointer;
+}
+
+.dashboard .pagination .active {
+    background-color: rgba(85, 175, 110, 1);
+    color: white;
+}
+
+.dashboard .pagination .outof{
+    font-size: .8em;
+    font-style: italic;
+}
+
+.dashboard .pagination .outof:hover{
+    background-color: transparent;
+    color: green;
+    cursor:default;
+}

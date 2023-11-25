@@ -15,6 +15,27 @@ export default function Crop() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
+  const [page, setPage] = useState(1)
+  const [total, settotal] = useState("")
+
+  const alert = (icon, text) => {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 3000,
+      timerProgressBar: true,
+      didOpen: (toast) => {
+        toast.onmouseenter = Swal.stopTimer;
+        toast.onmouseleave = Swal.resumeTimer;
+      }
+    });
+
+    Toast.fire({
+      icon: icon,
+      title: text
+    });
+  }
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -30,17 +51,65 @@ export default function Crop() {
     });
   
     useEffect(() => {
-      send.get("/produce",{
+      send.get(`/produce/?page=${page}`,{
       })
       .then(res => {
         setisLoaded(true)
         setProduce(res.data.data)
-        console.log(res)
+        settotal(res.data["meta-data"]["total-pages"])
+        // console.log(res)
       })
       .catch(err => {
         console.log(err)
       })
     },[])
+
+    const dataPaginate = (pageNum) => {
+      if(pageNum == "next"){
+        setPage(page + 1)
+        if((page + 1 ) > (total + 1)){
+          setPage(page)
+          alert("info", "No more produce to view")
+        }
+        else{
+          setisLoaded(false)
+          send.get(`/produce/?page=${page + 1}`,{
+          })
+          .then(res => {
+            setisLoaded(true)
+            setProduce(res.data.data)
+            settotal(res.data["meta-data"]["total-pages"])
+          })
+          .catch(err => {
+            alert("error", "Something went wrong")
+            console.log(err)
+          })
+        }
+      }else{
+        setPage(page - 1)
+        if((page - 1 ) < 1){
+          setPage(1) 
+          alert("info", "Click next to view more")
+        }
+        else{
+          setisLoaded(false)
+          send.get(`/produce/?page=${page - 1}`,{
+          })
+          .then(res => {
+            setisLoaded(true)
+            setProduce(res.data.data)
+            settotal(res.data["meta-data"]["total-pages"])
+          })
+          .catch(err => { 
+            alert("error", "Something went wrong")
+            console.log(err)
+          })
+        }
+      }
+      
+      
+    }
+
     return (
       <div className='dashboard'>
           <div className="d-flex">
@@ -80,12 +149,22 @@ export default function Crop() {
                 })}
                 </div> 
                   
-
               : <div className="text-center mt-5">
                   <img src={loader} alt="" width={400} />
                 </div>
                 
             }
+          </div>
+
+          <div className="pagination fixed-bottom">
+            <div className="info">
+            <ul class="d-flex paginate">
+            <li><a onClick={() => dataPaginate("prev")} className='active'><i class="fa-solid fa-angles-left"></i></a></li>
+            <li><a className='outof'>{page} out of {total + 1} pages</a></li>
+             <li><a onClick={() => dataPaginate("next")} className='active'><i class="fa-solid fa-angles-right"></i></a></li>
+
+            </ul>
+            </div>
           </div>
     </div>
     )

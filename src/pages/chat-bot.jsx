@@ -16,11 +16,13 @@ import empty from "/img/emptyimg.png"
 
 export default function ChatBot() {
   const [msg, setMSg] = useState("")
+  const [recieveMsg, setrecieveMsg] = useState([])
+  const [msgId, setmsgId] = useState("")
   const [history, setHistory] = useState([])
   const [cookie, setCookie, removeCookie] = useCookies("")
   const msgInputs = useRef("")
   const [AIresponse, setAIresponse] = useState(false)
-  const [isloaded, setisloaded] = useState(true)
+  const [isloaded, setisloaded] = useState(false)
   const [username, setUsername] = useState("")
 
   const alert = (icon, text) => {
@@ -59,22 +61,25 @@ export default function ChatBot() {
     },
   });
 
+  
+
   const postMsg = (id, msg) => {
     setAIresponse(true)
+    const data =  {
+      "role": "user", 
+      "content": msg 
+    }
     $(".msg-container").scrollTop($(".msg-container").height()*200);
     send.post("/assistant",{
-      "chatId": "", 
+      "chatId": msgId, 
       "title": "", 
-      "message": [
-          {
-              "role": "user", 
-              "content": msg 
-          }
-      ]
+      "message": recieveMsg.concat(data),
     }).then(res => {
+      setmsgId(res.data.conversation._id)
+      setrecieveMsg(res.data.conversation.chats)
       setAIresponse(false)
-      console.log(res, res.data.conversation.chats[1].content)
-      AImsg(res.data.conversation.chats[1].content)
+      console.log(res)
+      AImsg(res.data.conversation.chats[res.data.conversation.chats.length - 1].content)
     })
     .catch(err => {
       console.log(err)
@@ -122,7 +127,7 @@ export default function ChatBot() {
   useEffect(() => {
     send.get("/assistant/history",{
     }).then(res => {
-      console.log(res.data.conversationHistory)
+      // console.log(res.data.conversationHistory)
       setHistory(res.data.conversationHistory)
       setisloaded(true)
     })
@@ -189,7 +194,7 @@ export default function ChatBot() {
               <h4 className="text-muted mb-3 overflow-nowrap">Chat history</h4>
               {/* <button className="btn text-white mt-3 btn-success">View chat</button> */}
             </div>
-            {/* {isloaded 
+            {isloaded 
               ?
               <div className="history">
                 { history.map((val, index) => {
@@ -213,12 +218,12 @@ export default function ChatBot() {
                   <img src={loader} alt="" width={300} />
                 </div>
               </div>
-            } */}
+            }
 
-              <div className="history text-center">
+              {/* <div className="history text-center">
                 <img className='mt-5' src={empty} alt="" width={150} />
                 <p className="mt-3 emp">You don't have any conversation history!</p>
-              </div>
+              </div> */}
 
             
             

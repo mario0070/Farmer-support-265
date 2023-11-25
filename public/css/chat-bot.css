@@ -113,3 +113,16 @@
     margin-top: 3em;
     text-align: center !important;
 }
+
+.chat_bot .typing{
+    width: 50px;
+    transform: translateX(-14px) translateY(5px);
+}
+
+.chat_bot .ai{
+}
+
+.chat_bot .ai p{
+    font-size: .7em;
+    color: rgb(181, 176, 176);
+}

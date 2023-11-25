@@ -3,15 +3,19 @@ import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/chat-bot.css"
 import farmer from "/img/farmer.png"
+import typing from "/img/typing1.gif"
 import $ from 'jquery';
 import {getCurrentDate} from './../components/date'
 import { CookiesProvider, useCookies } from "react-cookie";
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 
 export default function ChatBot() {
   const [msg, setMSg] = useState("")
   const [cookie, setCookie, removeCookie] = useCookies("")
   const msgInputs = useRef("")
+  const [AIresponse, setAIresponse] = useState(false)
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -32,6 +36,61 @@ export default function ChatBot() {
     });
   }
 
+  if(AIresponse){
+    $(".msg-container").append(`
+      <div class="wrap1">
+      <div class="">
+          <div class="msgBodys">
+              <p class='mb-0 p-2'>${msg}</p>
+          </div>
+      </div>
+    </div>`)
+    $(".msg-container").scrollTop($(".msg-container").height());
+  }
+
+  var data = JSON.parse(Cookies.get('user_token'))
+  let send = axios.create({
+    baseURL: 'https://farmer-support-api.onrender.com/',
+    headers: {
+        "Authorization" : `Bearer ${data.token}`,
+        'Access-Control-Allow-Origin' : '*',
+        'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+    },
+  });
+
+  const postMsg = (id, msg) => {
+    setAIresponse(true)
+    send.post("/assistant",{
+      "chatId": "", 
+      "title": "", 
+      "message": [
+          {
+              "role": "user", 
+              "content": msg 
+          }
+      ]
+    }).then(res => {
+      setAIresponse(false)
+      console.log(res, res.data.conversation.chats[1].content)
+      AImsg(res.data.conversation.chats[1].content)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
+  const AImsg = (msg) => {
+    $(".msg-container").append(`
+      <div class="wrap1">
+      <div class="">
+          <div class="msgBodys">
+              <p class='mb-0 p-2'>${msg}</p>
+          </div>
+      </div>
+    </div>`)
+    $(".msg-container").scrollTop($(".msg-container").height());
+  }
+
   const sendMsg = () => {
     if(msgInputs.current.value != ""){
       $(".msg-container").append(`
@@ -43,6 +102,7 @@ export default function ChatBot() {
         </div>
       </div>`)
       $(".msg-container").scrollTop($(".msg-container").height());
+      postMsg("",msgInputs.current.value)
       msgInputs.current.value = ""
     }else{
       alert("warning","Please type a message")
@@ -85,13 +145,20 @@ export default function ChatBot() {
                   </div>
               </div>
             </div>
+
+            <div className="wrap1 ai">
+              <div className="mx-4 mt-2">
+                <img src={typing} alt="" className='typing' />
+                <p>typing.....</p>
+              </div>
+            </div>
             
           </div>
 
           <div className="inputs">
             <div className="d-flex mt-3">
               <textarea  ref={msgInputs} onChange={msgInput} name="" id=""  placeholder='Type message.....'></textarea>
-              <button onClick={sendMsg} className="btn btn-success text-white">Send message</button>
+              <button onClick={sendMsg} className="btn send_msg btn-success text-white">Send message</button>
             </div>
           </div>
 

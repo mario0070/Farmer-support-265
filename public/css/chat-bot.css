@@ -136,6 +136,11 @@
     overflow: scroll;
 }
 
+.chat_history .history .emp{
+    font-size: .8em;
+    color: rgb(132, 130, 130);
+}
+
 ::-webkit-scrollbar{
     display: none;
 }
@@ -154,4 +159,11 @@
 .chat_bot .ai p{
     font-size: .7em;
     color: rgb(181, 176, 176);
+}
+
+.chat_bot .msgIcon img{
+    background-color: rgba(85, 175, 110, 1);
+    /* padding: 1em; */
+    border-radius: 50%;
+    transform: translateY(10px);
 }

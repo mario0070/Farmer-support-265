@@ -11,6 +11,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import CustomSidebar from '../components/customSidebar'
 import loader from "/img/loader.gif"
+import empty from "/img/emptyimg.png"
 
 
 export default function ChatBot() {
@@ -19,7 +20,8 @@ export default function ChatBot() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const msgInputs = useRef("")
   const [AIresponse, setAIresponse] = useState(false)
-  const [isloaded, setisloaded] = useState(false)
+  const [isloaded, setisloaded] = useState(true)
+  const [username, setUsername] = useState("")
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -41,6 +43,13 @@ export default function ChatBot() {
   }
 
   var data = JSON.parse(Cookies.get('user_token'))
+  const user_data = JSON.parse(Cookies.get('user'))
+  const str = user_data.farmerName
+  const farmerName = str.substring(
+    str.indexOf(" ") + 1, 
+    str.lastIndexOf(";")
+  );
+
   let send = axios.create({
     baseURL: 'https://farmer-support-api.onrender.com/',
     headers: {
@@ -76,7 +85,8 @@ export default function ChatBot() {
     $(".msg-container").append(`
       <div class="wrap1">
       <div class="">
-          <div class="msgBodys">
+          <p className='mb-0 mx-3'>icons</p>
+          <div class="msgBodys mt-0">
               <p class='mb-0 p-2'>${msg}</p>
           </div>
       </div>
@@ -87,8 +97,11 @@ export default function ChatBot() {
   const sendMsg = () => {
     if(msgInputs.current.value != ""){
       $(".msg-container").append(`
-      <div class="wrap2">
-      <div class="sentMsg">
+      <div class="wrap2 mt -2">
+      <p class='mb-0 msgIcon mx-3 text-end mb-0'>
+      <img src=${farmer} alt="" className='' width=${20} />
+      </p>
+      <div class="sentMsg mt-0">
           <div class="myMsg">
               <p class="mb-0 p-2">${msgInputs.current.value}</p>
           </div>
@@ -116,6 +129,7 @@ export default function ChatBot() {
     .catch(err => {
       console.log(err)
     })
+    setUsername(farmerName)
   },[history])
 
   if(!cookie.user_token){
@@ -146,8 +160,9 @@ export default function ChatBot() {
 
             <div className="wrap1">
               <div className="">
-                  <div className="msgBodys">
-                      <p className='mb-0 p-2'>Hello User, what questions do you have for me today? </p>
+                  <p className='mb-0 mx-3'>bot</p>
+                  <div className="msgBodys mt-0">
+                      <p className='mb-0 p-2'>Hello {username}, what questions do you have for me today? </p>
                   </div>
               </div>
             </div>
@@ -174,13 +189,21 @@ export default function ChatBot() {
               <h4 className="text-muted mb-3 overflow-nowrap">Chat history</h4>
               {/* <button className="btn text-white mt-3 btn-success">View chat</button> */}
             </div>
-            {isloaded 
+            {/* {isloaded 
               ?
               <div className="history">
                 { history.map((val, index) => {
-                  return(
-                    <li className='list-unstyled'>{val.title}</li>
-                  )
+                  if(history.length < 1){
+                    <div className="history text-center">
+                      <img className='mt-5' src={empty} alt="" width={150} />
+                      <p className="mt-3 emp">You don't have any conversation history!</p>
+                    </div>
+                  }
+                  else{
+                    return(
+                      <li className='list-unstyled'>{val.title}</li>
+                    )
+                  }
                 })}
                 
               </div>
@@ -190,7 +213,14 @@ export default function ChatBot() {
                   <img src={loader} alt="" width={300} />
                 </div>
               </div>
-            }
+            } */}
+
+              <div className="history text-center">
+                <img className='mt-5' src={empty} alt="" width={150} />
+                <p className="mt-3 emp">You don't have any conversation history!</p>
+              </div>
+
+            
             
           </div>
       </div>

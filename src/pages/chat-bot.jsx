@@ -48,7 +48,7 @@ export default function ChatBot() {
 
   const postMsg = (id, msg) => {
     setAIresponse(true)
-    $(".msg-container").scrollTop($(".msg-container").height());
+    $(".msg-container").scrollTop($(".msg-container").height()*200);
     send.post("/assistant",{
       "chatId": "", 
       "title": "", 
@@ -77,7 +77,7 @@ export default function ChatBot() {
           </div>
       </div>
     </div>`)
-    $(".msg-container").scrollTop($(".msg-container").height());
+    $(".msg-container").scrollTop($(".msg-container").height()*200);
   }
 
   const sendMsg = () => {
@@ -90,7 +90,7 @@ export default function ChatBot() {
           </div>
         </div>
       </div>`)
-      $(".msg-container").scrollTop($(".msg-container").height());
+      $(".msg-container").scrollTop($(".msg-container").height()*200);
       postMsg("",msgInputs.current.value)
       msgInputs.current.value = ""
     }else{

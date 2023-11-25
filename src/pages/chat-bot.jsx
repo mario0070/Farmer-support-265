@@ -85,7 +85,7 @@ export default function ChatBot() {
     $(".msg-container").append(`
       <div class="wrap1">
       <div class="">
-          <p className='mb-0 mx-3'>icons</p>
+          <p class='mb-0 mx-3'><i class="fa-brands fa-bots"></i></p>
           <div class="msgBodys mt-0">
               <p class='mb-0 p-2'>${msg}</p>
           </div>
@@ -158,9 +158,9 @@ export default function ChatBot() {
           <p className='text-start mb-0 text-sm'>{getCurrentDate()}</p>
           <div className="msg-container" id='msgBody'>
 
-            <div className="wrap1">
+            <div className="wrap1 pt-4">
               <div className="">
-                  <p className='mb-0 mx-3'>bot</p>
+                  <p className='mb-0 mx-3'><i className="fa-brands fa-bots"></i></p>
                   <div className="msgBodys mt-0">
                       <p className='mb-0 p-2'>Hello {username}, what questions do you have for me today? </p>
                   </div>

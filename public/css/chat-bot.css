@@ -163,7 +163,13 @@
 
 .chat_bot .msgIcon img{
     background-color: rgba(85, 175, 110, 1);
-    /* padding: 1em; */
     border-radius: 50%;
-    transform: translateY(10px);
+}
+
+.chat_bot .wrap1 .fa-bots{
+    background-color: rgba(85, 175, 110, 1);
+    padding: .2em;
+    border-radius: 100%;
+    color: white;
+    font-size: 1em;
 }

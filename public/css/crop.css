@@ -173,6 +173,7 @@
 }
 
 .dashboard .pagination .outof:hover{
-    background-color: black;
-    color: white;
+    background-color: transparent;
+    color: green;
+    cursor:default;
 }

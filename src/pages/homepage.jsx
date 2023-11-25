@@ -114,6 +114,13 @@ export default function Homepage() {
         </ul>
      </div>
 
+     <div className="section1">
+        <div className="img-container">
+          <img src={soil} alt="" className='' />
+          <h5 className="fw-bold text-center mt-3">An AI chat system that takes care of the rigors of the farming system, providing you with the best solutions.</h5>
+        </div>
+      </div>
+
      <div className="head-up">
         <h2 className="text-white fw-bold">Guiding you to a fruitful harvest</h2>
         <p className="text-white">Bountiful fruits, tasty produce is what we offer, just hit the button below</p>
@@ -125,14 +132,7 @@ export default function Homepage() {
      <img src={bg} alt="" className=''/>
    </div>
 
-   <div className="body">
-      <div className="section1">
-        <div className="img-container">
-          <img src={soil} alt="" className='' />
-          <h4 className="fw-bold mt-3">An AI chat system that takes care of the rigors of the farming system, providing you with the best solutions</h4>
-        </div>
-      </div>
-
+   <div className="body mt-4">
       <div>
         <div className="d-flex flex-wrap p-4">
           <div className="section2 p-0">

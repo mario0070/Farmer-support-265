@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/chat-bot.css"
@@ -10,13 +10,16 @@ import { CookiesProvider, useCookies } from "react-cookie";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import CustomSidebar from '../components/customSidebar'
+import loader from "/img/loader.gif"
 
 
 export default function ChatBot() {
   const [msg, setMSg] = useState("")
+  const [history, setHistory] = useState([])
   const [cookie, setCookie, removeCookie] = useCookies("")
   const msgInputs = useRef("")
   const [AIresponse, setAIresponse] = useState(false)
+  const [isloaded, setisloaded] = useState(false)
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -103,6 +106,18 @@ export default function ChatBot() {
     setMSg(e.target.value)
   }
 
+  useEffect(() => {
+    send.get("/assistant/history",{
+    }).then(res => {
+      console.log(res.data.conversationHistory)
+      setHistory(res.data.conversationHistory)
+      setisloaded(true)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  },[history])
+
   if(!cookie.user_token){
     window.location.href = "/login"
   }
@@ -116,7 +131,6 @@ export default function ChatBot() {
         <div className="home w-100">
             <div className='show_custombar'>
               <i class="fa-solid fa-bars"></i>
-              show
             </div>
           <div className="header d-flex">
             <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
@@ -157,9 +171,27 @@ export default function ChatBot() {
 
           <div className="chat_history">
             <div className="contents">
-              <h2 className="text-muted mb-3 overflow-nowrap">Chat history</h2>
-              <button className="btn text-white mt-3 btn-success">View chat</button>
+              <h4 className="text-muted mb-3 overflow-nowrap">Chat history</h4>
+              {/* <button className="btn text-white mt-3 btn-success">View chat</button> */}
             </div>
+            {isloaded 
+              ?
+              <div className="history">
+                { history.map((val, index) => {
+                  return(
+                    <li className='list-unstyled'>{val.title}</li>
+                  )
+                })}
+                
+              </div>
+            :
+              <div className="history">
+                <div className="text-center mt-2">
+                  <img src={loader} alt="" width={300} />
+                </div>
+              </div>
+            }
+            
           </div>
       </div>
     </div>

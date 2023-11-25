@@ -11,10 +11,8 @@ import book from "/img/book.png"
 import fruits from "/img/allfruits.jpg"
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
 import empty from "/img/emptyimg.png"
-import { redirect } from 'react-router-dom'
 
 export default function Dashboard() {    
   const [cookie, setCookie] = useCookies("")

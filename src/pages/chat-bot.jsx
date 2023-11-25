@@ -9,6 +9,7 @@ import {getCurrentDate} from './../components/date'
 import { CookiesProvider, useCookies } from "react-cookie";
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import CustomSidebar from '../components/customSidebar'
 
 
 export default function ChatBot() {
@@ -108,12 +109,14 @@ export default function ChatBot() {
   else{
     return (
       <div className='dashboard'>
+      <CustomSidebar/>
       <div className="d-flex">
         <Sidebar/>
 
         <div className="home w-100">
-            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+            <div className='show_custombar'>
               <i class="fa-solid fa-bars"></i>
+              show
             </div>
           <div className="header d-flex">
             <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>

@@ -14,7 +14,7 @@
 }
 
 .chat_bot .inputs{
-    transform: translateY(-20px);
+    transform: translateY(-15px);
     position: absolute;
     bottom: 0;
     padding:0  1em;
@@ -42,7 +42,7 @@
 .chat_bot button{
     background-color: rgba(85, 175, 110, 1);
     width: 10em;
-    border-radius: 30px;
+    border-radius: 10px;
     border: none;
 }
 

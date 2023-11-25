@@ -36,18 +36,6 @@ export default function ChatBot() {
     });
   }
 
-  if(AIresponse){
-    $(".msg-container").append(`
-      <div class="wrap1">
-      <div class="">
-          <div class="msgBodys">
-              <p class='mb-0 p-2'>${msg}</p>
-          </div>
-      </div>
-    </div>`)
-    $(".msg-container").scrollTop($(".msg-container").height());
-  }
-
   var data = JSON.parse(Cookies.get('user_token'))
   let send = axios.create({
     baseURL: 'https://farmer-support-api.onrender.com/',
@@ -60,6 +48,7 @@ export default function ChatBot() {
 
   const postMsg = (id, msg) => {
     setAIresponse(true)
+    $(".msg-container").scrollTop($(".msg-container").height());
     send.post("/assistant",{
       "chatId": "", 
       "title": "", 
@@ -146,12 +135,13 @@ export default function ChatBot() {
               </div>
             </div>
 
-            <div className="wrap1 ai">
-              <div className="mx-4 mt-2">
-                <img src={typing} alt="" className='typing' />
-                <p>typing.....</p>
+            { AIresponse &&
+              <div className="wrap1 ai">
+                <div className="mx-4 mt-2">
+                  <img src={typing} alt="" className='typing' />
+                </div>
               </div>
-            </div>
+            }
             
           </div>
 

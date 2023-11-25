@@ -116,10 +116,13 @@
 
 .chat_bot .typing{
     width: 50px;
-    transform: translateX(-14px) translateY(5px);
+    position: absolute;
+    top: 100;
+    transform: translateX(-14px) translateY(-15px);
 }
 
 .chat_bot .ai{
+    position: relative;
 }
 
 .chat_bot .ai p{

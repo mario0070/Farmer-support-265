@@ -120,8 +120,9 @@
     border-bottom: 1px solid rgb(233, 231, 231);
     text-transform: capitalize;
     color: rgb(103, 101, 101);
-    font-style: italic;
+    /* font-style: italic; */
     transition: .2s;
+    font-size: .9em;
 }
 
 .chat_history li:hover{

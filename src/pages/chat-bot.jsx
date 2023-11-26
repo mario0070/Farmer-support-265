@@ -149,7 +149,7 @@ export default function ChatBot() {
       console.log(err)
     })
     setUsername(farmerName)
-  },[])
+  },[history])
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -257,18 +257,16 @@ export default function ChatBot() {
             {isloaded 
               ?
               <div className="history">
+                {history.length == 0 &&
+                  <div className="text-center">
+                  <img className='mt-5' src={empty} alt="" width={150} />
+                  <p className="mt-3 emp">You don't have any conversation history!</p>
+                </div>
+                }
                 { history.map((val, index) => {
-                  if(history.length < 1){
-                    <div className="history text-center">
-                      <img className='mt-5' src={empty} alt="" width={150} />
-                      <p className="mt-3 emp">You don't have any conversation history!</p>
-                    </div>
-                  }
-                  else{
-                    return(
-                      <li onClick={() => getConversation(index)} className='list-unstyled'>{val.title}</li>
-                    )
-                  }
+                  return(
+                    <li onClick={() => getConversation(index)} className='list-unstyled'>{val.title}</li>
+                  )
                 })}
                 
               </div>

@@ -17,6 +17,8 @@ import empty from "/img/emptyimg.png"
 export default function ChatBot() {
   const [msg, setMSg] = useState("")
   const [recieveMsg, setrecieveMsg] = useState([])
+  const [conversation, setConversation] = useState([])
+  const [getconverse, setConverse] = useState(false)
   const [msgId, setmsgId] = useState("")
   const [history, setHistory] = useState([])
   const [cookie, setCookie, removeCookie] = useCookies("")
@@ -61,8 +63,6 @@ export default function ChatBot() {
     },
   });
 
-  
-
   const postMsg = (id, msg) => {
     setAIresponse(true)
     const data =  {
@@ -88,7 +88,7 @@ export default function ChatBot() {
 
   const AImsg = (msg) => {
     $(".msg-container").append(`
-      <div class="wrap1">
+      <div class="wrap1 unique">
       <div class="">
           <p class='mb-0 mx-3'><i class="fa-brands fa-bots"></i></p>
           <div class="msgBodys mt-0">
@@ -102,7 +102,7 @@ export default function ChatBot() {
   const sendMsg = () => {
     if(msgInputs.current.value != ""){
       $(".msg-container").append(`
-      <div class="wrap2 mt -2">
+      <div class="wrap2 unique mt -2">
       <p class='mb-0 msgIcon mx-3 text-end mb-0'>
       <img src=${farmer} alt="" className='' width=${20} />
       </p>
@@ -124,6 +124,20 @@ export default function ChatBot() {
     setMSg(e.target.value)
   }
 
+  const getConversation = (index) => {
+    setConverse(true)
+    send.get("/assistant/history",{
+    }).then(res => {
+      $(".unique").hide()
+      setConverse(false)
+      setConversation(res.data.conversationHistory[index].chats)
+      // console.log(res.data.conversationHistory[index].chats,index)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+  }
+
   useEffect(() => {
     send.get("/assistant/history",{
     }).then(res => {
@@ -135,7 +149,7 @@ export default function ChatBot() {
       console.log(err)
     })
     setUsername(farmerName)
-  },[history])
+  },[])
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -162,24 +176,70 @@ export default function ChatBot() {
       <div className="content chat_bot">
           <p className='text-start mb-0 text-sm'>{getCurrentDate()}</p>
           <div className="msg-container" id='msgBody'>
-
-            <div className="wrap1 pt-4">
-              <div className="">
-                  <p className='mb-0 mx-3'><i className="fa-brands fa-bots"></i></p>
-                  <div className="msgBodys mt-0">
-                      <p className='mb-0 p-2'>Hello {username}, what questions do you have for me today? </p>
+          {
+            !getconverse 
+            ?
+               <>
+                <div className="wrap1 unique pt-4">
+                  <div className="">
+                      <p className='mb-0 mx-3'><i className="fa-brands fa-bots"></i></p>
+                      <div className="msgBodys mt-0">
+                          <p className='mb-0 p-2'>Hello {username}, what questions do you have for me today? </p>
+                      </div>
                   </div>
-              </div>
-            </div>
+                </div>
 
-            { AIresponse &&
-              <div className="wrap1 ai">
-                <div className="mx-4 mt-2">
-                  <img src={typing} alt="" className='typing' />
+               
+                {
+                  conversation.map((val,index) => {
+                    if(val.role == "assistant"){
+                      return (
+                        <>
+                          <div className="wrap1 pt-4">
+                            <div className="">
+                                <p className='mb-0 mx-3'><i className="fa-brands fa-bots"></i></p>
+                                <div className="msgBodys mt-0">
+                                    <p className='mb-0 p-2'>{val.content}</p>
+                                </div>
+                            </div>
+                         </div>
+                        </>
+                      )
+                    }else{
+                      return (
+                        <div class="wrap2 mt -2">
+                          <p class='mb-0 msgIcon mx-3 text-end mb-0'>
+                          <img src={farmer} alt="" className='' width={20} />
+                          </p>
+                          <div class="sentMsg mt-0">
+                            <div class="myMsg">
+                                <p class="mb-0 p-2">{val.content}</p>
+                            </div>
+                          </div>
+                        </div>
+                      )
+                    }
+                   
+                  })
+                }
+
+                { AIresponse &&
+                  <div className="wrap1 ai">
+                    <div className="mx-4 mt-2">
+                      <img src={typing} alt="" className='typing' />
+                    </div>
+                  </div>
+                }
+
+                
+               </>
+              
+            : <div className="">
+                <div className="text-center mt-2">
+                  <img src={loader} alt="" width={300} />
                 </div>
               </div>
-            }
-            
+          }
           </div>
 
           <div className="inputs">
@@ -206,7 +266,7 @@ export default function ChatBot() {
                   }
                   else{
                     return(
-                      <li className='list-unstyled'>{val.title}</li>
+                      <li onClick={() => getConversation(index)} className='list-unstyled'>{val.title}</li>
                     )
                   }
                 })}
@@ -219,11 +279,6 @@ export default function ChatBot() {
                 </div>
               </div>
             }
-
-              {/* <div className="history text-center">
-                <img className='mt-5' src={empty} alt="" width={150} />
-                <p className="mt-3 emp">You don't have any conversation history!</p>
-              </div> */}
 
             
             

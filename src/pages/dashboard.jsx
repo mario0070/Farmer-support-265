@@ -13,6 +13,7 @@ import Cookies from 'js-cookie';
 import axios from 'axios';
 import loader from "/img/loader.gif"
 import empty from "/img/emptyimg.png"
+import CustomSidebar from '../components/customSidebar'
 
 export default function Dashboard() {    
   const [cookie, setCookie] = useCookies("")
@@ -21,6 +22,37 @@ export default function Dashboard() {
   const [isLoaded, setisLoaded] = useState(false)
   const [period, setPeriod] = useState("")
   const [username, setUsername] = useState("")
+  const [showBar , setShow] = useState(false)
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setShow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setShow(false)
+  }
+
+  if(showBar){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
+  }
 
   if(cookie.user_token){
     const data = [
@@ -118,11 +150,12 @@ export default function Dashboard() {
     },[])
     return (
       <div className='dashboard'>
+         <CustomSidebar/>
         <div className="d-flex">
           <Sidebar/>
 
           <div className="home w-100">
-            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+            <div onClick={bar} className='show_custombar'>
               <i className="fa-solid fa-bars"></i>
             </div>
             <div className="header d-flex">
@@ -134,7 +167,7 @@ export default function Dashboard() {
         </div>
         
 
-        <div className="content overview weather">
+        <div onClick={rmBar} className="content overview weather">
           {isLoaded ?
               <div className="weather_content d-flex">
 

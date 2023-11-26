@@ -1,13 +1,12 @@
-/* .custom_sidebar{
+.showcustom{
     position: fixed;
-    width: 200px;
+    width: 90%;
     height: 100vh;
     z-index: 100;
-} */
+}
 
 .custom_sidebar{
     position: fixed;
     height: 100vh;
     z-index: 100;
-    transform: translateX(-500px);
 }

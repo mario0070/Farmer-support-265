@@ -9,6 +9,7 @@ import { CookiesProvider, useCookies, } from "react-cookie";
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import fruits from "/img/allfruits.jpg"
+import CustomSidebar from '../components/customSidebar'
 
 export default function Crop() {
   const [cookie, setCookie, removeCookie] = useCookies("")
@@ -16,6 +17,7 @@ export default function Crop() {
   const [isLoaded, setisLoaded] = useState(false)
   const [page, setPage] = useState(1)
   const [total, settotal] = useState("")
+  const [showBar , setShow] = useState(false)
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -34,6 +36,36 @@ export default function Crop() {
       icon: icon,
       title: text
     });
+  }
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setShow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setShow(false)
+  }
+
+  if(showBar){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
   }
 
   if(!cookie.user_token){
@@ -111,11 +143,12 @@ export default function Crop() {
 
     return (
       <div className='dashboard'>
+          <CustomSidebar/>
           <div className="d-flex">
           <Sidebar/>
 
           <div className="home w-100">
-              <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+              <div onClick={bar} className='show_custombar'>
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="header d-flex">
@@ -129,7 +162,7 @@ export default function Crop() {
 
           
 
-          <div className="content produce_listing mt-2">
+          <div onClick={rmBar} className="content produce_listing mt-2">
             { isLoaded 
               ? <div className="prod_container d-flex">
 

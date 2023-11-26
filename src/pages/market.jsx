@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/market.css"
@@ -7,6 +7,7 @@ import farmer from "/img/farmer.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
 import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
 import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, LineElement, Tooltip, PointElement } from 'chart.js'
+import CustomSidebar from '../components/customSidebar'
 
 
 Chartjs.register(
@@ -20,6 +21,7 @@ Chartjs.register(
 
 export default function Market() {
   const [cookie, setCookie, removeCookie] = useCookies("")
+  const [showBar , setShow] = useState(false)
 
   const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
@@ -71,16 +73,48 @@ export default function Market() {
     }
   }
 
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setShow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setShow(false)
+  }
+
+  if(showBar){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
+  }
+  
+
   if(!cookie.user_token){
     window.location.href = "/login"
   }else{
     return (
       <div className='dashboard'>
+        <CustomSidebar/>
           <div className="d-flex">
           <Sidebar/>
 
           <div className="home w-100">
-              <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+              <div onClick={bar} className='show_custombar'>
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="header d-flex">
@@ -93,7 +127,7 @@ export default function Market() {
 
           
 
-          <div className="content market">
+          <div onClick={rmBar} className="content market">
               <div className="market_container">
                   <div className="chart">
                     <div className="d-flex mb-3">

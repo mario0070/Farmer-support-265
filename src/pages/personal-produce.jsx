@@ -12,6 +12,7 @@ import axios from 'axios';
 import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
 import fruits from "/img/allfruits.jpg"
+import CustomSidebar from '../components/customSidebar'
 
 export default function Person_produce() {
   const [cookie, setCookie, removeCookie] = useCookies("")
@@ -19,6 +20,7 @@ export default function Person_produce() {
   const [input, setInput] = useState("")
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
+  const [barshow, setbarshow] = useState(false)
   const cropType = useRef("")
   const description = useRef("")
   const price = useRef("")
@@ -40,6 +42,36 @@ export default function Person_produce() {
       icon: icon,
       title: text
     });
+  }
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setbarshow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setbarshow(false)
+  }
+
+  if(barshow){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
   }
 
   if(!cookie.user_token){
@@ -135,11 +167,12 @@ export default function Person_produce() {
 
     return (
         <div className='dashboard'>
+          <CustomSidebar/>
             <div className="d-flex">
             <Sidebar/>
 
             <div className="home w-100">
-                <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+                <div className='show_custombar' onClick={bar}>
                   <i className="fa-solid fa-bars"></i>
                 </div>
                 <div className="header d-flex">
@@ -151,7 +184,7 @@ export default function Person_produce() {
 
             </div>
 
-            <div className="content produce_listing mt-2">
+            <div onClick={rmBar} className="content produce_listing mt-2">
               { isLoaded 
                 ? <div className="prod_container d-flex">
 

@@ -9,6 +9,7 @@ import book from "/img/book.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
 import $ from "jquery"
 import Cookies from 'js-cookie';
+import CustomSidebar from '../components/customSidebar'
 
 
 export default function Settings() {
@@ -19,6 +20,7 @@ export default function Settings() {
     const location = useRef("")
     const password = useRef("")
     const biz_name = useRef("")
+    const [showBar , setShow] = useState(false)
 
     const alert = (icon, text) => {
         const Toast = Swal.mixin({
@@ -37,6 +39,36 @@ export default function Settings() {
           icon: icon,
           title: text
         });
+    }
+
+    const bar = () => {
+      var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+      custom_sidebar.forEach((val,index) => {
+        val.classList.add("showcustom")
+        setShow(true)
+      })
+    }
+
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.addEventListener("click",() => {
+        val.classList.remove("showcustom")
+      })
+      
+    })
+
+    var rmBar = () => {
+      setShow(false)
+    }
+  
+    if(showBar){
+      custom_sidebar.forEach((val,index) => {
+        val.classList.add("showcustom")
+      })
+    }else{
+      custom_sidebar.forEach((val,index) => {
+        val.classList.remove("showcustom")
+      })
     }
 
     if(!cookie.user_token){
@@ -63,11 +95,12 @@ export default function Settings() {
       
       return (
         <div className='dashboard'>
+          <CustomSidebar/>
             <div className="d-flex">
             <Sidebar/>
   
             <div className="home w-100">
-                <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+                <div className='show_custombar' onClick={bar}>
                   <i className="fa-solid fa-bars"></i>
                 </div>
                 <div className="header d-flex">
@@ -78,7 +111,7 @@ export default function Settings() {
   
             </div>
   
-            <div className="content settings mt-2">
+            <div onClick={rmBar} className="content settings mt-2">
                 <div className="setting_container">
 
                     <div className="d-flex">

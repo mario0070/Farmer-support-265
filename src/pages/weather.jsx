@@ -12,6 +12,7 @@ import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
 import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Axios from '../utils/axios'
+import CustomSidebar from '../components/customSidebar'
 
 Chartjs.register(
   BarElement,
@@ -24,6 +25,7 @@ export default function Weather() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [pest, setPest] = useState(false)
   const [pestAlert, setPestalert] = useState("")
+  const [showBar , setShow] = useState(false)
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -37,6 +39,36 @@ export default function Weather() {
       borderWidth: 0,
       backgroundColor: ["#00FF80"],
     }]
+  }
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setShow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setShow(false)
+  }
+
+  if(showBar){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
   }
 
   const options = {
@@ -86,11 +118,12 @@ export default function Weather() {
   else{
     return (
       <div className='dashboard'>
+        <CustomSidebar/>
           <div className="d-flex">
           <Sidebar/>
 
           <div className="home w-100">
-            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+            <div onClick={bar} className='show_custombar'>
               <i className="fa-solid fa-bars"></i>
             </div>
               <div className="header d-flex">
@@ -103,7 +136,7 @@ export default function Weather() {
 
           
 
-          <div className="content weather">
+          <div onClick={rmBar} className="content weather">
             <div className="weather_content d-flex">
 
                 <div className="section">

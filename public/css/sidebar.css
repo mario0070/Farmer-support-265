@@ -27,6 +27,10 @@
     font-size: 14px !important;
 }
 
+/* .sidebar nav .active{
+    color: rgba(85, 175, 110, 1);
+} */
+
 .sidebar nav a:hover{
     background-color: rgba(85, 175, 110, 0.265);
     transition: .2s;
@@ -34,7 +38,8 @@
 }
 
 .sidebar .active{
-    color: rgba(85, 175, 110, 1) !important;
+    color: white !important ;
+    background: rgba(85, 175, 110, 1) !important;
 }
 
 .sidebar .img img{

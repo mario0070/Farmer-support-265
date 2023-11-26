@@ -142,6 +142,8 @@ export default function ChatBot() {
         })
       }
 
+      // console.log(window.location.pathname)
+
       useEffect(() => {
         send.get("/assistant/history",{
         }).then(res => {
@@ -162,7 +164,7 @@ export default function ChatBot() {
         <Sidebar/>
 
         <div className="home w-100">
-            <div className='show_custombar'>
+            <div className='show_custombar' data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
               <i class="fa-solid fa-bars"></i>
             </div>
           <div className="header d-flex">

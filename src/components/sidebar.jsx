@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import "/public/css/sidebar.css"
 import logo from "/img/greenlogo.png"
 import { Link } from 'react-router-dom'
@@ -31,6 +31,64 @@ export default function Sidebar() {
             }
         });
     }
+
+    const data = [
+        {
+            "url" : "/dashboard",
+            "name" : " Dashboard"
+        },
+        {
+            "url" : "/weather",
+            "name" : " Weather Forecast"
+        },
+         
+        {
+            "url" : "/produce-listing",
+            "name" : " Produce Listing"
+        },
+        {
+            "url" : "/chat-bot",
+            "name" : " Chat Bot"
+        },
+        
+        {
+            "url" : "/market-insight",
+            "name" : " Market Insight"
+        },
+        {
+            "url" : "/articles",
+            "name" : " Articles"
+        },
+        {
+            "url" : "/account-settings",
+            "name" : " Settings"
+        },
+        {
+            "url" : "/log-out",
+            "name" : " Logout"
+        }
+    ]
+
+   
+    useEffect(() => {
+        var links = document.querySelectorAll(".nav-link")
+        // console.log(Array.from(links))
+        links = Array.from(links)
+        data.map((val,index) => {
+            if(window.location.pathname == val.url){
+                // console.log(val)
+                if(links[index].innerText  == val.name){
+                    console.log("yes",links[index])
+                    links[index].classList.add("active")
+                }else{
+                    console.log("no",links[index].innerText,val.name)
+                }
+            }else{
+                // console.log("no match",data[index])
+            }
+        })
+        // console.log(data)
+    },[])
 
   return (
     <div className="sidebar">

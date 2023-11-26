@@ -67,7 +67,7 @@ export default function Weather() {
   Axios.get("/pest/alert",{
 
   }).then(res => {
-    console.log(res,res.data.pests)
+    // console.log(res,res.data.pests)
     if(res.data.alert == true){
       setPest(true)
       setPestalert(res.data.pests)

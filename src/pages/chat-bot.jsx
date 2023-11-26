@@ -167,7 +167,9 @@ export default function ChatBot() {
       var custom_sidebar = document.querySelectorAll(".custom_sidebar")
       custom_sidebar.forEach((val,index) => {
         val.addEventListener("click",() => {
-          val.classList.remove("showcustom")
+          // val.classList.remove("showcustom")
+          setShow(false)
+          console.log(showBar)
         })
         
       })

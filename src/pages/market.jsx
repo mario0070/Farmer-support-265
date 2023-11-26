@@ -117,6 +117,10 @@ export default function Market() {
               <div onClick={bar} className='show_custombar'>
                 <i className="fa-solid fa-bars"></i>
               </div>
+              <div className="search">
+                <input type="text" placeholder='search produce base on your location'/>
+                <button className="btn">search produce</button>
+              </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
               <img src={farmer} alt="" />

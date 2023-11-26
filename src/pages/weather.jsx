@@ -209,7 +209,7 @@ export default function Weather() {
 
                 <div className="section">
                   <div className="pest temp mt-2 text-center">
-                    <p className="">Forecast <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
+                    <p className="">Pest Control <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
                     <img src={!pest ? noDanger : dangeryes} alt="" />
                     {!pest ? <h4 className='mt-4 fs-5'>{pestAlert}</h4> : <h4 className='text-danger mt-4'>{pestAlert}</h4>}
                     

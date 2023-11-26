@@ -68,3 +68,36 @@
     background-color: green;
     transition: .2s;
 }
+
+.home .search{
+    position: absolute;
+}
+
+.home .search input {
+    border: none;
+    border-bottom: 2px solid rgb(209, 206, 206);
+    width: 200px;
+    outline: navy;
+    padding: .6em;
+    transition: .2s;
+}
+
+.home .search input:focus{
+    border-bottom:  2px solid rgba(85, 175, 110, 1);
+    width: 300px;
+    transition: .2s;
+}
+
+.home .search input::placeholder{
+    color: rgb(180, 177, 177);
+}
+
+.home .search .btn{
+    background-color: rgba(85, 175, 110, 1);
+    padding: .6em;
+    border: none;
+    color: white;
+    margin-left: 1em;
+    font-size: .8em;
+    width: 10em;
+}

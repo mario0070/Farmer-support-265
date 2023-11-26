@@ -41,7 +41,8 @@
 }
 
 .article .sing_article .name{
-    color: rgb(48, 46, 46);
+    color: rgb(126, 125, 125);
+    font-weight: 600;
 }
 
 .article img{

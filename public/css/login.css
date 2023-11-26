@@ -111,6 +111,11 @@
     text-decoration: none;
 }
 
+.signup .input-group p{
+    color: rgb(160, 158, 158);
+    font-size: .8em;
+}
+
 
 @media screen and (max-width: 800px){
     .signup .logo-container{

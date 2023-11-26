@@ -98,7 +98,7 @@ export default function Crop() {
     const dataPaginate = (pageNum) => {
       if(pageNum == "next"){
         setPage(page + 1)
-        if((page + 1 ) > (total + 1)){
+        if((page + 1 ) > (total)){
           setPage(page)
           alert("info", "No more produce to view")
         }
@@ -192,7 +192,7 @@ export default function Crop() {
             <div className="info">
             <ul class="d-flex paginate">
             <li><a onClick={() => dataPaginate("prev")} className='active'><i class="fa-solid fa-angles-left"></i></a></li>
-            <li><a className='outof'>{page} out of {total + 1} pages</a></li>
+            <li><a className='outof'>{page} out of {total} pages</a></li>
              <li><a onClick={() => dataPaginate("next")} className='active'><i class="fa-solid fa-angles-right"></i></a></li>
 
             </ul>

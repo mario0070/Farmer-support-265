@@ -7,14 +7,12 @@ import farmer from "/img/farmer.png"
 import { CookiesProvider, useCookies } from "react-cookie";
 import sun from "/img/sun.png"
 import farmer1 from "/img/farmer1.png"
-import book from "/img/book.png"
+import book from "/img/book1.png"
 import fruits from "/img/allfruits.jpg"
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
 import empty from "/img/emptyimg.png"
-import { redirect } from 'react-router-dom'
 
 export default function Dashboard() {    
   const [cookie, setCookie] = useCookies("")
@@ -203,9 +201,11 @@ export default function Dashboard() {
                         return(
                           <a href={val.url}>
                             <div className="sing_article">
-                              <img src={book} alt="" />  
-                              <p className="name">{val.content}</p> 
-                              <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p>             
+                              <img src={book} alt="" /> 
+                              <div className="p-3">
+                                <p className="name">{val.content}</p> 
+                                <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p>  
+                              </div>           
                             </div>
                           </a>
                         )

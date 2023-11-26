@@ -1,0 +1,13 @@
+/* .custom_sidebar{
+    position: fixed;
+    width: 200px;
+    height: 100vh;
+    z-index: 100;
+} */
+
+.custom_sidebar{
+    position: fixed;
+    height: 100vh;
+    z-index: 100;
+    transform: translateX(-500px);
+}

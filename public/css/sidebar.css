@@ -87,7 +87,7 @@
     }
 
     .chat_bot .inputs,.msg-container .wrap1 .msgBodys, .msg-container .sentMsg .myMsg{
-        z-index: -1 !important;
+        z-index: 1 !important;
     }
 
     .home .fa-bars{
@@ -163,7 +163,7 @@
     }
 
     .settings .img{
-        z-index: -1;
+        z-index: 1;
         position: relative !important;
         transform: translateY(0px) !important;
     }

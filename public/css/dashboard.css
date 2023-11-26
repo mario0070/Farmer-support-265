@@ -49,11 +49,11 @@
 
 .overview .article .sing_article{
     box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.068);
-    padding: 1em;
+    /* padding: 1em; */
     width: 200px;
-    margin-bottom: 3.4em;
+    margin-bottom: 2em;
     margin-right: 2em;
-    height: 250px;
+    height: 280px;
     overflow: hidden;
     position: relative;
 }
@@ -76,6 +76,10 @@
     padding: 1em;
 }
 
+.overview .article img{
+    width: 100%;
+}
+
 .overview .article .article_container a{
     text-decoration: none;
 }
@@ -90,6 +94,7 @@
 
 .overview .article .sing_article .name{
     font-size: .8em !important;
+    color: black !important;
 }
 
 .overview .section .see_all{

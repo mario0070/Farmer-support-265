@@ -62,36 +62,18 @@
     color: rgba(85, 175, 110, 1);
 }
 
-.weather .weather_content .section .pest .d-flex {
+.weather .weather_content .section .pest h4 {
     color: rgba(85, 175, 110, 1);
+    font-size: 1em;
+}
+
+.weather .weather_content .section .pest  img{
+    margin-top: 1em;
+}
+
+.weather .weather_content .section .pest .d-flex{
     justify-content: space-evenly;
-    font-size: .8em;
-}
-
-.weather .weather_content .section .pest .d-flex p{
-    margin-right: .3em;
-}
-
-.weather .weather_content .section .pest .d-flex p:hover{
-    cursor: pointer;
-}
-
-.weather .weather_content .section .pest input{
-    padding: .5em;
-    border: 1px solid rgb(223, 222, 222);
-    border-radius: 20px;
-    width: 70%;
-    outline: none;
-    margin-right: .5em;
-}
-
-.weather .weather_content .section .pest input::placeholder{
-    color:  rgb(181, 180, 180);
-}
-
-.weather .weather_content .section .pest .search i {
-    color:  rgb(181, 180, 180);
-    font-size: 1.4em;
+    /* margin-top: 2em; */
 }
 
 .weather .weather_content .section .bar{

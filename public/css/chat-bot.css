@@ -14,7 +14,7 @@
 }
 
 .chat_bot .inputs{
-    transform: translateY(-20px);
+    transform: translateY(-15px);
     position: absolute;
     bottom: 0;
     padding:0  1em;
@@ -42,7 +42,7 @@
 .chat_bot button{
     background-color: rgba(85, 175, 110, 1);
     width: 10em;
-    border-radius: 30px;
+    border-radius: 10px;
     border: none;
 }
 
@@ -110,6 +110,67 @@
 }
 
 .chat_history .contents{
-    margin-top: 3em;
+    margin-top: 1em;
     text-align: center !important;
+    border-bottom: 1px solid rgb(233, 231, 231);
+}
+
+.chat_history li{
+    padding: 1em;
+    border-bottom: 1px solid rgb(233, 231, 231);
+    text-transform: capitalize;
+    color: rgb(103, 101, 101);
+    /* font-style: italic; */
+    transition: .2s;
+    font-size: .9em;
+}
+
+.chat_history li:hover{
+    cursor: pointer;
+    background-color: rgba(85, 175, 110, 1);
+    transition: .2s;
+    color: white;
+}
+
+.chat_history .history{
+    height: 80vh;
+    overflow: scroll;
+}
+
+.chat_history .history .emp{
+    font-size: .8em;
+    color: rgb(132, 130, 130);
+}
+
+::-webkit-scrollbar{
+    display: none;
+}
+
+.chat_bot .typing{
+    width: 50px;
+    position: absolute;
+    top: 100;
+    transform: translateX(-14px) translateY(-15px);
+}
+
+.chat_bot .ai{
+    position: relative;
+}
+
+.chat_bot .ai p{
+    font-size: .7em;
+    color: rgb(181, 176, 176);
+}
+
+.chat_bot .msgIcon img{
+    background-color: rgba(85, 175, 110, 1);
+    border-radius: 50%;
+}
+
+.chat_bot .wrap1 .fa-bots{
+    background-color: rgba(85, 175, 110, 1);
+    padding: .2em;
+    border-radius: 100%;
+    color: white;
+    font-size: 1em;
 }

@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Cookies from 'js-cookie';
 import axios from 'axios';
-import { NumericFormat } from 'react-number-format';
 import fruits from "/img/allfruits.jpg"
 
 export default function Crop() {

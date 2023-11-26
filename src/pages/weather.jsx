@@ -35,7 +35,7 @@ export default function Weather() {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
     datasets: [{
       label: 'Rain Quantity',
-      data: [0.1, 0.9, 0.3, 0.5, 0.2, 0.3, 0.3, 0.3, 0.2, 0.8, 0.6, 0.4],
+      data: [1, 7, 4, 2.5, 1.5, 3, 2, 6, 2, 5, 4, 2],
       borderWidth: 0,
       backgroundColor: ["#00FF80"],
     }]

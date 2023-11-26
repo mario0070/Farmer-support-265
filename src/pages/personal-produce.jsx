@@ -19,7 +19,7 @@ export default function Person_produce() {
   const [show, setShow] = useState(false)
   const [input, setInput] = useState("")
   const [produce, setProduce] = useState([])
-  const [isLoaded, setisLoaded] = useState(true)
+  const [isLoaded, setisLoaded] = useState(false)
   const [barshow, setbarshow] = useState(false)
   const cropType = useRef("")
   const description = useRef("")

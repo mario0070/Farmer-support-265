@@ -28,6 +28,8 @@ export default function Weather() {
   const [pestAlert, setPestalert] = useState("")
   const [showBar , setShow] = useState(false)
   const [showControl , setshowControl] = useState(false)
+  const [pestNames , setpestNames] = useState(["jamiu","ganu"])
+  const [pestinfo , setpestinfo] = useState(["jamiu","ganu"])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -59,8 +61,20 @@ export default function Weather() {
     
   })
 
-  const showPestControl = () => {
+  const showPestControl = (index) => {
     setshowControl(true)
+    Axios.get("/pest/alert",{
+
+    }).then(res => {
+      // console.log(res,index)
+      if(res.data.pestControlData){
+        setpestinfo(res.data.pestControlData[index])
+      }else{
+      setpestinfo([])
+      }
+    }).catch(err => {
+      console.log(err)
+    })
   }
 
   var rmBar = () => {
@@ -105,18 +119,19 @@ export default function Weather() {
   Axios.get("/pest/alert",{
 
   }).then(res => {
-    console.log(res)
+    // console.log(pestNames)
     if(res.data.alert == true){
       setPest(true)
-      setPestalert(res.data.message)
+      setpestNames(res.data.pests)
     }else{
-      setPest(false)
       setPestalert(res.data.message)
+      setPest(false)
     }
   }).catch(err => {
     console.log(err)
   })
- })
+ },[])
+
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -218,7 +233,7 @@ export default function Weather() {
                     <div className="pest p-1 temp mt-2 text-center">
                       <p className={pest ? "text-danger" : ""}>Pest Control <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
                       {
-                        pest 
+                        !pest 
                         ? <><img src={noDanger} alt="" /><h4 className='mt-4 fs-5'>There would likely be no pest attack for the next one month</h4></>
                         
                         : 
@@ -227,27 +242,39 @@ export default function Weather() {
                         <img src={dangeryes} alt="" />
                         <p className="mb-3 mt-3 text-danger">The following  pests may attack your farm soon</p>
                         <div className="d-flex flex-wrap pests mt-4">
-                          <p onClick={showPestControl} className="pest">Groundnut Aphid</p>
-                          <p  onClick={showPestControl} className="pest">Groundnut Aphid</p>
-                          <p  onClick={showPestControl} className="pest">Groundnut Aphid</p>
-                          <p  onClick={showPestControl} className="pest">Groundnut Aphid</p>
+                          {pestNames.map((val,index) => {
+                            return(
+                              <p onClick={() => showPestControl(index)} className="pest mx-2">{val}</p>
+                            )
+                          })}
                         </div>
                         </>
                       }
                     </div>
                   : 
                     <div className="pest">
-                      <img className='pest-img mt-0' src={fruits} alt="" />
-                      <div className="names">
-                        <div className="p-3">
-                          <p className="fw-bold mb-1">Name</p>
-                          <p className="fw-bold mb-1">Crop</p>
-                        </div>
-                      </div>
+                      {pestinfo.map((val, index) => {
+                          return(
+                            <>
+                              <img className='pest-img mt-0' src={val.name} alt="" />
+                              <div className="names">
+                                <div className="p-3">
+                                  <p className="fw-bold mb-1">{val.name}</p>
+                                  <p className="fw-bold mb-1">{val.crops_affected}</p>
+                                </div>
+                              </div>
+                            </>
+                          )
+                      })}
                       <div className="p-3">
-                        <p className="fw-bold mt-2 mb-3">Control Methods</p>
-                        <p className="text-muted ">Lorem ipsum dolor sit amet consectetur adipisicing elit. Error ullam exercitationem eaque, repellendus pariatur maxime recusandae numquam accusamus qui porro nulla quia vero quo iure corporis adipisci commodi deserunt neque.</p>
-                        <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
+                        {pestinfo.map((val, index) => {
+                          return(
+                            <>
+                              <p className="text-muted ">{val.control_methods}</p>
+                            </>
+                          )
+                        })}
+                       <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
                       </div>
                     </div>
                   }

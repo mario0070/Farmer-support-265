@@ -50,7 +50,6 @@ export default function Sidebar() {
             "url" : "/chat-bot",
             "name" : " Chat Bot"
         },
-        
         {
             "url" : "/market-insight",
             "name" : " Market Insight"
@@ -72,22 +71,14 @@ export default function Sidebar() {
    
     useEffect(() => {
         var links = document.querySelectorAll(".nav-link")
-        // console.log(Array.from(links))
         links = Array.from(links)
         data.map((val,index) => {
             if(window.location.pathname == val.url){
-                // console.log(val)
                 if(links[index].innerText  == val.name){
-                    console.log("yes",links[index])
                     links[index].classList.add("active")
-                }else{
-                    console.log("no",links[index].innerText,val.name)
                 }
-            }else{
-                // console.log("no match",data[index])
             }
         })
-        // console.log(data)
     },[])
 
   return (

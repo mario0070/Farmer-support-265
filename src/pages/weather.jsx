@@ -8,10 +8,12 @@ import sun from "/img/sun.png"
 import noDanger from "/img/d-no.png"
 import dangeryes from "/img/d-yes.png"
 import $ from 'jquery';
+import fruits from "/img/allfruits.jpg"
 import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
 import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Axios from '../utils/axios'
+import CustomSidebar from '../components/customSidebar'
 
 Chartjs.register(
   BarElement,
@@ -24,6 +26,10 @@ export default function Weather() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [pest, setPest] = useState(false)
   const [pestAlert, setPestalert] = useState("")
+  const [showBar , setShow] = useState(false)
+  const [showControl , setshowControl] = useState(false)
+  const [pestNames , setpestNames] = useState(["jamiu","ganu"])
+  const [pestinfo , setpestinfo] = useState(["jamiu","ganu"])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -33,10 +39,56 @@ export default function Weather() {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
     datasets: [{
       label: 'Rain Quantity',
-      data: [0.1, 0.9, 0.3, 0.5, 0.2, 0.3, 0.3, 0.3, 0.2, 0.8, 0.6, 0.4],
+      data: [1, 7, 4, 2.5, 1.5, 3, 2, 6, 2, 5, 4, 2],
       borderWidth: 0,
       backgroundColor: ["#00FF80"],
     }]
+  }
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setShow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  const showPestControl = (index) => {
+    setshowControl(true)
+    Axios.get("/pest/alert",{
+
+    }).then(res => {
+      // console.log(res,index)
+      if(res.data.pestControlData){
+        setpestinfo(res.data.pestControlData[index])
+      }else{
+      setpestinfo([])
+      }
+    }).catch(err => {
+      console.log(err)
+    })
+  }
+
+  var rmBar = () => {
+    setShow(false)
+  }
+
+  if(showBar){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
   }
 
   const options = {
@@ -67,18 +119,19 @@ export default function Weather() {
   Axios.get("/pest/alert",{
 
   }).then(res => {
-    // console.log(res,res.data.pests)
+    // console.log(pestNames)
     if(res.data.alert == true){
       setPest(true)
-      setPestalert(res.data.pests)
+      setpestNames(res.data.pests)
     }else{
+      setPestalert(res.data.message)
       setPest(false)
-      setPestalert(res.data.pests)
     }
   }).catch(err => {
     console.log(err)
   })
- })
+ },[])
+
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -86,11 +139,12 @@ export default function Weather() {
   else{
     return (
       <div className='dashboard'>
+        <CustomSidebar/>
           <div className="d-flex">
           <Sidebar/>
 
           <div className="home w-100">
-            <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+            <div onClick={bar} className='show_custombar'>
               <i className="fa-solid fa-bars"></i>
             </div>
               <div className="header d-flex">
@@ -103,7 +157,7 @@ export default function Weather() {
 
           
 
-          <div className="content weather">
+          <div onClick={rmBar} className="content weather">
             <div className="weather_content d-flex">
 
                 <div className="section">
@@ -174,22 +228,56 @@ export default function Weather() {
                   </div>
                 </div>
 
-                <div className="section">
-                  <div className="pest temp mt-2 text-center">
-                    <p className="">Forecast <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
-                    <img src={!pest ? noDanger : dangeryes} alt="" />
-                    {!pest ? <h4 className='mt-4 fs-5'>{pestAlert}</h4> : <h4 className='text-danger mt-4'>{pestAlert}</h4>}
-                    
-                    {pest && 
-                     <> 
-                     <p className="fw-bold mb-1 mt-4">Pests</p>
-                      <div className="d-flex">
-                        <p className="">Groundnut Aphid</p>
-                        <p className="">Groundnut Aphid</p>
+                <div className="section p-0 pest-container" >
+                  { !showControl ?
+                    <div className="pest p-1 temp mt-2 text-center">
+                      <p className={pest ? "text-danger" : ""}>Pest Control <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
+                      {
+                        !pest 
+                        ? <><img src={noDanger} alt="" /><h4 className='mt-4 fs-5'>There would likely be no pest attack for the next one month</h4></>
+                        
+                        : 
+                        <> 
+                        <h3 className='text-danger mt-2'>Alert!!!</h3>
+                        <img src={dangeryes} alt="" />
+                        <p className="mb-3 mt-3 text-danger">The following  pests may attack your farm soon</p>
+                        <div className="d-flex flex-wrap pests mt-4">
+                          {pestNames.map((val,index) => {
+                            return(
+                              <p onClick={() => showPestControl(index)} className="pest mx-2">{val}</p>
+                            )
+                          })}
+                        </div>
+                        </>
+                      }
+                    </div>
+                  : 
+                    <div className="pest">
+                      {pestinfo.map((val, index) => {
+                          return(
+                            <>
+                              <img className='pest-img mt-0' src={val.name} alt="" />
+                              <div className="names">
+                                <div className="p-3">
+                                  <p className="fw-bold mb-1">{val.name}</p>
+                                  <p className="fw-bold mb-1">{val.crops_affected}</p>
+                                </div>
+                              </div>
+                            </>
+                          )
+                      })}
+                      <div className="p-3">
+                        {pestinfo.map((val, index) => {
+                          return(
+                            <>
+                              <p className="text-muted ">{val.control_methods}</p>
+                            </>
+                          )
+                        })}
+                       <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
                       </div>
-                     </>
-                    }
-                  </div>
+                    </div>
+                  }
                 </div>
 
             </div>

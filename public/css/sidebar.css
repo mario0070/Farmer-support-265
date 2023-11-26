@@ -119,6 +119,10 @@
         margin-right: .8em !important;
         border-radius: 3px;
     }
+
+    .dashboard .search{
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 750px){    
@@ -193,7 +197,11 @@
 
     .article .sing_article {
         width: 300px !important;
-        height: fit-content;
+        height: fit-content !important;
+    }
+
+    .article .sing_article img{
+        height: 200px;
     }
 
     .article .sing_article img{

@@ -12,6 +12,7 @@ import axios from 'axios';
 import { NumericFormat } from 'react-number-format';
 import loader from "/img/loader.gif"
 import fruits from "/img/allfruits.jpg"
+import CustomSidebar from '../components/customSidebar'
 
 export default function Person_produce() {
   const [cookie, setCookie, removeCookie] = useCookies("")
@@ -19,9 +20,11 @@ export default function Person_produce() {
   const [input, setInput] = useState("")
   const [produce, setProduce] = useState([])
   const [isLoaded, setisLoaded] = useState(false)
+  const [barshow, setbarshow] = useState(false)
   const cropType = useRef("")
   const description = useRef("")
   const price = useRef("")
+  const file = useRef("")
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -40,6 +43,36 @@ export default function Person_produce() {
       icon: icon,
       title: text
     });
+  }
+
+  const bar = () => {
+    var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+      setbarshow(true)
+    })
+  }
+
+  var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+  custom_sidebar.forEach((val,index) => {
+    val.addEventListener("click",() => {
+      val.classList.remove("showcustom")
+    })
+    
+  })
+
+  var rmBar = () => {
+    setbarshow(false)
+  }
+
+  if(barshow){
+    custom_sidebar.forEach((val,index) => {
+      val.classList.add("showcustom")
+    })
+  }else{
+    custom_sidebar.forEach((val,index) => {
+      val.classList.remove("showcustom")
+    })
   }
 
   if(!cookie.user_token){
@@ -111,19 +144,20 @@ export default function Person_produce() {
         send.post("/produce/me",{
           "cropType": cropType.current.value,
           "description": description.current.value,
-          "price": price.current.value
+          "price": price.current.value,
+          "file" : file.current.value,
         })
         .then(res => {
-          alert("success", "Product has been added")
-          btn.innerHTML = `List product`
+          alert("success", "Produce has been added")
+          btn.innerHTML = `List produce`
           cropType.current.value = ""
           description.current.value = ""
           price.current.value = ""
         })
         .catch(err => {
-          btn.innerHTML = `List product`
+          btn.innerHTML = `List produce`
           alert("error", "something went wrong")
-          console.log(err)
+          console.log(err,file.current.value)
         })
       }
     }
@@ -135,11 +169,12 @@ export default function Person_produce() {
 
     return (
         <div className='dashboard'>
+          <CustomSidebar/>
             <div className="d-flex">
             <Sidebar/>
 
             <div className="home w-100">
-                <div data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+                <div className='show_custombar' onClick={bar}>
                   <i className="fa-solid fa-bars"></i>
                 </div>
                 <div className="header d-flex">
@@ -151,7 +186,7 @@ export default function Person_produce() {
 
             </div>
 
-            <div className="content produce_listing mt-2">
+            <div onClick={rmBar} className="content produce_listing mt-2">
               { isLoaded 
                 ? <div className="prod_container d-flex">
 
@@ -164,14 +199,13 @@ export default function Person_produce() {
 
                   { show &&
                     <div className="produce produce_form">
-                    {/* <p className="text-center">Fill products in quantity such as, “A bag of rice”</p> */}
                     <form action="" onSubmit={addProduce}>
-                        <input onChange={e => setInput(e.target.value)} ref={cropType} type="text" placeholder='Enter product name'/>
-                        <input onChange={e => setInput(e.target.value)} ref={price} type="text" placeholder='Product price' />
+                        <input onChange={e => setInput(e.target.value)} ref={cropType} type="text" placeholder='Enter produce name'/>
+                        <input onChange={e => setInput(e.target.value)} ref={price} type="text" placeholder='Produce price' />
                         <input onChange={e => setInput(e.target.value)} ref={description} type="text" placeholder='Description' />
                         <label htmlFor="file" className='d-block mb-4'>Choose images</label>
-                        <input type="file" className='d-none ' name="file" id="file" />
-                        <button id='add' className='btn btn-success text-white mt-2'>List product</button>
+                        <input ref={file} type="file" className='d-none ' name="file" id="file" />
+                        <button id='add' className='btn btn-success text-white mt-2'>List produce</button>
                         <p onClick={() => {setShow(!show)}} className='btn text-danger fw-bold mt-2 mx-2'>Go back</p>
                     </form>
                   </div>

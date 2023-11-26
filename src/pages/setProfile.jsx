@@ -98,6 +98,7 @@ export default function Login() {
                     <div className="input-group mb-3">
                       <span className="input-group-text"><i class="fa-solid fa-location-dot"></i></span>
                       <input ref={location} type="text" className="p-2" onChange={e => setinput(e.target.value)} placeholder="Location"/>
+                      <p>Example: "Town, State" , "Maryland, Lagos".</p>
                     </div>
 
                     <div className="text-center mb-4">

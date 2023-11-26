@@ -26,6 +26,7 @@ export default function ChatBot() {
   const [AIresponse, setAIresponse] = useState(false)
   const [isloaded, setisloaded] = useState(false)
   const [username, setUsername] = useState("")
+  const [showBar , setShow] = useState(false)
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -142,8 +143,6 @@ export default function ChatBot() {
         })
       }
 
-      // console.log(window.location.pathname)
-
       useEffect(() => {
         send.get("/assistant/history",{
         }).then(res => {
@@ -157,6 +156,37 @@ export default function ChatBot() {
         setUsername(farmerName)
       },[history])
 
+      const bar = () => {
+        var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+        custom_sidebar.forEach((val,index) => {
+          val.classList.add("showcustom")
+          setShow(true)
+        })
+      }
+
+      var custom_sidebar = document.querySelectorAll(".custom_sidebar")
+      custom_sidebar.forEach((val,index) => {
+        val.addEventListener("click",() => {
+          val.classList.remove("showcustom")
+        })
+        
+      })
+
+      var rmBar = () => {
+        setShow(false)
+      }
+    
+      if(showBar){
+        custom_sidebar.forEach((val,index) => {
+          val.classList.add("showcustom")
+        })
+      }else{
+        custom_sidebar.forEach((val,index) => {
+          val.classList.remove("showcustom")
+        })
+      }
+      
+
     return (
       <div className='dashboard'>
       <CustomSidebar/>
@@ -164,7 +194,7 @@ export default function ChatBot() {
         <Sidebar/>
 
         <div className="home w-100">
-            <div className='show_custombar' data-bs-toggle="offcanvas" data-bs-target=".show_sidebar">
+            <div onClick={bar} className='show_custombar'>
               <i class="fa-solid fa-bars"></i>
             </div>
           <div className="header d-flex">
@@ -175,7 +205,7 @@ export default function ChatBot() {
 
       </div>
 
-      <div className="content chat_bot">
+      <div onClick={rmBar} className="content chat_bot">
           <p className='text-start mb-0 text-sm'>{getCurrentDate()}</p>
           <div className="msg-container" id='msgBody'>
           {

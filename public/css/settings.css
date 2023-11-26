@@ -12,6 +12,7 @@
     width: 230px;
     height: 230px;
     transform: translateY(40px);
+    z-index: 1;
 }
 
 .settings .img .name{

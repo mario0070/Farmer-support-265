@@ -1,14 +1,17 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/weather.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
 import sun from "/img/sun.png"
+import noDanger from "/img/d-no.png"
+import dangeryes from "/img/d-yes.png"
 import $ from 'jquery';
 import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
 import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from 'chart.js'
 import { CookiesProvider, useCookies, } from "react-cookie";
+import Axios from '../utils/axios'
 
 Chartjs.register(
   BarElement,
@@ -19,6 +22,8 @@ Chartjs.register(
 
 export default function Weather() {
   const [cookie, setCookie, removeCookie] = useCookies("")
+  const [pest, setPest] = useState(false)
+  const [pestAlert, setPestalert] = useState("")
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -57,6 +62,23 @@ export default function Weather() {
       },
     }
   }
+
+ useEffect(() => {
+  Axios.get("/pest/alert",{
+
+  }).then(res => {
+    console.log(res,res.data.pests)
+    if(res.data.alert == true){
+      setPest(true)
+      setPestalert(res.data.pests)
+    }else{
+      setPest(false)
+      setPestalert(res.data.pests)
+    }
+  }).catch(err => {
+    console.log(err)
+  })
+ })
 
   if(!cookie.user_token){
     window.location.href = "/login"
@@ -154,18 +176,19 @@ export default function Weather() {
 
                 <div className="section">
                   <div className="pest temp mt-2 text-center">
-                    <p className="mb-4">Pest control <i className="fa-solid fa-spaghetti-monster-flying"></i></p>
-                    <div className="search">
-                      <input type="text"  placeholder='Crop name'/>
-                      <button className='btn'><i className="fa-solid fa-magnifying-glass"></i></button>
-                    </div>
-                    <p className="text-center mt-4">Pest</p>
-                    <div className="d-flex mt-2">
-                      <p className="mb-0">Mealy bugs</p>
-                      <p className="">True bugs</p>
-                      <p className="">Scale insects</p>
-                      <p className="">Thrips</p>
-                    </div>
+                    <p className="">Forecast <i class="fa-solid fa-spaghetti-monster-flying"></i></p>
+                    <img src={!pest ? noDanger : dangeryes} alt="" />
+                    {!pest ? <h4 className='mt-4 fs-5'>{pestAlert}</h4> : <h4 className='text-danger mt-4'>{pestAlert}</h4>}
+                    
+                    {pest && 
+                     <> 
+                     <p className="fw-bold mb-1 mt-4">Pests</p>
+                      <div className="d-flex">
+                        <p className="">Groundnut Aphid</p>
+                        <p className="">Groundnut Aphid</p>
+                      </div>
+                     </>
+                    }
                   </div>
                 </div>
 

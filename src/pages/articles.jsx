@@ -4,6 +4,7 @@ import "/public/css/home.css"
 import "/public/css/article.css"
 import farmer from "/img/farmer.png"
 import logo from "/img/greenlogo.png"
+import book1 from "/img/book1.png"
 import book from "/img/book.png"
 import { CookiesProvider, useCookies, } from "react-cookie";
 
@@ -82,9 +83,10 @@ export default function Articles() {
                 return(
                   <a href={val.url}>
                     <div className="sing_article">
-                      <img src={book} alt="" />  
-                      <p className="name">{val.content}</p> 
-                      <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p>             
+                      <img src={book1} alt="" />  
+                     <div className="p-2">
+                     <p className="name">{val.content}</p> 
+                      <p className="text-end mb-1 mt-2">read <i className="fa-solid fa-arrows-turn-right"></i></p> </div>            
                     </div>
                   </a>
                 )

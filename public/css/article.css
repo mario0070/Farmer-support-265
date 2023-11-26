@@ -4,13 +4,15 @@
 
 .article .sing_article{
     box-shadow: .1em .1em 1em rgba(0, 0, 0, 0.068);
-    padding: 1em;
+    /* padding: 1em; */
     width: 200px;
     margin-bottom: 3em;
     margin-right: 2em;
-    height: 250px;
+    height: 290px;
     overflow: hidden;
     position: relative;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
 }
 
 .article .sing_article .text-end{
@@ -39,5 +41,9 @@
 }
 
 .article .sing_article .name{
-    color: rgb(156, 155, 155);
+    color: rgb(48, 46, 46);
+}
+
+.article img{
+    width: 100%;
 }

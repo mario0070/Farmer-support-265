@@ -117,7 +117,7 @@
 
 .weather .pest .names{
     position: absolute;
-    background-color: rgba(0, 0, 0, 0.185);
+    background-color: rgba(0, 0, 0, 0.333);
     z-index: 1000;
     top: 0;
     height: 170px;
@@ -126,6 +126,20 @@
 }
 
 .weather .pest .names div{
-    position: absolute;
+    /* position: absolute; */
     bottom: 0;
+}
+
+.weather .affected{
+    justify-content: start !important;
+}
+
+.weather .affected p{
+    margin-left: .5em;
+    font-size: .8em;
+    color: rgb(231, 230, 230);
+}
+
+.weather .affected h6{
+    color: rgb(231, 230, 230);
 }

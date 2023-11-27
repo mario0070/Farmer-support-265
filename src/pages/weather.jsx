@@ -36,6 +36,7 @@ export default function Weather() {
   const [pestinfo , setpestinfo] = useState([])
   const [pestcontrol , setpestcontrol] = useState([])
   const [isShow , setisShow] = useState(false)
+  const [affected , setaffected] = useState([])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -156,6 +157,8 @@ export default function Weather() {
           setisShow(false)
           setpestinfo(res.data.pestControlData[index])
           setpestcontrol(res.data.pestControlData[index].control_methods)
+          setaffected(res.data.pestControlData[index].crops_affected)
+          // console.log(affected.map(val => val))
         }else{
         setpestinfo([])
         }
@@ -285,8 +288,11 @@ export default function Weather() {
                         <img className='pest-img mt-0' src={"img/" + pestinfo.name + ".png"} alt="" />
                         <div className="names">
                           <div className="p-3">
-                            <p className="fw-bold mb-1">{pestinfo.name}</p>
-                            <p className="fw-bold mb-1">{pestinfo.crops_affected}</p>
+                            <p className="fw-bold mt-3 mb-1">{pestinfo.name}</p>
+                            <div className="d-flex affected mt-3">
+                              <h6 className=''>Affected Crops:</h6>
+                              {affected.map(val => <p className="fw-bold mb-1">{val}</p>)}
+                            </div>
                           </div>
                         </div>
                         <div className="p-3">

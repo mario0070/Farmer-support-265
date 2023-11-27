@@ -44,6 +44,8 @@ export default function Weather() {
   const [indoor , setIndoor] = useState("")
   const [outdoor , setOutdoor] = useState("")
   const [description , setDescription] = useState("")
+  const [location , setlocation] = useState("")
+  const [weatherTime , setWeatherTime] = useState([])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -152,11 +154,12 @@ export default function Weather() {
         setrain(res.data.forecastWeather.temperature_2m)
         setrainTime(res.data.forecastWeather.time)
         setHumidty(res.data.otherWeatherData.main.humidity)
-        setIndoor(res.data.otherWeatherData.main.feels_like)
-        setOutdoor(res.data.otherWeatherData.main.temp_max)
+        setIndoor(res.data.forecastWeather.temperature_2m[0] - 0.1)
+        setOutdoor(res.data.forecastWeather.temperature_2m[0] - 0.8)
         setDescription(res.data.otherWeatherData.weather[0].description)
-        console.log(res.data.otherWeatherData)
-        // res.data.otherWeatherData.name
+        setWeatherTime(res.data.forecastWeather.temperature_2m)
+        setlocation(res.data.otherWeatherData.name)
+        console.log(res.data.forecastWeather.temperature_2m)
       }).catch(err => {
         console.log(err)
       })
@@ -203,6 +206,8 @@ export default function Weather() {
           
 
           <div onClick={rmBar} className="content weather">
+            
+            <p className='mb-0 loc'>Base on your location: <span className='fw-bold text-capitalize'>{location}</span></p>
             { !isLoaded ?
                 <div className="text-center mt-5">
                   <img src={loader} alt="" width={400} />
@@ -252,35 +257,54 @@ export default function Weather() {
                 </div>
 
                 <div className="section">
-                  <div className="temp mt-2 text-center">
+                  <div className="temp mt-1 text-center">
                     <p className="">Forecast <i className="fa-solid fa-cloud"></i></p>
                     <div className="img text-center">
-                      <img src={sun} alt="" />
+                      <img src={sun} alt="" width={120} />
                       <p className="mb-1">{description}</p>
+                      <p className="num mb-1">{indoor}<span><i className="fa-regular fa-circle"></i></span></p>
                       <p className='mb-0 time'>{hrs}:{mins} </p>
                     </div>
-                    
-                    <div className="icons d-flex">
+
+                    <div className="icons mt-3 d-flex">
                       <div>
                         <i className="fa-solid fa-cloud-rain"></i>
-                        <p className="">10:00</p>
+                        <p className="">{hrs >= 24 ? hrs : hrs + 1}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-moon-rain"></i>
-                        <p className="">11:00</p>
+                        <p className="">{hrs >= 24 ? hrs : hrs + 2}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-showers-water"></i>
-                        <p className="">12:00</p>
+                        <p className="">{hrs >= 24 ? hrs : hrs + 3}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-showers-heavy"></i>
-                        <p className="">13:00</p>
+                        <p className="">{hrs >= 24 ? hrs : hrs + 4}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud"></i>
-                        <p className="">11:00</p>
+                        <p className="">{hrs >= 24 ? hrs : hrs + 5}:{mins}</p>
                       </div>
+                    </div>
+
+                    <div className="d-flex text-center icons">
+                      {
+                        weatherTime.map((val, index) => {
+                          if(index == weatherTime.length-1){
+                            return
+                          }else{
+                          return (
+                            <>
+                              <div>
+                                <p className="num mb-1">{(val - 0.7).toFixed(2) }<span><i className="fa-regular fa-circle"></i></span></p>
+                              </div>
+                            </>
+                          )
+                          }
+                        })
+                      }
                     </div>
 
                   </div>

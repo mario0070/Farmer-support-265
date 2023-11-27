@@ -130,6 +130,7 @@ export default function Market() {
       send.get(`/produce/insights?crop=${produce}`,{
       })
       .then(res => {
+        // console.log(res)
         setlineChart(Object.entries(res.data))
       })
       .catch(err => {

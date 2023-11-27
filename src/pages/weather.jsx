@@ -14,6 +14,10 @@ import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Axios from '../utils/axios'
 import CustomSidebar from '../components/customSidebar'
+import Cookies from 'js-cookie';
+import axios from 'axios';
+import loader from "/img/loader.gif"
+import Tomato from "/img/d-yes.png"
 
 Chartjs.register(
   BarElement,
@@ -28,8 +32,12 @@ export default function Weather() {
   const [pestAlert, setPestalert] = useState("")
   const [showBar , setShow] = useState(false)
   const [showControl , setshowControl] = useState(false)
-  const [pestNames , setpestNames] = useState(["jamiu","ganu"])
-  const [pestinfo , setpestinfo] = useState(["jamiu","ganu"])
+  const [pestNames , setpestNames] = useState([])
+  const [pestinfo , setpestinfo] = useState([])
+  const [pestcontrol , setpestcontrol] = useState([])
+  const [isShow , setisShow] = useState(false)
+  const [affected , setaffected] = useState([])
+  const [weather , setweather] = useState([])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -60,22 +68,6 @@ export default function Weather() {
     })
     
   })
-
-  const showPestControl = (index) => {
-    setshowControl(true)
-    Axios.get("/pest/alert",{
-
-    }).then(res => {
-      // console.log(res,index)
-      if(res.data.pestControlData){
-        setpestinfo(res.data.pestControlData[index])
-      }else{
-      setpestinfo([])
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }
 
   var rmBar = () => {
     setShow(false)
@@ -115,36 +107,68 @@ export default function Weather() {
     }
   }
 
- useEffect(() => {
-  Axios.get("/pest/alert",{
-
-  }).then(res => {
-    // console.log(pestNames)
-    if(res.data.alert == true){
-      setPest(true)
-      setpestNames(res.data.pests)
-    }else{
-      setPestalert(res.data.message)
-      setPest(false)
-    }
-  }).catch(err => {
-    console.log(err)
-  })
-
-  // Axios.get("/weather/forecast",{
-
-  // }).then(res => {
-  //   console.log(res)
-  // }).catch(err => {
-  //   console.log(err)
-  // })
- },[])
-
 
   if(!cookie.user_token){
     window.location.href = "/login"
   }
   else{
+
+    const tk = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${tk.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
+
+    useEffect(() => {
+      send.get("/pest/alert",{
+
+      }).then(res => {
+        // console.log(res)
+        if(res.data.alert == true){
+          setPest(true)
+          setpestNames(res.data.pests)
+        }else{
+          setPestalert(res.data.message)
+          setPest(false)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+
+      send.get("/weather/forecast",{
+
+      }).then(res => {
+        setweather(res.data)
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
+    },[])
+
+    const showPestControl = (index) => {
+      setshowControl(true)
+      setisShow(true)
+      send.get("/pest/alert",{
+  
+      }).then(res => {
+        if(res.data.pestControlData){
+          setisShow(false)
+          setpestinfo(res.data.pestControlData[index])
+          setpestcontrol(res.data.pestControlData[index].control_methods)
+          setaffected(res.data.pestControlData[index].crops_affected)
+          // console.log(affected.map(val => val))
+        }else{
+        setpestinfo([])
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+
     return (
       <div className='dashboard'>
         <CustomSidebar/>
@@ -261,29 +285,29 @@ export default function Weather() {
                     </div>
                   : 
                     <div className="pest">
-                      {pestinfo.map((val, index) => {
-                          return(
-                            <>
-                              <img className='pest-img mt-0' src={val.name} alt="" />
-                              <div className="names">
-                                <div className="p-3">
-                                  <p className="fw-bold mb-1">{val.name}</p>
-                                  <p className="fw-bold mb-1">{val.crops_affected}</p>
-                                </div>
-                              </div>
-                            </>
-                          )
-                      })}
-                      <div className="p-3">
-                        {pestinfo.map((val, index) => {
-                          return(
-                            <>
-                              <p className="text-muted ">{val.control_methods}</p>
-                            </>
-                          )
-                        })}
-                       <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
+                     { !isShow ?
+                      <>
+                        <img className='pest-img mt-0' src={"img/" + pestinfo.name + ".png"} alt="" />
+                        <div className="names">
+                          <div className="p-3">
+                            <p className="fw-bold mt-3 mb-1">{pestinfo.name}</p>
+                            <div className="d-flex affected mt-3">
+                              <h6 className=''>Affected Crops:</h6>
+                              {affected.map(val => <p className="fw-bold mb-1">{val}</p>)}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="p-3">
+                          <p className="fw-bold mb-2">Control Method</p>
+                        {pestcontrol.map(val => <p className="text-muted ">{val}</p>)}
+                        <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
+                        </div>
+                      </>
+                      :
+                      <div className="text-center mt-5">
+                        <img src={loader} alt="" width={400} />
                       </div>
+                    }
                     </div>
                   }
                 </div>

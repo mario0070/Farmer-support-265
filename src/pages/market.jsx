@@ -163,8 +163,8 @@ export default function Market() {
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="search">
-                <input onChange={e => setproduce(e.target.value)} type="text" value={produce} placeholder='search produce base on your location'/>
-                <button onClick={filterProd} className="btn" id='search'>search produce</button>
+                <input onChange={e => setproduce(e.target.value)} type="text" value={produce} placeholder='filter produce base on your location'/>
+                <button onClick={filterProd} className="btn" id='search'>Filter Produce</button>
               </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>

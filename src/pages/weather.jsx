@@ -224,11 +224,11 @@ export default function Weather() {
                   <div className="d-flex degree">
                     <div className='outdoor'>
                       <p className="name mb-1">Max</p>
-                      <p className="num">{indoor}<span><i className="fa-regular fa-circle"></i></span></p>
+                      <p className="num">{(indoor - 0.1).toFixed(1)}<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                     <div className='indoor'>
                       <p className="name mb-1">Min</p>
-                      <p className="num">{outdoor}<span><i className="fa-regular fa-circle"></i></span></p>
+                      <p className="num">{(outdoor - 0.1).toFixed(1)}<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                   </div>
 
@@ -262,7 +262,7 @@ export default function Weather() {
                     <div className="img text-center">
                       <img src={sun} alt="" width={120} />
                       <p className="mb-1">{description}</p>
-                      <p className="num mb-1">{indoor}<span><i className="fa-regular fa-circle"></i></span></p>
+                      <p className="num mb-1">{(indoor - 0.1).toFixed(1)}<span><i className="fa-regular fa-circle"></i></span></p>
                       <p className='mb-0 time'>{hrs}:{mins} </p>
                     </div>
 
@@ -298,7 +298,7 @@ export default function Weather() {
                           return (
                             <>
                               <div>
-                                <p className="num mb-1">{(val - 0.7).toFixed(2) }<span><i className="fa-regular fa-circle"></i></span></p>
+                                <p className="num mb-1">{(val - 0.7).toFixed(1) }<span><i className="fa-regular fa-circle"></i></span></p>
                               </div>
                             </>
                           )

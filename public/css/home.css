@@ -76,7 +76,7 @@
 .home .search input {
     border: none;
     border-bottom: 2px solid rgb(209, 206, 206);
-    width: 200px;
+    width: 300px;
     outline: navy;
     padding: .6em;
     transition: .2s;
@@ -84,7 +84,6 @@
 
 .home .search input:focus{
     border-bottom:  2px solid rgba(85, 175, 110, 1);
-    width: 300px;
     transition: .2s;
 }
 

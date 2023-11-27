@@ -23,6 +23,16 @@ export default function Dashboard() {
   const [period, setPeriod] = useState("")
   const [username, setUsername] = useState("")
   const [showBar , setShow] = useState(false)
+  const [humidty , setHumidty] = useState("")
+  const [indoor , setIndoor] = useState("")
+  const [outdoor , setOutdoor] = useState("")
+  const [description , setDescription] = useState("")
+  const [location , setlocation] = useState("")
+  const [weatherTime , setWeatherTime] = useState([])
+
+  let newDate = new Date()
+  let hrs = newDate.getHours();
+  let mins = newDate.getMinutes();
 
   const bar = () => {
     var custom_sidebar = document.querySelectorAll(".custom_sidebar")
@@ -135,6 +145,18 @@ export default function Dashboard() {
       .catch(err => {
         console.log(err)
       })
+      send.get("/weather/forecast",{
+
+      }).then(res => {
+        setHumidty(res.data.otherWeatherData.main.humidity)
+        setIndoor(res.data.forecastWeather.temperature_2m[0] - 0.1)
+        setOutdoor(res.data.forecastWeather.temperature_2m[0] - 0.8)
+        setWeatherTime(res.data.forecastWeather.temperature_2m)
+        setlocation(res.data.otherWeatherData.name)
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
 
       setUsername(farmerName)
 
@@ -183,42 +205,61 @@ export default function Dashboard() {
                         <p className="">Temperature <i className="fa-solid fa-temperature-low"></i></p>
                       </div>
 
-                      <div className="d-flex degree">
+                      <div className="d-flex mt-2 degree">
                         <div className='outdoor'>
-                          <p className="name mb-1">Outdoor</p>
-                          <p className="num">80<span><i className="fa-regular fa-circle"></i></span></p>
+                          <p className="name mb-1">Max</p>
+                          <p className="num">{(indoor - 0.1).toFixed(1)}<span><i className="fa-regular fa-circle"></i></span></p>
                         </div>
                         <div className='indoor'>
-                          <p className="name mb-1">Indoor</p>
-                          <p className="num">90<span><i className="fa-regular fa-circle"></i></span></p>
+                          <p className="name mb-1">Min</p>
+                          <p className="num">{(outdoor - 0.1).toFixed(1)}<span><i className="fa-regular fa-circle"></i></span></p>
                         </div>
                       </div>
 
-                      <div className="humidity mt-2 text-center">
-                        <p className="name mb-1">Forecast <i className="fa-solid fa-droplet"></i></p>
+                      <div className="humidity mb-4 mt-2 text-center">
+                        <p className="name mb-1">Humidity <i className="fa-solid fa-droplet"></i></p>
+                          <p className="num">{humidty}%</p>
                       </div>
 
-                      <div className="icons d-flex text-center">
+                      <div className="icons mt-1 d-flex text-center">
                           <div>
                             <i className="fa-solid fa-cloud-rain"></i>
-                            <p className="">10:00</p>
+                            <p className="">{hrs >= 24 ? hrs : hrs + 1}:{mins}</p>
                           </div>
                           <div>
                             <i className="fa-solid fa-cloud-moon-rain"></i>
-                            <p className="">11:00</p>
+                            <p className="">{hrs >= 24 ? hrs : hrs + 2}:{mins}</p>
                           </div>
                           <div>
                             <i className="fa-solid fa-cloud-showers-water"></i>
-                            <p className="">12:00</p>
+                            <p className="">{hrs >= 24 ? hrs : hrs + 3}:{mins}</p>
                           </div>
                           <div>
                             <i className="fa-solid fa-cloud-showers-heavy"></i>
-                            <p className="">13:00</p>
+                            <p className="">{hrs >= 24 ? hrs : hrs + 4}:{mins}</p>
                           </div>
                           <div>
                             <i className="fa-solid fa-cloud"></i>
-                            <p className="">11:00</p>
+                            <p className="">{hrs >= 24 ? hrs : hrs + 5}:{mins}</p>
                           </div>
+                        </div>
+
+                        <div className="d-flex mb-2 text-center icons">
+                          {
+                            weatherTime.map((val, index) => {
+                              if(index == weatherTime.length-1){
+                                return
+                              }else{
+                              return (
+                                <>
+                                  <div>
+                                    <p className="num mb-1">{(val - 0.7).toFixed(1) }<span><i className="fa-regular fa-circle"></i></span></p>
+                                  </div>
+                                </>
+                              )
+                              }
+                            })
+                          }
                         </div>
                     </div>
                   </div>

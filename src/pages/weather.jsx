@@ -14,6 +14,8 @@ import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, Tooltip} from
 import { CookiesProvider, useCookies, } from "react-cookie";
 import Axios from '../utils/axios'
 import CustomSidebar from '../components/customSidebar'
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 Chartjs.register(
   BarElement,
@@ -61,22 +63,6 @@ export default function Weather() {
     
   })
 
-  const showPestControl = (index) => {
-    setshowControl(true)
-    Axios.get("/pest/alert",{
-
-    }).then(res => {
-      // console.log(res,index)
-      if(res.data.pestControlData){
-        setpestinfo(res.data.pestControlData[index])
-      }else{
-      setpestinfo([])
-      }
-    }).catch(err => {
-      console.log(err)
-    })
-  }
-
   var rmBar = () => {
     setShow(false)
   }
@@ -115,36 +101,63 @@ export default function Weather() {
     }
   }
 
- useEffect(() => {
-  Axios.get("/pest/alert",{
-
-  }).then(res => {
-    // console.log(pestNames)
-    if(res.data.alert == true){
-      setPest(true)
-      setpestNames(res.data.pests)
-    }else{
-      setPestalert(res.data.message)
-      setPest(false)
-    }
-  }).catch(err => {
-    console.log(err)
-  })
-
-  // Axios.get("/weather/forecast",{
-
-  // }).then(res => {
-  //   console.log(res)
-  // }).catch(err => {
-  //   console.log(err)
-  // })
- },[])
-
 
   if(!cookie.user_token){
     window.location.href = "/login"
   }
   else{
+
+    const tk = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${tk.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+      },
+    });
+
+    useEffect(() => {
+      send.get("/pest/alert",{
+
+      }).then(res => {
+        // console.log(res)
+        if(res.data.alert == true){
+          setPest(true)
+          setpestNames(res.data.pests)
+        }else{
+          setPestalert(res.data.message)
+          setPest(false)
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+
+      // Axios.get("/weather/forecast",{
+
+      // }).then(res => {
+      //   console.log(res)
+      // }).catch(err => {
+      //   console.log(err)
+      // })
+    },[])
+
+    const showPestControl = (index) => {
+      setshowControl(true)
+      send.get("/pest/alert",{
+  
+      }).then(res => {
+        if(res.data.pestControlData){
+          console.log(res.data.pestControlData[0])
+          setpestinfo(res.data.pestControlData[index])
+        }else{
+        setpestinfo([])
+        }
+      }).catch(err => {
+        console.log(err)
+      })
+    }
+
     return (
       <div className='dashboard'>
         <CustomSidebar/>
@@ -261,27 +274,15 @@ export default function Weather() {
                     </div>
                   : 
                     <div className="pest">
-                      {pestinfo.map((val, index) => {
-                          return(
-                            <>
-                              <img className='pest-img mt-0' src={val.name} alt="" />
-                              <div className="names">
-                                <div className="p-3">
-                                  <p className="fw-bold mb-1">{val.name}</p>
-                                  <p className="fw-bold mb-1">{val.crops_affected}</p>
-                                </div>
-                              </div>
-                            </>
-                          )
-                      })}
+                      <img className='pest-img mt-0' src={pestinfo.name} alt="" />
+                      <div className="names">
+                        <div className="p-3">
+                          <p className="fw-bold mb-1">{pestinfo.name}</p>
+                          <p className="fw-bold mb-1">{pestinfo.crops_affected}</p>
+                        </div>
+                      </div>
                       <div className="p-3">
-                        {pestinfo.map((val, index) => {
-                          return(
-                            <>
-                              <p className="text-muted ">{val.control_methods}</p>
-                            </>
-                          )
-                        })}
+                          <p className="text-muted ">{pestinfo.control_methods}</p>
                        <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
                       </div>
                     </div>

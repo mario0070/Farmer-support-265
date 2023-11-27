@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from '../components/sidebar'
 import "/public/css/home.css"
 import "/public/css/market.css"
@@ -8,6 +8,8 @@ import { CookiesProvider, useCookies, } from "react-cookie";
 import {Bar, Line, Pie, PolarArea} from "react-chartjs-2"
 import { Chart as Chartjs, BarElement, CategoryScale, LinearScale, LineElement, Tooltip, PointElement } from 'chart.js'
 import CustomSidebar from '../components/customSidebar'
+import Cookies from 'js-cookie';
+import axios from 'axios';
 
 
 Chartjs.register(
@@ -22,12 +24,16 @@ Chartjs.register(
 export default function Market() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [showBar , setShow] = useState(false)
+  const [lineChart , setlineChart] = useState([])
 
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
+    labels: ["Mon","Tue", "Wed", "Thu", "Fri", "Sat", "sun"],
     datasets: [{
       label: 'Range',
-      data: [20, 49, 60, 35, 55, 15, 70, 35, 50, 24, 70, 45],
+
+      // data: lineChart.map((val) => {
+      //   return val.
+      // }),
       borderWidth: 1,
       borderColor: ["green"],
       pointBorderColor: ["green"],
@@ -35,7 +41,7 @@ export default function Market() {
   }
 
   const barData = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
+    labels: ["Mon","Tue", "Wed", "Thu", "Fri", "Sat", "sun"],
     datasets: [{
       label: 'Range',
       data: [20, 49, 60, 35, 55, 15, 70, 35, 50, 24, 70, 45],
@@ -107,6 +113,29 @@ export default function Market() {
   if(!cookie.user_token){
     window.location.href = "/login"
   }else{
+    var tk = JSON.parse(Cookies.get('user_token'))
+    let send = axios.create({
+      baseURL: 'https://farmer-support-api.onrender.com/',
+      headers: {
+          "Authorization" : `Bearer ${tk.token}`,
+          'Access-Control-Allow-Origin' : '*',
+          'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          'Content-Type': 'multipart/form-data'
+      },
+    });
+
+    useEffect(() => {
+      send.get("/produce/insights?crop=rice",{
+      })
+      .then(res => {
+        console.log(res.data)
+        setlineChart(res.data)
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    },[])
+
     return (
       <div className='dashboard'>
         <CustomSidebar/>

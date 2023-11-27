@@ -25,6 +25,7 @@
     transition: .2s;
     border-top-right-radius: 8px;
     border-top-left-radius: 8px;
+    object-fit: cover;
 }
 
 .produce_listing .produce .prod_name, .produce_listing .produce .prod_biz_name{

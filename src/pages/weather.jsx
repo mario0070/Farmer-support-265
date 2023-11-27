@@ -37,17 +37,27 @@ export default function Weather() {
   const [pestcontrol , setpestcontrol] = useState([])
   const [isShow , setisShow] = useState(false)
   const [affected , setaffected] = useState([])
-  const [weather , setweather] = useState([])
+  const [rain , setrain] = useState([])
+  const [rainTime , setrainTime] = useState([])
+  const [isLoaded , setisLoaded] = useState(false)
+  const [humidty , setHumidty] = useState("")
+  const [indoor , setIndoor] = useState("")
+  const [outdoor , setOutdoor] = useState("")
+  const [description , setDescription] = useState("")
 
   let newDate = new Date()
   let hrs = newDate.getHours();
   let mins = newDate.getMinutes();
 
   const data = {
-    labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', "Dec"],
+    labels: rainTime.map((val)=>{
+        return `${val.split("-")[2].split("T")[0]}/${val.split("T")[1]}`
+      }),
     datasets: [{
       label: 'Rain Quantity',
-      data: [1, 7, 4, 2.5, 1.5, 3, 2, 6, 2, 5, 4, 2],
+      data: rain.map((val)=>{
+        return val
+      }),
       borderWidth: 0,
       backgroundColor: ["#00FF80"],
     }]
@@ -84,13 +94,6 @@ export default function Weather() {
   }
 
   const options = {
-    Plugins : {
-      legend: {
-        labels: {
-            fontSize: 22
-        }
-      }
-    },
     scales : {
       x : {
         grid :{
@@ -103,6 +106,9 @@ export default function Weather() {
           display : false,
           drawOnChartArea: false,
         } ,
+        ticks:{
+          callback: (value) => value + "mm"
+        }
       },
     }
   }
@@ -142,8 +148,15 @@ export default function Weather() {
       send.get("/weather/forecast",{
 
       }).then(res => {
-        setweather(res.data)
-        console.log(res.data)
+        setisLoaded(true)
+        setrain(res.data.forecastWeather.temperature_2m)
+        setrainTime(res.data.forecastWeather.time)
+        setHumidty(res.data.otherWeatherData.main.humidity)
+        setIndoor(res.data.otherWeatherData.main.feels_like)
+        setOutdoor(res.data.otherWeatherData.main.temp_max)
+        setDescription(res.data.otherWeatherData.weather[0].description)
+        console.log(res.data.otherWeatherData)
+        // res.data.otherWeatherData.name
       }).catch(err => {
         console.log(err)
       })
@@ -190,6 +203,11 @@ export default function Weather() {
           
 
           <div onClick={rmBar} className="content weather">
+            { !isLoaded ?
+                <div className="text-center mt-5">
+                  <img src={loader} alt="" width={400} />
+                </div>
+              :
             <div className="weather_content d-flex">
 
                 <div className="section">
@@ -200,29 +218,37 @@ export default function Weather() {
 
                   <div className="d-flex degree">
                     <div className='outdoor'>
-                      <p className="name mb-1">Indoor</p>
-                      <p className="num">80<span><i className="fa-regular fa-circle"></i></span></p>
+                      <p className="name mb-1">Max</p>
+                      <p className="num">{indoor}<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                     <div className='indoor'>
-                      <p className="name mb-1">Indoor</p>
-                      <p className="num">90<span><i className="fa-regular fa-circle"></i></span></p>
+                      <p className="name mb-1">Min</p>
+                      <p className="num">{outdoor}<span><i className="fa-regular fa-circle"></i></span></p>
                     </div>
                   </div>
 
                   <div className="humidity mt-5 text-center">
                     <p className="name mb-1">Humidity <i className="fa-solid fa-droplet"></i></p>
-                    <p className="num">90%</p>
+                    <p className="num">{humidty}%</p>
                   </div>
 
                 </div>
 
                 <div className="section">
-                  <div className="temp mt-2 text-center">
-                    <p className="">Rain Quantity <i className="fa-solid fa-cloud-showers-water"></i></p>
-                  </div>
-                  <div className="bar">
-                    <Bar data={data} options={options}></Bar>
-                  </div>
+                  { !isLoaded ?
+                    <div className="text-center mt-5">
+                      <img src={loader} alt="" width={400} />
+                    </div>
+                    :
+                    <>
+                      <div className="temp mt-2 text-center">
+                        <p className="">Rain Quantity <i className="fa-solid fa-cloud-showers-water"></i></p>
+                      </div>
+                      <div className="bar">
+                        <Bar data={data} options={options}></Bar>
+                      </div>
+                    </>
+                  } 
                 </div>
 
                 <div className="section">
@@ -230,8 +256,8 @@ export default function Weather() {
                     <p className="">Forecast <i className="fa-solid fa-cloud"></i></p>
                     <div className="img text-center">
                       <img src={sun} alt="" />
-                      <p className="mb-1">Partly cloudy</p>
-                      <p className='mb-0 time'>{hrs}:{mins}</p>
+                      <p className="mb-1">{description}</p>
+                      <p className='mb-0 time'>{hrs}:{mins} </p>
                     </div>
                     
                     <div className="icons d-flex">
@@ -313,6 +339,7 @@ export default function Weather() {
                 </div>
 
             </div>
+          }
           </div>
       </div>
     )

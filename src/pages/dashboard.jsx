@@ -256,7 +256,7 @@ export default function Dashboard() {
                           {produce.map((val, index) => {
                             return (
                               <div className="produce">
-                                <img src={fruits} alt="" /> 
+                                <img src={val.imageUrl ? val.imageUrl : fruits} alt="" /> 
                                 <div className="prod_info p-3">
                                   <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
                                   <p className="prod_name mb-1">{val.description}</p>
@@ -281,7 +281,7 @@ export default function Dashboard() {
                         ? myproduce.map((val, index) => {
                           return (
                             <div className="produce">
-                              <img src={fruits} alt="" /> 
+                              <img src={val.imageUrl ? val.imageUrl : fruits} alt="" /> 
                               <div className="prod_info p-3">
                                 <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
                                 <p className="prod_name mb-1">{val.description}</p>

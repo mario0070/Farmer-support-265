@@ -104,7 +104,8 @@
     }
 
     .overview .sec1{
-        width: 100% !important;
+        width: 90% !important;
+        /* margin-right: 0 !important; */
     }
 
     .dashboard .pagination{
@@ -127,7 +128,8 @@
 
 @media screen and (max-width: 750px){    
     .weather .weather_content .section{
-        width: 100% !important;
+        width: 90% !important;
+        margin-left: 1em !important;
     }
     
     .chat_history{
@@ -187,7 +189,7 @@
     }
 
     .produce_listing .produce{
-        width: 100% !important;
+        width: 90% !important;
         margin-right: 0 !important;
     }
 

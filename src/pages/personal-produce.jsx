@@ -25,6 +25,18 @@ export default function Person_produce() {
   const description = useRef("")
   const price = useRef("")
   const file = useRef("")
+  const [img, setImg] = useState("")
+
+  const getProduceImg = (e) => {
+    console.log(img[0])
+    Swal.fire({
+      text: "Choose this image",
+      imageUrl: URL.createObjectURL(img[0]),
+      imageWidth: 300,
+      imageHeight: 300,
+    });
+  }
+  
 
   const alert = (icon, text) => {
     const Toast = Swal.mixin({
@@ -85,6 +97,7 @@ export default function Person_produce() {
           "Authorization" : `Bearer ${data.token}`,
           'Access-Control-Allow-Origin' : '*',
           'Access-Control-Allow-Methods':'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          'Content-Type': 'multipart/form-data'
       },
     });
 
@@ -126,6 +139,7 @@ export default function Person_produce() {
       })
       .then(res => {
         setisLoaded(true)
+        console.log(res)
         setProduce(res.data.myProduces)
       })
       .catch(err => {
@@ -145,7 +159,7 @@ export default function Person_produce() {
           "cropType": cropType.current.value,
           "description": description.current.value,
           "price": price.current.value,
-          "file" : file.current.value,
+          "file" : img[0],
         })
         .then(res => {
           alert("success", "Produce has been added")
@@ -157,7 +171,7 @@ export default function Person_produce() {
         .catch(err => {
           btn.innerHTML = `List produce`
           alert("error", "something went wrong")
-          console.log(err,file.current.value)
+          console.log(err,img)
         })
       }
     }
@@ -204,9 +218,10 @@ export default function Person_produce() {
                         <input onChange={e => setInput(e.target.value)} ref={price} type="text" placeholder='Produce price' />
                         <input onChange={e => setInput(e.target.value)} ref={description} type="text" placeholder='Description' />
                         <label htmlFor="file" className='d-block mb-4'>Choose images</label>
-                        <input ref={file} type="file" className='d-none ' name="file" id="file" />
+                        <input onChange={(e) => {setImg(e.target.files)}} ref={file} type="file" className='d-none file' name="file" id="file" />
                         <button id='add' className='btn btn-success text-white mt-2'>List produce</button>
                         <p onClick={() => {setShow(!show)}} className='btn text-danger fw-bold mt-2 mx-2'>Go back</p>
+                        <p className="" onClick={getProduceImg}>view uploaded image</p>
                     </form>
                   </div>
                   }
@@ -214,7 +229,7 @@ export default function Person_produce() {
                   {produce.map((val, index) => {
                     return (
                       <div className="produce">
-                        <img src={fruits} alt="" /> 
+                        <img src={val.imageUrl ? val.imageUrl : fruits} alt="" /> 
                         <div className="prod_info p-3">
                           <p className="prod_name mb-1 fw-bold">{val.cropType}</p>
                           <p className="prod_name mb-1">{val.description}</p>

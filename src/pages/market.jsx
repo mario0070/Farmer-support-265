@@ -34,7 +34,7 @@ export default function Market() {
     datasets: [{
       label: 'Price',
       data: lineChart.map((val) => {
-        return val[1].averagePrice[0]
+        return `${val[1].averagePrice} `
       }),
       borderWidth: 1,
       borderColor: ["green"],
@@ -64,7 +64,7 @@ export default function Market() {
         ticks:{
           beginAtZero: true,
           color: ["green"],
-          callback: (value) => value + "k"
+          // callback: (value) => "₦" + value
         }
       },
     }
@@ -180,7 +180,7 @@ export default function Market() {
                   <div className="chart">
                     <div className="d-flex mb-3">
                       <p className="mb-0 name fw-bold text-capitalize">{produce}</p>
-                      <p className="mb-0">Price</p>
+                      <p className="mb-0">Price ₦</p>
                       <p className="mb-0">2023</p>
                     </div>
 

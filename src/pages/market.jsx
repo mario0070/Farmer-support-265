@@ -59,18 +59,10 @@ export default function Market() {
 
   const options = {
     scales : {
-      // x : {
-      //   grid :{
-      //     display : false,
-      //     drawOnChartArea: false,
-      //   } 
-      // },
       y : {
-        // grid :{
-        //   display : false,
-        //   drawOnChartArea: false,
-        // } ,
+        beginAtZero: true,
         ticks:{
+          beginAtZero: true,
           color: ["green"],
           callback: (value) => value + "k"
         }
@@ -135,16 +127,29 @@ export default function Market() {
     });
 
     useEffect(() => {
-      send.get("/produce/insights?crop=rice",{
+      send.get(`/produce/insights?crop=${produce}`,{
       })
       .then(res => {
-        console.log(res.data,Object.entries(res.data)[0][1].averagePrice)
         setlineChart(Object.entries(res.data))
       })
       .catch(err => {
         console.log(err)
       })
-    },[lineChart])
+    },[])
+
+    const filterProd = () => {
+      var btn = document.getElementById("search")
+      btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
+      send.get(`/produce/insights?crop=${produce}`,{
+      })
+      .then(res => {
+        setlineChart(Object.entries(res.data))
+        btn.innerHTML = `search produce`
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
 
     return (
       <div className='dashboard'>
@@ -158,7 +163,7 @@ export default function Market() {
               </div>
               <div className="search">
                 <input onChange={e => setproduce(e.target.value)} type="text" value={produce} placeholder='search produce base on your location'/>
-                <button className="btn">search produce</button>
+                <button onClick={filterProd} className="btn" id='search'>search produce</button>
               </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>

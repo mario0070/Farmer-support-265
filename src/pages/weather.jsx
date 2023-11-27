@@ -17,6 +17,7 @@ import CustomSidebar from '../components/customSidebar'
 import Cookies from 'js-cookie';
 import axios from 'axios';
 import loader from "/img/loader.gif"
+import Tomato from "/img/d-yes.png"
 
 Chartjs.register(
   BarElement,
@@ -281,7 +282,7 @@ export default function Weather() {
                     <div className="pest">
                      { !isShow ?
                       <>
-                        <img className='pest-img mt-0' src={pestinfo.name} alt="" />
+                        <img className='pest-img mt-0' src={"img/" + pestinfo.name + ".png"} alt="" />
                         <div className="names">
                           <div className="p-3">
                             <p className="fw-bold mb-1">{pestinfo.name}</p>
@@ -289,6 +290,7 @@ export default function Weather() {
                           </div>
                         </div>
                         <div className="p-3">
+                          <p className="fw-bold mb-2">Control Method</p>
                         {pestcontrol.map(val => <p className="text-muted ">{val}</p>)}
                         <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
                         </div>

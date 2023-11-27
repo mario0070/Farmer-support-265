@@ -16,6 +16,7 @@ import Axios from '../utils/axios'
 import CustomSidebar from '../components/customSidebar'
 import Cookies from 'js-cookie';
 import axios from 'axios';
+import loader from "/img/loader.gif"
 
 Chartjs.register(
   BarElement,
@@ -30,8 +31,10 @@ export default function Weather() {
   const [pestAlert, setPestalert] = useState("")
   const [showBar , setShow] = useState(false)
   const [showControl , setshowControl] = useState(false)
-  const [pestNames , setpestNames] = useState(["jamiu","ganu"])
-  const [pestinfo , setpestinfo] = useState(["jamiu","ganu"])
+  const [pestNames , setpestNames] = useState([])
+  const [pestinfo , setpestinfo] = useState([])
+  const [pestcontrol , setpestcontrol] = useState([])
+  const [isShow , setisShow] = useState(false)
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -144,12 +147,14 @@ export default function Weather() {
 
     const showPestControl = (index) => {
       setshowControl(true)
+      setisShow(true)
       send.get("/pest/alert",{
   
       }).then(res => {
         if(res.data.pestControlData){
-          console.log(res.data.pestControlData[0])
+          setisShow(false)
           setpestinfo(res.data.pestControlData[index])
+          setpestcontrol(res.data.pestControlData[index].control_methods)
         }else{
         setpestinfo([])
         }
@@ -274,17 +279,25 @@ export default function Weather() {
                     </div>
                   : 
                     <div className="pest">
-                      <img className='pest-img mt-0' src={pestinfo.name} alt="" />
-                      <div className="names">
-                        <div className="p-3">
-                          <p className="fw-bold mb-1">{pestinfo.name}</p>
-                          <p className="fw-bold mb-1">{pestinfo.crops_affected}</p>
+                     { !isShow ?
+                      <>
+                        <img className='pest-img mt-0' src={pestinfo.name} alt="" />
+                        <div className="names">
+                          <div className="p-3">
+                            <p className="fw-bold mb-1">{pestinfo.name}</p>
+                            <p className="fw-bold mb-1">{pestinfo.crops_affected}</p>
+                          </div>
                         </div>
+                        <div className="p-3">
+                        {pestcontrol.map(val => <p className="text-muted ">{val}</p>)}
+                        <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
+                        </div>
+                      </>
+                      :
+                      <div className="text-center mt-5">
+                        <img src={loader} alt="" width={400} />
                       </div>
-                      <div className="p-3">
-                          <p className="text-muted ">{pestinfo.control_methods}</p>
-                       <p onClick={() => setshowControl(false)} className="text-end text-muted back fw-bold mt-3">Go back</p>
-                      </div>
+                    }
                     </div>
                   }
                 </div>

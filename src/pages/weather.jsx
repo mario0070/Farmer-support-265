@@ -37,6 +37,7 @@ export default function Weather() {
   const [pestcontrol , setpestcontrol] = useState([])
   const [isShow , setisShow] = useState(false)
   const [affected , setaffected] = useState([])
+  const [weather , setweather] = useState([])
 
   let newDate = new Date()
   let hrs = newDate.getHours();
@@ -138,13 +139,14 @@ export default function Weather() {
         console.log(err)
       })
 
-      // Axios.get("/weather/forecast",{
+      send.get("/weather/forecast",{
 
-      // }).then(res => {
-      //   console.log(res)
-      // }).catch(err => {
-      //   console.log(err)
-      // })
+      }).then(res => {
+        setweather(res.data)
+        console.log(res.data)
+      }).catch(err => {
+        console.log(err)
+      })
     },[])
 
     const showPestControl = (index) => {

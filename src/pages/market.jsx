@@ -25,15 +25,17 @@ export default function Market() {
   const [cookie, setCookie, removeCookie] = useCookies("")
   const [showBar , setShow] = useState(false)
   const [lineChart , setlineChart] = useState([])
+  const [produce , setproduce] = useState("Rice")
 
   const data = {
-    labels: ["Mon","Tue", "Wed", "Thu", "Fri", "Sat", "sun"],
+    labels: lineChart.map((val) => {
+            return `${val[0].split(" ")[2]} ${val[0].split(" ")[1]}`
+          }),
     datasets: [{
-      label: 'Range',
-
-      // data: lineChart.map((val) => {
-      //   return val.
-      // }),
+      label: 'Price',
+      data: lineChart.map((val) => {
+        return val[1].averagePrice[0]
+      }),
       borderWidth: 1,
       borderColor: ["green"],
       pointBorderColor: ["green"],
@@ -41,10 +43,14 @@ export default function Market() {
   }
 
   const barData = {
-    labels: ["Mon","Tue", "Wed", "Thu", "Fri", "Sat", "sun"],
+    labels:  lineChart.map((val) => {
+      return `${val[0].split(" ")[2]} ${val[0].split(" ")[1]}`
+    }),
     datasets: [{
-      label: 'Range',
-      data: [20, 49, 60, 35, 55, 15, 70, 35, 50, 24, 70, 45],
+      label: 'Quantity',
+      data: lineChart.map((val) => {
+        return val[1].produceCount
+      }),
       borderColor: ["green"],
       pointBorderColor: ["#00FF80"],
       backgroundColor: ["#00FF80"]
@@ -52,28 +58,24 @@ export default function Market() {
   }
 
   const options = {
-    Plugins : {
-      legend: {
-        labels: {
-            fontSize: 22
-        }
-      }
-    },
     scales : {
-      x : {
-        grid :{
-          display : false,
-          drawOnChartArea: false,
-        } 
-      },
       y : {
-        grid :{
-          display : false,
-          drawOnChartArea: false,
-        } ,
+        beginAtZero: true,
         ticks:{
+          beginAtZero: true,
           color: ["green"],
           callback: (value) => value + "k"
+        }
+      },
+    }
+  }
+
+  const baroptions = {
+    scales : {
+      y : {
+        ticks:{
+          color: ["green"],
+          callback: (value) => value
         }
       },
     }
@@ -125,16 +127,29 @@ export default function Market() {
     });
 
     useEffect(() => {
-      send.get("/produce/insights?crop=rice",{
+      send.get(`/produce/insights?crop=${produce}`,{
       })
       .then(res => {
-        console.log(res.data)
-        setlineChart(res.data)
+        setlineChart(Object.entries(res.data))
       })
       .catch(err => {
         console.log(err)
       })
     },[])
+
+    const filterProd = () => {
+      var btn = document.getElementById("search")
+      btn.innerHTML = `Process <div class="spinner-border spinner-border-sm"></div>`
+      send.get(`/produce/insights?crop=${produce}`,{
+      })
+      .then(res => {
+        setlineChart(Object.entries(res.data))
+        btn.innerHTML = `search produce`
+      })
+      .catch(err => {
+        console.log(err)
+      })
+    }
 
     return (
       <div className='dashboard'>
@@ -147,8 +162,8 @@ export default function Market() {
                 <i className="fa-solid fa-bars"></i>
               </div>
               <div className="search">
-                <input type="text" placeholder='search produce base on your location'/>
-                <button className="btn">search produce</button>
+                <input onChange={e => setproduce(e.target.value)} type="text" value={produce} placeholder='search produce base on your location'/>
+                <button onClick={filterProd} className="btn" id='search'>search produce</button>
               </div>
               <div className="header d-flex">
               <i className="fa-regular fa-bell text-muted mb-3 mx-2 mt-2"></i>
@@ -164,8 +179,8 @@ export default function Market() {
               <div className="market_container">
                   <div className="chart">
                     <div className="d-flex mb-3">
-                      <p className="mb-0 name fw-bold">Rice</p>
-                      <p className="mb-0">Quantity</p>
+                      <p className="mb-0 name fw-bold text-capitalize">{produce}</p>
+                      <p className="mb-0">Price</p>
                       <p className="mb-0">2023</p>
                     </div>
 
@@ -174,11 +189,11 @@ export default function Market() {
                   
                   <div className="chart">
                   <div className="d-flex mb-3">
-                      <p className="mb-0 name fw-bold">Rice</p>
+                      <p className="mb-0 name fw-bold text-capitalize">{produce}</p>
                       <p className="mb-0">Quantity</p>
                       <p className="mb-0">2023</p>
                     </div>
-                    <Bar data={barData} options={options}></Bar>
+                    <Bar data={barData} options={baroptions}></Bar>
                   </div>
                   <p className='text-muted text-center'>Note: these are approximated values</p>
               </div>

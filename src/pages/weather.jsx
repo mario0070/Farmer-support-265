@@ -269,23 +269,23 @@ export default function Weather() {
                     <div className="icons mt-3 d-flex">
                       <div>
                         <i className="fa-solid fa-cloud-rain"></i>
-                        <p className="">{hrs >= 24 ? hrs : hrs + 1}:{mins}</p>
+                        <p className="">{hrs + 1 >= 24 ? hrs : hrs + 1}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-moon-rain"></i>
-                        <p className="">{hrs >= 24 ? hrs : hrs + 2}:{mins}</p>
+                        <p className="">{hrs + 2 >= 24 ? hrs : hrs + 2}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-showers-water"></i>
-                        <p className="">{hrs >= 24 ? hrs : hrs + 3}:{mins}</p>
+                        <p className="">{hrs + 3 >= 24 ? hrs : hrs + 3}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud-showers-heavy"></i>
-                        <p className="">{hrs >= 24 ? hrs : hrs + 4}:{mins}</p>
+                        <p className="">{hrs + 4 >= 24 ? hrs : hrs + 4}:{mins}</p>
                       </div>
                       <div>
                         <i className="fa-solid fa-cloud"></i>
-                        <p className="">{hrs >= 24 ? hrs : hrs + 5}:{mins}</p>
+                        <p className="">{hrs + 5 >= 24 ? hrs : hrs + 5}:{mins}</p>
                       </div>
                     </div>
 
